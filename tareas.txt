@@ -1,0 +1,2 @@
+Comprobar formato dni
+A la hora de calcular precio total de la reserva multiplicar precio_noche * noches
