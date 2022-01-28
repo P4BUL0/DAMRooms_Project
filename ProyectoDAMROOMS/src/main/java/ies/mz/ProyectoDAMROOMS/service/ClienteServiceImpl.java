@@ -1,13 +1,11 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
-import ies.mz.ProyectoDAMROOMS.exception.ClienteNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 import java.util.Set;
 
 @Service

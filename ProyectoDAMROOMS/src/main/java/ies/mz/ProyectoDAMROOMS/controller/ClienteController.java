@@ -1,7 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
-import ies.mz.ProyectoDAMROOMS.exception.ClienteNotFoundException;
 import ies.mz.ProyectoDAMROOMS.service.ClienteService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
