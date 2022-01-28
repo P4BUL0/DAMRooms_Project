@@ -26,6 +26,11 @@ public class HabitacionServiceImpl implements HabitacionService {
     }
 
     @Override
+    public Habitacion addHabitacion(Habitacion habitacion){
+        return habitacionRepository.save(habitacion);
+    }
+
+    @Override
     public Habitacion modifyHabitacion(long id, Habitacion newHabitacion){
         Habitacion habitacion = habitacionRepository.findById(id)
                 .orElseThrow(() -> new HabitacionNotFoundException(id));

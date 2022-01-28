@@ -7,7 +7,7 @@ import java.util.Set;
 public interface HabitacionService {
     Set<Habitacion> findAll();
     Set<Habitacion> findById(long id);
-    Habitacion addHabitacion();
-    Habitacion modifyHabitacion();
+    Habitacion addHabitacion(Habitacion habitacion);
+    Habitacion modifyHabitacion(long id, Habitacion habitacion);
     void deleteHabitacion(long id);
 }
