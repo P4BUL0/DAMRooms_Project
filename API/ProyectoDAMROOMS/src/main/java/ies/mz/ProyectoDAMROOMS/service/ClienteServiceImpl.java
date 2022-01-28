@@ -22,7 +22,7 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public Set<Cliente> findByDni(String dni) {
-        return clienteRepository.findByNombre(dni);
+        return clienteRepository.findByDni(dni);
     }
 
     @Override
@@ -37,8 +37,8 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public Cliente modifyCliente(String dni, Cliente newCliente) {
-        Cliente vuelo = (Cliente) clienteRepository.findByDni(dni);
-        newCliente.setDni(vuelo.getDni());
+        Cliente c = (Cliente) clienteRepository.findByDni(dni);
+        newCliente.setDni(c.getDni());
         return clienteRepository.save(newCliente);
     }
 
