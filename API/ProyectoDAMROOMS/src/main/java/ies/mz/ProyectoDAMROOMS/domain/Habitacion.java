@@ -15,7 +15,7 @@ public class Habitacion {
 
     private float importe_noche;
 
-    public int getNumero() {ç
+    public int getNumero() {
         return numero;
     }
 
