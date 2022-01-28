@@ -9,12 +9,41 @@ public class Habitacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int numero;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String tipo;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String caracteristicas;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private float importe_noche;
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getCaracteristicas() {
+        return caracteristicas;
+    }
+
+    public void setCaracteristicas(String caracteristicas) {
+        this.caracteristicas = caracteristicas;
+    }
+
+    public float getImporte_noche() {
+        return importe_noche;
+    }
+
+    public void setImporte_noche(float importe_noche) {
+        this.importe_noche = importe_noche;
+    }
 }
