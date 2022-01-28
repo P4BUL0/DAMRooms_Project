@@ -1,7 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.exception;
 
 public class ClienteNotFoundException extends RuntimeException{
-
     public ClienteNotFoundException() {
         super();
     }
@@ -9,7 +8,6 @@ public class ClienteNotFoundException extends RuntimeException{
         super(message);
     }
     public ClienteNotFoundException(long id) {
-        super("Vuelo not found: " + id);
+        super("Cliente not found: " + id);
     }
-
 }

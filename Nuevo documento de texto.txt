@@ -1,0 +1,7 @@
+{
+   "dni": "48781825K",
+   "nombre": "pablo",
+   "apellidos": "Guijarro",
+   "direccion": "mi casa",
+   "telefono": 677426876
+}
