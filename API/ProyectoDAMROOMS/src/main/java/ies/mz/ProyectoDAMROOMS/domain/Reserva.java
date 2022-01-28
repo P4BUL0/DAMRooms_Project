@@ -1,27 +1,43 @@
 package ies.mz.ProyectoDAMROOMS.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "reserva")
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int codigoReserva;
+    @Column(name = "idReserva")
+    private int idReserva;
 
+    @Column(name = "fechaInicio")
     private Date fechaInicio;
 
+    @Column(name = "fechaFin")
     private Date fechaFin;
 
-    private float importe;
+    @Column(name = "importeTotal")
+    private float importeTotal;
 
-    public int getCodigoReserva() {
-        return codigoReserva;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cliente cliente;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Habitacion habitacion;
+
+    public int getIdReserva() {
+        return idReserva;
     }
 
-    public void setCodigoReserva(int codigoReserva) {
-        this.codigoReserva = codigoReserva;
+    public void setIdReserva(int idReserva) {
+        this.idReserva = idReserva;
     }
 
     public Date getFechaInicio() {
@@ -40,11 +56,11 @@ public class Reserva {
         this.fechaFin = fechaFin;
     }
 
-    public float getImporte() {
-        return importe;
+    public float getImporteTotal() {
+        return importeTotal;
     }
 
-    public void setImporte(float importe) {
-        this.importe = importe;
+    public void setImporteTotal(float importeTotal) {
+        this.importeTotal = importeTotal;
     }
 }
