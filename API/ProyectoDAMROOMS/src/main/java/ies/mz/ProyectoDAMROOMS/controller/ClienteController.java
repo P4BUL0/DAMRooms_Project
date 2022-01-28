@@ -17,9 +17,10 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/clientes/{dni}")
-    public ResponseEntity<Cliente> getCliente(@PathVariable String dni) {
-        Cliente c = (Cliente) clienteService.findByDni(dni);
+    @GetMapping("/clientes/dni")
+    public ResponseEntity<Set<Cliente>> getClienteByDni(@RequestParam(value = "dni", defaultValue = "") String dni) {
+        Set<Cliente> c = null;
+        c = clienteService.findByDni(dni);
         return new ResponseEntity<>(c, HttpStatus.OK);
     }
 
@@ -34,5 +35,11 @@ public class ClienteController {
     public ResponseEntity<Cliente> addCliente(@RequestBody Cliente c) {
         Cliente addedCliente = clienteService.addCliente(c);
         return new ResponseEntity<>(addedCliente, HttpStatus.OK);
+    }
+
+    @PutMapping("/clientes/dni")
+    public ResponseEntity<Cliente> modifyCliente(@PathVariable String dni, @RequestBody Cliente newCliente) {
+        Cliente vuelo = clienteService.modifyCliente(dni, newCliente);
+        return new ResponseEntity<>(vuelo, HttpStatus.OK);
     }
 }
