@@ -32,6 +32,22 @@ public class Reserva {
     @ManyToMany(fetch = FetchType.LAZY)
     private Habitacion habitacion;
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
+    }
+
     public int getIdReserva() {
         return idReserva;
     }

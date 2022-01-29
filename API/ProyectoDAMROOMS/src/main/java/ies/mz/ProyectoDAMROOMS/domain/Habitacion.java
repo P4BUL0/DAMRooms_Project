@@ -28,6 +28,14 @@ public class Habitacion {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Reserva reserva;
 
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+
     public int getNumero() {
         return numero;
     }
