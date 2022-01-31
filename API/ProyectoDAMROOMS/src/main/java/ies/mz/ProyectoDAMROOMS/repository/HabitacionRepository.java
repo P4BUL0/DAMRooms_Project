@@ -1,6 +1,5 @@
 package ies.mz.ProyectoDAMROOMS.repository;
 
-import ies.mz.ProyectoDAMROOMS.domain.Cliente;
 import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import org.springframework.data.repository.CrudRepository;
 

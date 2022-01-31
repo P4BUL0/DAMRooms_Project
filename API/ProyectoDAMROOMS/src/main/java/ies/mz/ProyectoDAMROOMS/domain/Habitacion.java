@@ -1,8 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -27,44 +25,4 @@ public class Habitacion {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Reserva reserva;
-
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }
-
-    public int getNumero() {
-        return numero;
-    }
-
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getCaracteristicas() {
-        return caracteristicas;
-    }
-
-    public void setCaracteristicas(String caracteristicas) {
-        this.caracteristicas = caracteristicas;
-    }
-
-    public float getImporte_noche() {
-        return importe_noche;
-    }
-
-    public void setImporte_noche(float importe_noche) {
-        this.importe_noche = importe_noche;
-    }
 }
