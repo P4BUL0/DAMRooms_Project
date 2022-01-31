@@ -2,9 +2,10 @@ package ies.mz.ProyectoDAMROOMS.controller;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
 import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
+import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.service.HabitacionService;
+import ies.mz.ProyectoDAMROOMS.controller.Response;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@Tag(name = "Habitaciones")
 public class HabitacionController {
 
     @Autowired
@@ -44,6 +44,14 @@ public class HabitacionController {
         habitacionService.deleteHabitacion(id);
         return new ResponseEntity<>(Response.noErrorResponse(),
                 HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Response>
+    handleException(HabitacionNotFoundException pnfe) {
+        Response response = Response.errorResponse(Response.NOT_FOUND,
+                pnfe.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
 }
