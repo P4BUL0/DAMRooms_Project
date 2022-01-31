@@ -41,7 +41,7 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public void deleteReserva(long id){
         reservaRepository.findById(id)
-                .orElseThrow( () -> new ReservaNotFoundException() );
+                .orElseThrow( () -> new ReservaNotFoundException(id) );
         reservaRepository.deleteById(id);
     }
 
