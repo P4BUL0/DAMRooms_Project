@@ -41,4 +41,13 @@ public class ClienteController {
         Cliente vuelo = clienteService.modifyCliente(dni, newCliente);
         return new ResponseEntity<>(vuelo, HttpStatus.OK);
     }
+
+    @DeleteMapping("/clientes/id")
+    public ResponseEntity<Response> deleteCliente(@PathVariable String dni)
+    {
+        clienteService.deleteCliente(dni);
+        return new ResponseEntity<>(Response.noErrorResponse(),
+                HttpStatus.OK);
+    }
+
 }

@@ -9,4 +9,5 @@ public interface ClienteRepository extends CrudRepository<Cliente, Long> {
     Set<Cliente> findAll();
     Set<Cliente> findByNombre(String nombre);
     Set<Cliente> findByDni(String dni);
+    void deleteByDni(String dni);
 }

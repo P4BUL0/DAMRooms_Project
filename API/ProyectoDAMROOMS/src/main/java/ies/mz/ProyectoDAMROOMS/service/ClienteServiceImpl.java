@@ -1,6 +1,7 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
+import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,17 @@ public class ClienteServiceImpl implements ClienteService{
         Cliente c = (Cliente) clienteRepository.findByDni(dni);
         newCliente.setDni(c.getDni());
         return clienteRepository.save(newCliente);
+    }
+
+    @Override
+    public void deleteCliente(String dni){
+        clienteRepository.findByDni(dni);
+        clienteRepository.deleteByDni(dni);
+    }
+
+    @Override
+    public void deleteByDni(String dni) {
+        clienteRepository.deleteByDni(dni);
     }
 
 }

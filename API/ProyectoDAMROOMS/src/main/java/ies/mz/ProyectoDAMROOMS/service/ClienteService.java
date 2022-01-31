@@ -8,7 +8,8 @@ public interface ClienteService {
     Set<Cliente> findAll();
     Set<Cliente> findByDni(String dni);
     Set<Cliente> findByNombre(String nombre);
-    Cliente addCliente(Cliente vuelo);
+    Cliente addCliente(Cliente cliente);
     Cliente modifyCliente(String dni, Cliente newCliente);
-
+    void deleteCliente(String dni);
+    void deleteByDni(String dni);
 }
