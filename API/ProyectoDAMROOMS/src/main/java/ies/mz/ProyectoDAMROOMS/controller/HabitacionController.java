@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@Tag(name = "Habitaciones")
 public class HabitacionController {
 
     @Autowired
