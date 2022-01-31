@@ -1,7 +1,5 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
-
-import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
