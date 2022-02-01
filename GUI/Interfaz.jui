@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
-    <height>626</height>
+    <width>614</width>
+    <height>781</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>20</y>
+     <y>100</y>
      <width>551</width>
-     <height>151</height>
+     <height>181</height>
     </rect>
    </property>
    <property name="palette">
@@ -458,55 +458,6 @@
     <bool>false</bool>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_DNI">
-      <property name="font">
-       <font>
-        <pointsize>8</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>DNI:</string>
-      </property>
-      <property name="buddy">
-       <cstring>lineEdit_DNI</cstring>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_DNI">
-      <property name="font">
-       <font>
-        <pointsize>8</pointsize>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>Introduzca su DNI</string>
-      </property>
-      <property name="placeholderText">
-       <string>Ej. 11111111A</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QLabel" name="label_Direccion">
-      <property name="font">
-       <font>
-        <pointsize>8</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Dirección:</string>
-      </property>
-      <property name="buddy">
-       <cstring>lineEdit_Direccion</cstring>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="3">
      <widget class="QLineEdit" name="lineEdit_Direccion">
       <property name="toolTip">
@@ -528,6 +479,70 @@
       </property>
       <property name="buddy">
        <cstring>lineEdit_Nombre</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="label_DNI">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>DNI:</string>
+      </property>
+      <property name="buddy">
+       <cstring>lineEdit_DNI</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QLabel" name="label_Direccion">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Dirección:</string>
+      </property>
+      <property name="buddy">
+       <cstring>lineEdit_Direccion</cstring>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="lineEdit_DNI">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Introduzca su DNI</string>
+      </property>
+      <property name="placeholderText">
+       <string>Ej. 11111111A</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="3">
+     <widget class="QLineEdit" name="lineEdit_Telefono">
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Introduzca su teléfono</string>
+      </property>
+      <property name="placeholderText">
+       <string>Ej. 666118855</string>
       </property>
      </widget>
     </item>
@@ -555,18 +570,10 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="3">
-     <widget class="QLineEdit" name="lineEdit_Telefono">
-      <property name="font">
-       <font>
-        <pointsize>8</pointsize>
-       </font>
-      </property>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="lineEdit_Apellidos">
       <property name="toolTip">
-       <string>Introduzca su teléfono</string>
-      </property>
-      <property name="placeholderText">
-       <string>Ej. 666118855</string>
+       <string>Introduzca sus Apellidos</string>
       </property>
      </widget>
     </item>
@@ -587,20 +594,13 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_Apellidos">
-      <property name="toolTip">
-       <string>Introduzca sus Apellidos</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QGroupBox" name="groupBox_Reservas">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>180</y>
+     <y>340</y>
      <width>551</width>
      <height>381</height>
     </rect>
@@ -1484,7 +1484,7 @@
     <property name="checkable">
      <bool>false</bool>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -2062,13 +2062,13 @@
         <property name="checkable">
          <bool>false</bool>
         </property>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>40</x>
            <y>20</y>
            <width>451</width>
-           <height>111</height>
+           <height>113</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
@@ -2316,7 +2316,7 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -2427,7 +2427,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>570</y>
+     <y>730</y>
      <width>551</width>
      <height>41</height>
     </rect>
@@ -2733,9 +2733,6 @@
   <tabstop>radioButton_CamaKing</tabstop>
   <tabstop>pushButton_Reservar</tabstop>
   <tabstop>pushButton_Cancelar</tabstop>
-  <tabstop>checkBox_6</tabstop>
-  <tabstop>checkBox_5</tabstop>
-  <tabstop>checkBox_4</tabstop>
  </tabstops>
  <resources/>
  <connections/>
