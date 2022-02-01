@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -29,5 +31,5 @@ public class Reserva {
     @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
     @ManyToMany(fetch = FetchType.LAZY)
-    private Habitacion habitacion;
+    private List<Habitacion> habitaciones = new ArrayList<>();
 }

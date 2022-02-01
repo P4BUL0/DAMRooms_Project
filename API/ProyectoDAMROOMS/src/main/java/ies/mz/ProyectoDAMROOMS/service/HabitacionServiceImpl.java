@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,8 +22,8 @@ public class HabitacionServiceImpl implements HabitacionService {
     }
 
     @Override
-    public Set<Habitacion> findById(long id){
-        return habitacionRepository.findById();
+    public Optional<Habitacion> findById(long id){
+        return habitacionRepository.findById(id);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class HabitacionServiceImpl implements HabitacionService {
     public Habitacion modifyHabitacion(long id, Habitacion newHabitacion){
         Habitacion habitacion = habitacionRepository.findById(id)
                 .orElseThrow(() -> new HabitacionNotFoundException(id));
-        newHabitacion.setNumero(habitacion.getNumero());
+        newHabitacion.setId(habitacion.getId());
         return habitacionRepository.save(newHabitacion);
     }
 

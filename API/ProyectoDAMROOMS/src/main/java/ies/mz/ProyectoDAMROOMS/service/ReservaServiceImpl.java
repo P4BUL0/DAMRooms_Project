@@ -15,7 +15,7 @@ public class ReservaServiceImpl implements ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    @Override
+   /* @Override
     public Set<Reserva> findAll(){
         return reservaRepository.findAll();
     }
@@ -43,6 +43,6 @@ public class ReservaServiceImpl implements ReservaService {
         reservaRepository.findById(id)
                 .orElseThrow( () -> new ReservaNotFoundException(id) );
         reservaRepository.deleteById(id);
-    }
+    }*/
 
 }

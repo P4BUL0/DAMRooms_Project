@@ -15,7 +15,7 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
-    @GetMapping("/reservas/id")
+    /*@GetMapping("/reservas/id")
     public ResponseEntity<Set<Reserva>> getReservaById(@RequestParam(value = "id", defaultValue = "") long id) {
         Set<Reserva> reserva = null;
         reserva = reservaService.findById(id);
@@ -40,6 +40,6 @@ public class ReservaController {
         reservaService.deleteReserva(id);
         return new ResponseEntity<>(Response.noErrorResponse(),
                 HttpStatus.OK);
-    }
+    }*/
 
 }
