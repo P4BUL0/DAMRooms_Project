@@ -24,6 +24,6 @@ public class Habitacion {
     @Column(name = "importe_noche")
     private float importe_noche;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "habitacion", fetch = FetchType.LAZY)
     private Reserva reserva;
 }

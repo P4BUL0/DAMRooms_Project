@@ -12,4 +12,5 @@ public interface HabitacionService {
     Habitacion addHabitacion(Habitacion habitacion);
     Habitacion modifyHabitacion(long id, Habitacion habitacion);
     void deleteHabitacion(long id);
+    void deleteAll(String tipo);
 }

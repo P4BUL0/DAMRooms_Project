@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -15,14 +16,14 @@ public class ReservaServiceImpl implements ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
 
-   /* @Override
+    @Override
     public Set<Reserva> findAll(){
         return reservaRepository.findAll();
     }
 
     @Override
-    public Set<Reserva> findById(long id){
-        return reservaRepository.findById();
+    public Optional<Reserva> findById(long id){
+        return reservaRepository.findById(id);
     }
 
     @Override
@@ -43,6 +44,6 @@ public class ReservaServiceImpl implements ReservaService {
         reservaRepository.findById(id)
                 .orElseThrow( () -> new ReservaNotFoundException(id) );
         reservaRepository.deleteById(id);
-    }*/
+    }
 
 }

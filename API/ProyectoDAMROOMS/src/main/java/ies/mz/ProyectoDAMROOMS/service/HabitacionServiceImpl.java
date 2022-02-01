@@ -45,4 +45,8 @@ public class HabitacionServiceImpl implements HabitacionService {
                 .orElseThrow( () -> new HabitacionNotFoundException(id) );
         habitacionRepository.deleteById(id);
     }
+    @Override
+    public void deleteAll(String tipo) {
+        habitacionRepository.deleteByTipo(tipo);
+    }
 }

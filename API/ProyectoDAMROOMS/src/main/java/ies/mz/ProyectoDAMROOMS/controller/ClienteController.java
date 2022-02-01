@@ -1,6 +1,7 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
+import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,38 +16,67 @@ public class ClienteController {
     @Autowired
     private ClienteService clienteService;
 
-    @GetMapping("/clientes/dni")
+    @GetMapping("/clientesDni")
     public ResponseEntity<Set<Cliente>> getClienteByDni(@RequestParam(value = "dni", defaultValue = "") String dni) {
-        Set<Cliente> c = null;
-        c = clienteService.findByDni(dni);
-        return new ResponseEntity<>(c, HttpStatus.OK);
+        Set<Cliente> cliente = null;
+        if (dni.equals(""))
+            cliente = clienteService.findAll();
+        else
+        cliente = clienteService.findByDni(dni);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
     @GetMapping("/clientes/nombre")
     public ResponseEntity<Set<Cliente>> getClienteByNombre(@RequestParam(value = "nombre", defaultValue = "") String nombre) {
-        Set<Cliente> c = null;
-        c = clienteService.findByNombre(nombre);
-        return new ResponseEntity<>(c, HttpStatus.OK);
+        Set<Cliente> cliente = null;
+        if (nombre.equals(""))
+            cliente = clienteService.findAll();
+        else
+        cliente = clienteService.findByNombre(nombre);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> addCliente(@RequestBody Cliente c) {
-        Cliente addedCliente = clienteService.addCliente(c);
+    public ResponseEntity<Cliente> addCliente(@RequestBody Cliente cliente) {
+        Cliente addedCliente = clienteService.addCliente(cliente);
         return new ResponseEntity<>(addedCliente, HttpStatus.OK);
     }
 
-    @PutMapping("/clientes/dni")
+    @PutMapping("/clientes/{dni}")
     public ResponseEntity<Cliente> modifyCliente(@PathVariable String dni, @RequestBody Cliente newCliente) {
-        Cliente vuelo = clienteService.modifyCliente(dni, newCliente);
-        return new ResponseEntity<>(vuelo, HttpStatus.OK);
+        Cliente cliente = clienteService.modifyCliente(dni, newCliente);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
-    @DeleteMapping("/clientes/id")
-    public ResponseEntity<Response> deleteCliente(@PathVariable String dni)
+    @DeleteMapping("/clientes/{dni}")
+    public ResponseEntity<Response> deleteClienteByDni(@PathVariable String dni)
     {
-        clienteService.deleteCliente(dni);
+        clienteService.deleteByDni(dni);
+        return new ResponseEntity<>(Response.noErrorResponse(),
+                HttpStatus.OK);
+    }
+    /*@DeleteMapping("/clientes/{nombre}")
+    public ResponseEntity<Response> deleteClienteByNombre(@PathVariable String nombre)
+    {
+        clienteService.deleteByNombre(nombre);
+        return new ResponseEntity<>(Response.noErrorResponse(),
+                HttpStatus.OK);
+    }*/
+
+    @DeleteMapping("/clientesDni/{dni}")
+    public ResponseEntity<Response> deletAllClientes(@PathVariable String dni)
+    {
+        clienteService.deleteAllByDni(dni);
         return new ResponseEntity<>(Response.noErrorResponse(),
                 HttpStatus.OK);
     }
 
+    @ExceptionHandler(HabitacionNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Response>handleException(HabitacionNotFoundException pnfe) {
+        Response response = Response.errorResponse(Response.NOT_FOUND,
+                pnfe.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 }

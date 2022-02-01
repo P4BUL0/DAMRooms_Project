@@ -10,6 +10,7 @@ public class Response {
 
     public static final int NO_ERROR = 0;
     public static final int NOT_FOUND = 101;
+    public static final String NOTFOUND = "No se ha encontrado";
     public static final String SUCCESSFUL = "Se ha ejecutado correctamente";
     private Error error;
     @Data
@@ -25,6 +26,4 @@ public class Response {
             errorMessage) {
         return new Response(new Error(errorCode, errorMessage));
     }
-
-
 }

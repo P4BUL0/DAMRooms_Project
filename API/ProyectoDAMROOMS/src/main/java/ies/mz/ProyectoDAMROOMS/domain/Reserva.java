@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,19 +18,21 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idReserva")
-    private int idReserva;
+    private long idReserva;
 
     @Column(name = "fechaInicio")
-    private Date fechaInicio;
+    private LocalDate fechaInicio;
 
     @Column(name = "fechaFin")
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
     @Column(name = "importeTotal")
     private float importeTotal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Cliente cliente;
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<Habitacion> habitaciones = new ArrayList<>();
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id_habitacion")
+    private Habitacion habitacion;
 }

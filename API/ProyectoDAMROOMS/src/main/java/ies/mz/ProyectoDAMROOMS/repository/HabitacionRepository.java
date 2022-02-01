@@ -12,4 +12,5 @@ import java.util.Set;
 public interface HabitacionRepository extends CrudRepository<Habitacion, Long> {
     Set<Habitacion> findAll();
     Optional<Habitacion> findById(long id);
+    Set<Habitacion> deleteByTipo(String tipo);
 }

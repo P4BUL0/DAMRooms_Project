@@ -20,10 +20,6 @@ public class HabitacionController {
     @GetMapping("/habitacionesId")
     public ResponseEntity<Optional<Habitacion>> getHabitacionById(@RequestParam(value = "id", defaultValue = "") long id) {
         Optional<Habitacion> habitacion = null;
-        Set<Habitacion> habitacions = null;
-        if (id < 0)
-            habitacions = habitacionService.findAll();
-        else
             habitacion = habitacionService.findById(id);
         return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
@@ -36,8 +32,8 @@ public class HabitacionController {
 
     @PutMapping("/habitaciones/{id}")
     public ResponseEntity<Habitacion> modifyHabitacion(@PathVariable long id, @RequestBody Habitacion newHabitacion) {
-        Habitacion h = habitacionService.modifyHabitacion(id, newHabitacion);
-        return new ResponseEntity<>(h, HttpStatus.OK);
+        Habitacion habitacion = habitacionService.modifyHabitacion(id, newHabitacion);
+        return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
 
     @DeleteMapping("/habitaciones/{id}")
@@ -48,11 +44,18 @@ public class HabitacionController {
                 HttpStatus.OK);
     }
 
+    @DeleteMapping("/HabitacionesTipo/{tipo}")
+    public ResponseEntity<Response> deletAllHabitaciones(@PathVariable String tipo)
+    {
+        habitacionService.deleteAll(tipo);
+        return new ResponseEntity<>(Response.noErrorResponse(),
+                HttpStatus.OK);
+    }
+
     @ExceptionHandler(HabitacionNotFoundException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Response>
-    handleException(HabitacionNotFoundException pnfe) {
+    public ResponseEntity<Response>handleException(HabitacionNotFoundException pnfe) {
         Response response = Response.errorResponse(Response.NOT_FOUND,
                 pnfe.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
