@@ -29,6 +29,6 @@ public class Cliente {
     @Column(name = "telefono")
     private int telefono;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Reserva> reservas = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "habitacion")
+    private List<Reserva> reservas;
 }

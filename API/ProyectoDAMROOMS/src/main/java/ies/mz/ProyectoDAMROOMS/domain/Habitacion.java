@@ -26,6 +26,9 @@ public class Habitacion {
     @Column(name = "importe_noche")
     private float importe_noche;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Reserva reserva;
+    @ManyToMany(cascade =  CascadeType.DETACH)
+    @JoinTable(name = "habitacion_reserva",
+            joinColumns = { @JoinColumn(name = "numero") },
+            inverseJoinColumns = { @JoinColumn(name = "dni") })
+    private List<Reserva> reserva;
 }

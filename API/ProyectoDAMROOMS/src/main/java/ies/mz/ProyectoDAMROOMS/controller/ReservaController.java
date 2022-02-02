@@ -1,5 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
+import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.service.ReservaService;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,12 +27,10 @@ public class ReservaController {
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
 
-    @PostMapping("/reservas/{dni}/{numero}")
-    public ResponseEntity<Reserva> addReserva(@PathVariable String dni, long numero, @RequestBody Reserva reserva) {
+    @PostMapping("/reservas/")
+    public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
 
         Reserva addedReserva = reservaService.addReserva(reserva);
-        addedReserva.setDni(dni);
-        addedReserva.setNumero(numero);
         return new ResponseEntity<>(addedReserva, HttpStatus.OK);
     }
 
