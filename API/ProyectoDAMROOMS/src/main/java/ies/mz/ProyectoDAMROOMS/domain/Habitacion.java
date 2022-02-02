@@ -13,12 +13,12 @@ import javax.persistence.*;
 public class Habitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long numero;
 
     @Column(name = "tipo")
     private String tipo;
 
-    @Column(name = "Caracteristicas")
+    @Column(name = "caracteristicas")
     private String caracteristicas;
 
     @Column(name = "importe_noche")

@@ -26,7 +26,7 @@ public class ClienteController {
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
-    @GetMapping("/clientes/nombre")
+    @GetMapping("/clientesNombre")
     public ResponseEntity<Set<Cliente>> getClienteByNombre(@RequestParam(value = "nombre", defaultValue = "") String nombre) {
         Set<Cliente> cliente = null;
         if (nombre.equals(""))
@@ -55,21 +55,7 @@ public class ClienteController {
         return new ResponseEntity<>(Response.noErrorResponse(),
                 HttpStatus.OK);
     }
-    /*@DeleteMapping("/clientes/{nombre}")
-    public ResponseEntity<Response> deleteClienteByNombre(@PathVariable String nombre)
-    {
-        clienteService.deleteByNombre(nombre);
-        return new ResponseEntity<>(Response.noErrorResponse(),
-                HttpStatus.OK);
-    }*/
 
-    @DeleteMapping("/clientesDni/{dni}")
-    public ResponseEntity<Response> deletAllClientes(@PathVariable String dni)
-    {
-        clienteService.deleteAllByDni(dni);
-        return new ResponseEntity<>(Response.noErrorResponse(),
-                HttpStatus.OK);
-    }
 
     @ExceptionHandler(HabitacionNotFoundException.class)
     @ResponseBody

@@ -17,8 +17,8 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
-    @GetMapping("/reservasId")
-    public ResponseEntity<Optional<Reserva>> getReservaById(@RequestParam(value = "id", defaultValue = "") long idReserva) {
+    @GetMapping("/reservas/{idReserva}")
+    public ResponseEntity<Optional<Reserva>> getReservaById(@PathVariable long idReserva) {
         Optional<Reserva> reserva = null;
         reserva = reservaService.findById(idReserva);
         return new ResponseEntity<>(reserva, HttpStatus.OK);
@@ -26,6 +26,7 @@ public class ReservaController {
 
     @PostMapping("/reservas")
     public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
+
         Reserva addedReserva = reservaService.addReserva(reserva);
         return new ResponseEntity<>(addedReserva, HttpStatus.OK);
     }

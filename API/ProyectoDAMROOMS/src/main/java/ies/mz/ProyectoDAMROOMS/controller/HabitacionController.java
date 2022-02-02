@@ -17,10 +17,10 @@ public class HabitacionController {
     @Autowired
     private HabitacionService habitacionService;
 
-    @GetMapping("/habitacionesId")
-    public ResponseEntity<Optional<Habitacion>> getHabitacionById(@RequestParam(value = "id", defaultValue = "") long id) {
+    @GetMapping("/habitaciones/{numero}")
+    public ResponseEntity<Optional<Habitacion>> getHabitacionById(@PathVariable long numero) {
         Optional<Habitacion> habitacion = null;
-            habitacion = habitacionService.findById(id);
+            habitacion = habitacionService.findById(numero);
         return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
 
@@ -30,16 +30,16 @@ public class HabitacionController {
         return new ResponseEntity<>(addedHabitacion, HttpStatus.OK);
     }
 
-    @PutMapping("/habitaciones/{id}")
-    public ResponseEntity<Habitacion> modifyHabitacion(@PathVariable long id, @RequestBody Habitacion newHabitacion) {
-        Habitacion habitacion = habitacionService.modifyHabitacion(id, newHabitacion);
+    @PutMapping("/habitaciones/{numero}")
+    public ResponseEntity<Habitacion> modifyHabitacion(@PathVariable long numero, @RequestBody Habitacion newHabitacion) {
+        Habitacion habitacion = habitacionService.modifyHabitacion(numero, newHabitacion);
         return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
 
-    @DeleteMapping("/habitaciones/{id}")
-    public ResponseEntity<Response> deleteHabitacion(@PathVariable long id)
+    @DeleteMapping("/habitaciones/{numero}")
+    public ResponseEntity<Response> deleteHabitacion(@PathVariable long numero)
     {
-        habitacionService.deleteHabitacion(id);
+        habitacionService.deleteHabitacion(numero);
         return new ResponseEntity<>(Response.noErrorResponse(),
                 HttpStatus.OK);
     }

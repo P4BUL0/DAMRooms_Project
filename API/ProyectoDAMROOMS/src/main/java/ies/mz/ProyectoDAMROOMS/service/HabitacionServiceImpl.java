@@ -35,7 +35,7 @@ public class HabitacionServiceImpl implements HabitacionService {
     public Habitacion modifyHabitacion(long id, Habitacion newHabitacion){
         Habitacion habitacion = habitacionRepository.findById(id)
                 .orElseThrow(() -> new HabitacionNotFoundException(id));
-        newHabitacion.setId(habitacion.getId());
+        newHabitacion.setNumero(habitacion.getNumero());
         return habitacionRepository.save(newHabitacion);
     }
 
