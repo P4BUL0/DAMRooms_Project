@@ -24,10 +24,12 @@ public class ReservaController {
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
 
-    @PostMapping("/reservas")
-    public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
+    @PostMapping("/reservas/{dni}/{numero}")
+    public ResponseEntity<Reserva> addReserva(@PathVariable String dni, long numero, @RequestBody Reserva reserva) {
 
         Reserva addedReserva = reservaService.addReserva(reserva);
+        addedReserva.setDni(dni);
+        addedReserva.setNumero(numero);
         return new ResponseEntity<>(addedReserva, HttpStatus.OK);
     }
 

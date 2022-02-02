@@ -13,15 +13,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "reserva")
+@Table(name = "reserva",uniqueConstraints=@UniqueConstraint(columnNames= {"numero","dni"}))
 public class Reserva {
     @Id
+    @Column(name = "fechaInicio")
+    private LocalDate fechaInicio;
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idReserva")
     private long idReserva;
-
-    @Column(name = "fechaInicio")
-    private LocalDate fechaInicio;
 
     @Column(name = "fechaFin")
     private LocalDate fechaFin;
@@ -29,10 +29,16 @@ public class Reserva {
     @Column(name = "importeTotal")
     private float importeTotal;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Cliente cliente;
+    @Column(name="numero")
+    private long numero;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "id_habitacion")
-    private Habitacion habitacion;
+    @Column(name="dni")
+    private String dni;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Cliente> clientes = new ArrayList<>();
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    private List<Habitacion> habitaciones = new ArrayList<>();
+
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,6 +26,6 @@ public class Habitacion {
     @Column(name = "importe_noche")
     private float importe_noche;
 
-    @OneToOne(mappedBy = "habitacion", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     private Reserva reserva;
 }
