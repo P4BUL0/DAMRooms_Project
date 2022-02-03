@@ -17,21 +17,24 @@ public class Reserva {
     @EmbeddedId
     private ReservaId idReserva = new ReservaId();
 
-    @ManyToMany
-    @MapsId("numero")
-    private Habitacion habitacion;
 
-    @ManyToMany
+    @ManyToOne
     @MapsId("dni")
     private Cliente cliente;
 
-    @Column(name = "fechaInicio")
+
+    @ManyToOne
+    @MapsId("numero")
+    private Habitaciones habitaciones;
+
+
+    //@Column(name = "fechaInicio")
     private LocalDate fechaInicio;
 
-    @Column(name = "fechaFin")
+    //@Column(name = "fechaFin")
     private LocalDate fechaFin;
 
-    @Column(name = "importeTotal")
+    //@Column(name = "importeTotal")
     private float importeTotal;
 
 }

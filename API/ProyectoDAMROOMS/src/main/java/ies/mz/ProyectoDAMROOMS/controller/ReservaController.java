@@ -1,6 +1,5 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
-import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.service.ReservaService;
