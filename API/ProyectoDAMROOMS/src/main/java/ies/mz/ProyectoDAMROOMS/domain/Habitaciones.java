@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "habitaciones")
-public class Habitacion {
+public class Habitaciones {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long numero;
@@ -25,10 +25,10 @@ public class Habitacion {
 
     @Column(name = "importe_noche")
     private float importe_noche;
-
-    @ManyToMany(cascade =  CascadeType.DETACH)
+/*
+    @ManyToMany
     @JoinTable(name = "habitacion_reserva",
             joinColumns = { @JoinColumn(name = "numero") },
             inverseJoinColumns = { @JoinColumn(name = "dni") })
-    private List<Reserva> reserva;
+    private List<Reserva> reserva;*/
 }

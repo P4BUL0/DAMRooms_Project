@@ -1,7 +1,7 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
-import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
+import ies.mz.ProyectoDAMROOMS.domain.Habitaciones;
 import ies.mz.ProyectoDAMROOMS.exception.ClienteNotFoundException;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.ClienteRepository;
@@ -40,7 +40,7 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public Cliente modifyCliente(String dni, Cliente newCliente) {
-        Cliente cliente = (Cliente) clienteRepository.findByDni(dni);
+        Cliente cliente = clienteRepository.findByDni(dni).stream().findFirst().get();
         newCliente.setDni(cliente.getDni());
         /*try{
             Cliente cliente = clienteRepository.findByDni(dni);

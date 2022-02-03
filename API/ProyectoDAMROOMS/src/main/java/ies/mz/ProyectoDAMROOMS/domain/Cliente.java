@@ -29,6 +29,6 @@ public class Cliente {
     @Column(name = "telefono")
     private int telefono;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "habitacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "habitaciones")
     private List<Reserva> reservas;
 }
