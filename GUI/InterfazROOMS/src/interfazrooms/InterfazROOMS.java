@@ -21,8 +21,9 @@ public class InterfazROOMS {
         // TODO code application logic here
         QApplication.initialize(args);
             QDialog mw = new QDialog();
-            Ui_Dialog dialog = new Ui_Dialog();
-            dialog.setupUi(mw);
+            Ui_MainWindow mainWindow = new Ui_MainWindow();
+            mainWindow.setupUi(mw);
+            mw.show();
         QApplication.execStatic();
     }
     
