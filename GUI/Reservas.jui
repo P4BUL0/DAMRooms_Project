@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>570</width>
-    <height>831</height>
+    <height>833</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Reservas</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Resources/Logos/logo_Icon.png</normaloff>Resources/Logos/logo_Icon.png</iconset>
   </property>
   <widget class="QGroupBox" name="groupBox_Reservas">
    <property name="geometry">
@@ -2059,17 +2063,21 @@
       <property name="text">
        <string>Cancelar</string>
       </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Resources/Iconos/Salir.png</normaloff>Resources/Iconos/Salir.png</iconset>
+      </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="label_Logo">
    <property name="geometry">
     <rect>
      <x>440</x>
      <y>20</y>
-     <width>111</width>
-     <height>91</height>
+     <width>121</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="layoutDirection">
@@ -2085,7 +2093,7 @@
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>Logos/logo_size_invert.png</pixmap>
+    <pixmap>Resources/Logos/logo_size_invert.png</pixmap>
    </property>
    <property name="scaledContents">
     <bool>true</bool>
@@ -2683,13 +2691,6 @@
     </property>
    </widget>
   </widget>
-  <zorder>groupBox_Reservas</zorder>
-  <zorder>layoutWidget_4</zorder>
-  <zorder>label_2</zorder>
-  <zorder>label_Titulo</zorder>
-  <zorder>groupBox_cliente</zorder>
-  <zorder>pushButton_eliminar</zorder>
-  <zorder>pushButton_modificar</zorder>
  </widget>
  <resources/>
  <connections/>

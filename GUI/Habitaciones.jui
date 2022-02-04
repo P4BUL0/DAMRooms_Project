@@ -13,37 +13,10 @@
   <property name="windowTitle">
    <string>Habitaciones</string>
   </property>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>10</y>
-     <width>111</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>com.trolltech.qt.core.Qt.LayoutDirection.LeftToRight</enum>
-   </property>
-   <property name="autoFillBackground">
-    <bool>false</bool>
-   </property>
-   <property name="frameShape">
-    <enum>com.trolltech.qt.gui.QFrame.Shape.NoFrame</enum>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap>Logos/logo_size_invert.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-   <property name="wordWrap">
-    <bool>false</bool>
-   </property>
-  </widget>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Resources/Logos/logo_Icon.png</normaloff>Resources/Logos/logo_Icon.png</iconset>
+  </property>
   <widget class="QLabel" name="label_Titulo">
    <property name="geometry">
     <rect>
@@ -74,7 +47,7 @@
      <x>10</x>
      <y>450</y>
      <width>551</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -223,6 +196,10 @@
       <property name="text">
        <string>Aceptar</string>
       </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Resources/Iconos/Aceptar.png</normaloff>Resources/Iconos/Aceptar.png</iconset>
+      </property>
      </widget>
     </item>
     <item>
@@ -357,11 +334,15 @@
       <property name="text">
        <string>Cancelar</string>
       </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Resources/Iconos/Salir.png</normaloff>Resources/Iconos/Salir.png</iconset>
+      </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -2179,6 +2160,37 @@
      </widget>
     </item>
    </layout>
+  </widget>
+  <widget class="QLabel" name="label_Logo">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>10</y>
+     <width>121</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>com.trolltech.qt.core.Qt.LayoutDirection.LeftToRight</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="frameShape">
+    <enum>com.trolltech.qt.gui.QFrame.Shape.NoFrame</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap>Resources/Logos/logo_size_invert.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+   <property name="wordWrap">
+    <bool>false</bool>
+   </property>
   </widget>
  </widget>
  <resources/>
