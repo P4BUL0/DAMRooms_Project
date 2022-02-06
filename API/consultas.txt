@@ -1,0 +1,40 @@
+-- Post cliente --
+{
+   "dni": "48781825K",
+   "nombre": "Pablo",
+   "apellidos": "Guijarro",
+   "direccion": "Mi casa",
+   "telefono": 677426876
+}
+
+{
+   "dni": "99999999A",
+   "nombre": "Lázaro",
+   "apellidos": "Ortega Boix",
+   "direccion": "Calle Castelar nº37",
+   "telefono": 111111111
+}
+
+-- Put cliente --
+{
+   "dni": "48781825K",
+   "nombre": "Pablito",
+   "apellidos": "Guijarro",
+   "direccion": "Home",
+   "telefono": 677426876
+}
+
+-- Post habitaciones --
+{
+   "caracteristicas": "Grande",
+   "importe_noche": "150",
+   "tipo": "Suit"
+}
+
+{
+   "caracteristicas": "Grande",
+   "importe_noche": "75",
+   "tipo": "Individual"
+}
+
+

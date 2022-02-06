@@ -19,6 +19,18 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
+    @GetMapping("/reservas")
+    public ResponseEntity<Set<Reserva>> getReservas(@RequestParam(value =
+            "id", defaultValue = "") String id) {
+        Set<Reserva> reservas = null;
+        Optional<Reserva> reservas2 = null;
+        if (id.equals(""))
+            reservas = reservaService.findAll();
+        else
+            reservas2 = reservaService.findById(Long.parseLong(id));
+        return new ResponseEntity<>(reservas, HttpStatus.OK);
+    }
+
     @GetMapping("/reservas/{idReserva}")
     public ResponseEntity<Optional<Reserva>> getReservaById(@PathVariable long idReserva) {
         Optional<Reserva> reserva = null;
@@ -26,15 +38,21 @@ public class ReservaController {
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
 
-    @PostMapping("/reservas/")
+    @PostMapping("/reservas")
     public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
 
         Reserva addedReserva = reservaService.addReserva(reserva);
         return new ResponseEntity<>(addedReserva, HttpStatus.OK);
     }
 
-    @PutMapping("/reservas/{id}")
+    @PutMapping("/reservas/{idReserva}")
     public ResponseEntity<Reserva> modifyReserva(@PathVariable long id, @RequestBody Reserva newReserva) {
+        Reserva reserva = reservaService.modifyReserva(id, newReserva);
+        return new ResponseEntity<>(reserva, HttpStatus.OK);
+    }
+
+    @PutMapping("/reservas/{idReserva}/checkIn")
+    public ResponseEntity<Reserva> modifyReservaCheckIn(@PathVariable long id, @RequestBody Reserva newReserva) {
         Reserva reserva = reservaService.modifyReserva(id, newReserva);
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
@@ -46,7 +64,6 @@ public class ReservaController {
         return new ResponseEntity<>(Response.noErrorResponse(),
                 HttpStatus.OK);
     }
-
 
     @ExceptionHandler(HabitacionNotFoundException.class)
     @ResponseBody

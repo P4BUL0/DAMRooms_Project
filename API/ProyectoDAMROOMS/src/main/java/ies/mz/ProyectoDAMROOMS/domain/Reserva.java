@@ -5,17 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
 public class Reserva {
     @EmbeddedId
-    private ReservaId idReserva = new ReservaId();
+    private ReservaId idReserva;
 
     @ManyToOne
     @MapsId("dni")
@@ -25,10 +21,20 @@ public class Reserva {
     @MapsId("numero")
     private Habitaciones habitaciones;
 
-
-
     private LocalDate fechaFin;
 
     private float importeTotal;
 
+    private estado estado;
+
+    public Reserva(){
+        idReserva = new ReservaId();
+        this.estado = ies.mz.ProyectoDAMROOMS.domain.estado.PENDIENTE;
+    }
+}
+
+enum estado {
+    PENDIENTE,
+    LIBRE,
+    EN_ACTIVO
 }

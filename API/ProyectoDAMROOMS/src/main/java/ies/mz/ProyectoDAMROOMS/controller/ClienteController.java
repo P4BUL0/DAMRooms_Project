@@ -1,6 +1,7 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
+import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -15,6 +17,18 @@ public class ClienteController {
 
     @Autowired
     private ClienteService clienteService;
+
+    @GetMapping("/clientes")
+    public ResponseEntity<Set<Cliente>> getClientes(@RequestParam(value =
+            "id", defaultValue = "") String id) {
+        Set<Cliente> cliente = null;
+        Set<Cliente> cliente2 = null;
+        if (id.equals(""))
+            cliente = clienteService.findAll();
+        else
+            cliente2 = clienteService.findByDni(id);
+        return new ResponseEntity<>(cliente, HttpStatus.OK);
+    }
 
     @GetMapping("/clientesDni")
     public ResponseEntity<Set<Cliente>> getClienteByDni(@RequestParam(value = "dni", defaultValue = "") String dni) {
