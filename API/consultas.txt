@@ -39,7 +39,7 @@
 
 {
    "caracteristicas": "Grande",
-   "importe_noche": "75",
+   "importe_noche": "50",
    "tipo": "Individual"
 }
 

@@ -1,13 +1,17 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
+import ies.mz.ProyectoDAMROOMS.domain.Cliente;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
+import ies.mz.ProyectoDAMROOMS.domain.ReservaId;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
+import ies.mz.ProyectoDAMROOMS.service.ClienteService;
 import ies.mz.ProyectoDAMROOMS.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +22,8 @@ public class ReservaController {
 
     @Autowired
     private ReservaService reservaService;
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping("/reservas")
     public ResponseEntity<Set<Reserva>> getReservas(@RequestParam(value =
@@ -38,10 +44,24 @@ public class ReservaController {
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
 
-    @PostMapping("/reservas")
-    public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
+    @PostMapping("/reservas/{fechaFin}")
+    public ResponseEntity<Reserva> addReserva(@RequestBody ReservaId reservaId, @PathVariable LocalDate fechaFin) {
+
+        reservaId.getDni();
+
+        Cliente cliente = new Cliente();
+
+
+        cliente = (Cliente) clienteService.findByDni(reservaId.getDni());
+
+        Reserva reserva = new Reserva();
+
+        System.out.println(cliente.toString());
+
+        //reserva.calcImporteTotal(reserva.getHabitaciones().getImporte_noche());
 
         Reserva addedReserva = reservaService.addReserva(reserva);
+
         return new ResponseEntity<>(addedReserva, HttpStatus.OK);
     }
 

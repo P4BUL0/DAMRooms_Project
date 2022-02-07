@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -23,4 +21,6 @@ public class ReservaId implements Serializable {
     private long numero;
 
     private LocalDate fechaInicio;
+
+    private long id;
 }
