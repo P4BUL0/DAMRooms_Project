@@ -16,7 +16,6 @@ import java.time.LocalDate;
 @Embeddable
 public class ReservaId implements Serializable {
 
-
     private static final long serialVersionUID = 1L;
 
     private String dni;
@@ -24,6 +23,4 @@ public class ReservaId implements Serializable {
     private long numero;
 
     private LocalDate fechaInicio;
-
-
 }
