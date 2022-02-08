@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>570</width>
-    <height>833</height>
+    <width>607</width>
+    <height>846</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,8 +22,8 @@
     <rect>
      <x>10</x>
      <y>130</y>
-     <width>549</width>
-     <height>661</height>
+     <width>591</width>
+     <height>651</height>
     </rect>
    </property>
    <property name="minimumSize">
@@ -472,38 +472,12 @@
      <rect>
       <x>10</x>
       <y>26</y>
-      <width>531</width>
-      <height>81</height>
+      <width>568</width>
+      <height>205</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
-     <item row="0" column="1">
-      <widget class="QDateEdit" name="dateEdit_FechaInicio">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_Direccion_2">
-       <property name="font">
-        <font>
-         <pointsize>8</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Fecha fin:</string>
-       </property>
-       <property name="buddy">
-        <cstring>dateEdit_FechaFin</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="label_FechaInicio">
        <property name="font">
         <font>
@@ -515,22 +489,10 @@
        <property name="text">
         <string>Fecha inicio:</string>
        </property>
-       <property name="buddy">
-        <cstring>dateEdit_FechaInicio</cstring>
-       </property>
       </widget>
      </item>
-     <item row="0" column="3">
-      <widget class="QDateEdit" name="dateEdit_FechaFin">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_importeTotal">
+     <item row="1" column="1">
+      <widget class="QLabel" name="label_Direccion_2">
        <property name="font">
         <font>
          <pointsize>8</pointsize>
@@ -539,29 +501,44 @@
         </font>
        </property>
        <property name="text">
-        <string>Importe Total:</string>
+        <string>Fecha fin:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="4">
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>com.trolltech.qt.core.Qt.Orientation.Horizontal</enum>
+     <item row="4" column="1">
+      <widget class="QCalendarWidget" name="calendarWidget_Fin">
+       <property name="firstDayOfWeek">
+        <enum>com.trolltech.qt.core.Qt.DayOfWeek.Monday</enum>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>600</width>
-         <height>20</height>
-        </size>
+       <property name="gridVisible">
+        <bool>true</bool>
        </property>
-      </spacer>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="label_importeTotalRes">
-       <property name="text">
-        <string/>
+       <property name="verticalHeaderFormat">
+        <enum>com.trolltech.qt.gui.QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader</enum>
        </property>
       </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QCalendarWidget" name="calendarWidget_Inicio">
+       <property name="firstDayOfWeek">
+        <enum>com.trolltech.qt.core.Qt.DayOfWeek.Monday</enum>
+       </property>
+       <property name="gridVisible">
+        <bool>true</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>com.trolltech.qt.gui.QCalendarWidget.SelectionMode.SingleSelection</enum>
+       </property>
+       <property name="verticalHeaderFormat">
+        <enum>com.trolltech.qt.gui.QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QDateEdit" name="dateEditInicio"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QDateEdit" name="dateEditFin"/>
      </item>
     </layout>
    </widget>
@@ -569,8 +546,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>120</y>
-      <width>531</width>
+      <y>240</y>
+      <width>571</width>
       <height>251</height>
      </rect>
     </property>
@@ -1014,8 +991,8 @@
       <rect>
        <x>0</x>
        <y>20</y>
-       <width>531</width>
-       <height>231</height>
+       <width>571</width>
+       <height>191</height>
       </rect>
      </property>
      <property name="toolTip">
@@ -1025,14 +1002,55 @@
       <bool>false</bool>
      </property>
     </widget>
+    <widget class="QLabel" name="label_importeTotal">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>220</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Importe Total:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_importeTotalRes">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>220</y>
+       <width>89</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_reservas">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>390</y>
-      <width>531</width>
-      <height>251</height>
+      <y>500</y>
+      <width>571</width>
+      <height>141</height>
      </rect>
     </property>
     <property name="palette">
@@ -1475,7 +1493,7 @@
       <rect>
        <x>0</x>
        <y>20</y>
-       <width>531</width>
+       <width>571</width>
        <height>231</height>
       </rect>
      </property>
@@ -1492,10 +1510,16 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>800</y>
-     <width>551</width>
-     <height>26</height>
+     <y>790</y>
+     <width>591</width>
+     <height>27</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>23</height>
+    </size>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
@@ -1513,6 +1537,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_eliminar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>23</height>
+       </size>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -1654,6 +1684,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_modificar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>23</height>
+       </size>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -1795,6 +1831,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_reservar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>23</height>
+       </size>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -1933,6 +1975,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_cancelar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>23</height>
+       </size>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -2074,7 +2122,7 @@
   <widget class="QLabel" name="label_Logo">
    <property name="geometry">
     <rect>
-     <x>440</x>
+     <x>480</x>
      <y>20</y>
      <width>121</width>
      <height>101</height>
@@ -2134,7 +2182,7 @@
     <rect>
      <x>10</x>
      <y>60</y>
-     <width>411</width>
+     <width>461</width>
      <height>61</height>
     </rect>
    </property>
@@ -2686,12 +2734,119 @@
     <property name="text">
      <string>DNI</string>
     </property>
-    <property name="buddy">
-     <cstring>dateEdit_FechaInicio</cstring>
-    </property>
    </widget>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>comboBox</tabstop>
+  <tabstop>dateEditInicio</tabstop>
+  <tabstop>calendarWidget_Inicio</tabstop>
+  <tabstop>dateEditFin</tabstop>
+  <tabstop>calendarWidget_Fin</tabstop>
+  <tabstop>listView_habitaciones</tabstop>
+  <tabstop>listView_reservas</tabstop>
+  <tabstop>pushButton_eliminar</tabstop>
+  <tabstop>pushButton_modificar</tabstop>
+  <tabstop>pushButton_reservar</tabstop>
+  <tabstop>pushButton_cancelar</tabstop>
+ </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>dateEditInicio</sender>
+   <signal>dateChanged&lt;com.trolltech.qt.core.QDate&gt;</signal>
+   <receiver>calendarWidget_Inicio</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>136</x>
+     <y>192</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>140</x>
+     <y>254</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dateEditInicio</sender>
+   <signal>dateChanged&lt;com.trolltech.qt.core.QDate&gt;</signal>
+   <receiver>calendarWidget_Inicio</receiver>
+   <slot>setSelectedDate(com.trolltech.qt.core.QDate)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>200</x>
+     <y>187</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>202</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>calendarWidget_Inicio</sender>
+   <signal>clicked&lt;com.trolltech.qt.core.QDate&gt;</signal>
+   <receiver>dateEditInicio</receiver>
+   <slot>setDate(com.trolltech.qt.core.QDate)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>282</x>
+     <y>261</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>264</x>
+     <y>193</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dateEditFin</sender>
+   <signal>dateChanged&lt;com.trolltech.qt.core.QDate&gt;</signal>
+   <receiver>calendarWidget_Fin</receiver>
+   <slot>setFocus()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>371</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>363</x>
+     <y>229</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dateEditFin</sender>
+   <signal>dateChanged&lt;com.trolltech.qt.core.QDate&gt;</signal>
+   <receiver>calendarWidget_Fin</receiver>
+   <slot>setSelectedDate(com.trolltech.qt.core.QDate)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>440</x>
+     <y>186</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>435</x>
+     <y>219</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>calendarWidget_Fin</sender>
+   <signal>clicked&lt;com.trolltech.qt.core.QDate&gt;</signal>
+   <receiver>dateEditFin</receiver>
+   <slot>setDate(com.trolltech.qt.core.QDate)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>539</x>
+     <y>240</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>533</x>
+     <y>194</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

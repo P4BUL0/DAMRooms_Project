@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>599</width>
-    <height>350</height>
+    <width>600</width>
+    <height>362</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>300</y>
+     <y>310</y>
      <width>549</width>
      <height>31</height>
     </rect>
@@ -45,6 +45,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_aceptar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>23</height>
+       </size>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -183,6 +189,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_cancelar">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>23</height>
+       </size>
+      </property>
       <property name="palette">
        <palette>
         <active>
@@ -324,8 +336,8 @@
   <widget class="QLabel" name="label_Titulo">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>50</y>
+     <x>40</x>
+     <y>20</y>
      <width>160</width>
      <height>24</height>
     </rect>
@@ -355,147 +367,6 @@
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QPushButton" name="pushButton_ingresar">
-      <property name="palette">
-       <palette>
-        <active>
-         <colorrole role="Button">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="ButtonText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Base">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Window">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </active>
-        <inactive>
-         <colorrole role="Button">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="ButtonText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Base">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Window">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </inactive>
-        <disabled>
-         <colorrole role="Button">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="ButtonText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>120</red>
-            <green>120</green>
-            <blue>120</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Base">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Window">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </disabled>
-       </palette>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>Ingresar cliente</string>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:rgb(19, 151, 213)</string>
-      </property>
-      <property name="text">
-       <string>Ingresar</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>Resources/Iconos/Guardar.png</normaloff>Resources/Iconos/Guardar.png</iconset>
-      </property>
-     </widget>
-    </item>
     <item row="0" column="1">
      <widget class="QPushButton" name="pushButton_consultar">
       <property name="palette">
@@ -634,147 +505,6 @@
       <property name="icon">
        <iconset>
         <normaloff>Resources/Iconos/Buscar.png</normaloff>Resources/Iconos/Buscar.png</iconset>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="pushButton_eliminar">
-      <property name="palette">
-       <palette>
-        <active>
-         <colorrole role="Button">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="ButtonText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Base">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Window">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </active>
-        <inactive>
-         <colorrole role="Button">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="ButtonText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>255</red>
-            <green>255</green>
-            <blue>255</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Base">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Window">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </inactive>
-        <disabled>
-         <colorrole role="Button">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="ButtonText">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>120</red>
-            <green>120</green>
-            <blue>120</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Base">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-         <colorrole role="Window">
-          <brush brushstyle="SolidPattern">
-           <color alpha="255">
-            <red>19</red>
-            <green>151</green>
-            <blue>213</blue>
-           </color>
-          </brush>
-         </colorrole>
-        </disabled>
-       </palette>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="toolTip">
-       <string>Eliminar cliente</string>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color:rgb(19, 151, 213)</string>
-      </property>
-      <property name="text">
-       <string>Eliminar</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>Resources/Iconos/Eliminar.png</normaloff>Resources/Iconos/Eliminar.png</iconset>
       </property>
      </widget>
     </item>
@@ -1359,174 +1089,428 @@
       <property name="checkable">
        <bool>false</bool>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_Apellidos">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Apellidos:</string>
-         </property>
-         <property name="buddy">
-          <cstring>lineEdit_Apellidos</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLineEdit" name="lineEdit_Direccion">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>Introduzca su Dirección</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_Nombre">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Nombre:</string>
-         </property>
-         <property name="buddy">
-          <cstring>lineEdit_Nombre</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_DNI">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>DNI:</string>
-         </property>
-         <property name="buddy">
-          <cstring>lineEdit_DNI</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="label_Direccion">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Dirección:</string>
-         </property>
-         <property name="buddy">
-          <cstring>lineEdit_Direccion</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_DNI">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>Introduzca su DNI</string>
-         </property>
-         <property name="placeholderText">
-          <string>Ej. 11111111A</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLabel" name="label_Telefono">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-           <weight>75</weight>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="text">
-          <string>Telefono:</string>
-         </property>
-         <property name="buddy">
-          <cstring>lineEdit_Telefono</cstring>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QLineEdit" name="lineEdit_Telefono">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>8</pointsize>
-          </font>
-         </property>
-         <property name="toolTip">
-          <string>Introduzca su teléfono</string>
-         </property>
-         <property name="placeholderText">
-          <string>Ej. 666118855</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_Nombre">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>Introduzca su Nombre</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_Apellidos">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="toolTip">
-          <string>Introduzca sus Apellidos</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QWidget" name="layoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>531</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="3">
+         <widget class="QLineEdit" name="lineEdit_Direccion">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Introduzca su Dirección</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
+         <widget class="QLineEdit" name="lineEdit_Telefono">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
+          <property name="toolTip">
+           <string>Introduzca su teléfono</string>
+          </property>
+          <property name="placeholderText">
+           <string>Ej. 666118855</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QLabel" name="label_Telefono">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Telefono:</string>
+          </property>
+          <property name="buddy">
+           <cstring>lineEdit_Telefono</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="label_Direccion">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Dirección:</string>
+          </property>
+          <property name="buddy">
+           <cstring>lineEdit_Direccion</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_Nombre">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Nombre:</string>
+          </property>
+          <property name="buddy">
+           <cstring>lineEdit_Nombre</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_Apellidos">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Apellidos:</string>
+          </property>
+          <property name="buddy">
+           <cstring>lineEdit_Apellidos</cstring>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_Nombre">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Introduzca su Nombre</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_Apellidos">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>Introduzca sus Apellidos</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="pushButton_eliminar">
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>120</red>
+            <green>120</green>
+            <blue>120</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Eliminar cliente</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(19, 151, 213)</string>
+      </property>
+      <property name="text">
+       <string>Eliminar</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Resources/Iconos/Eliminar.png</normaloff>Resources/Iconos/Eliminar.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="pushButton_ingresar">
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>255</green>
+            <blue>255</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>120</red>
+            <green>120</green>
+            <blue>120</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>19</red>
+            <green>151</green>
+            <blue>213</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>Ingresar cliente</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgb(19, 151, 213)</string>
+      </property>
+      <property name="text">
+       <string>Ingresar</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>Resources/Iconos/Guardar.png</normaloff>Resources/Iconos/Guardar.png</iconset>
+      </property>
      </widget>
     </item>
    </layout>
@@ -1562,176 +1546,513 @@
     <bool>false</bool>
    </property>
   </widget>
+  <widget class="QGroupBox" name="groupBox_cliente_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>60</y>
+     <width>361</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="palette">
+    <palette>
+     <active>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Light">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Midlight">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>203</red>
+         <green>232</green>
+         <blue>245</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Dark">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>76</red>
+         <green>105</green>
+         <blue>118</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Mid">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>101</red>
+         <green>140</green>
+         <blue>157</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Text">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="BrightText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ButtonText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Shadow">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="AlternateBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>203</red>
+         <green>232</green>
+         <blue>245</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ToolTipBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>220</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ToolTipText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </active>
+     <inactive>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Light">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Midlight">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>203</red>
+         <green>232</green>
+         <blue>245</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Dark">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>76</red>
+         <green>105</green>
+         <blue>118</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Mid">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>101</red>
+         <green>140</green>
+         <blue>157</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Text">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="BrightText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ButtonText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Shadow">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="AlternateBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>203</red>
+         <green>232</green>
+         <blue>245</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ToolTipBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>220</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ToolTipText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </inactive>
+     <disabled>
+      <colorrole role="WindowText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>76</red>
+         <green>105</green>
+         <blue>118</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Button">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Light">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Midlight">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>203</red>
+         <green>232</green>
+         <blue>245</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Dark">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>76</red>
+         <green>105</green>
+         <blue>118</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Mid">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>101</red>
+         <green>140</green>
+         <blue>157</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Text">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>76</red>
+         <green>105</green>
+         <blue>118</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="BrightText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ButtonText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>76</red>
+         <green>105</green>
+         <blue>118</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Base">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Window">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>232</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="Shadow">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="AlternateBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>152</red>
+         <green>210</green>
+         <blue>236</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ToolTipBase">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>255</red>
+         <green>255</green>
+         <blue>220</blue>
+        </color>
+       </brush>
+      </colorrole>
+      <colorrole role="ToolTipText">
+       <brush brushstyle="SolidPattern">
+        <color alpha="255">
+         <red>0</red>
+         <green>0</green>
+         <blue>0</blue>
+        </color>
+       </brush>
+      </colorrole>
+     </disabled>
+    </palette>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color:rgb(152,210,232)</string>
+   </property>
+   <property name="title">
+    <string>Cliente</string>
+   </property>
+   <widget class="QLabel" name="label_DNI">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>55</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>DNI:</string>
+    </property>
+    <property name="buddy">
+     <cstring>lineEdit_DNI</cstring>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_DNI">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>20</y>
+      <width>201</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Introduzca su DNI</string>
+    </property>
+    <property name="placeholderText">
+     <string>Ej. 11111111A</string>
+    </property>
+   </widget>
+  </widget>
  </widget>
  <tabstops>
   <tabstop>lineEdit_DNI</tabstop>
-  <tabstop>lineEdit_Direccion</tabstop>
+  <tabstop>pushButton_ingresar</tabstop>
+  <tabstop>pushButton_consultar</tabstop>
+  <tabstop>pushButton_eliminar</tabstop>
+  <tabstop>pushButton_modificar</tabstop>
   <tabstop>lineEdit_Nombre</tabstop>
-  <tabstop>lineEdit_Telefono</tabstop>
+  <tabstop>lineEdit_Direccion</tabstop>
   <tabstop>lineEdit_Apellidos</tabstop>
+  <tabstop>lineEdit_Telefono</tabstop>
+  <tabstop>pushButton_aceptar</tabstop>
+  <tabstop>pushButton_cancelar</tabstop>
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_DNI</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>182</x>
-     <y>133</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>109</x>
-     <y>220</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_Nombre</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>135</x>
-     <y>129</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>130</x>
-     <y>250</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_Apellidos</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>150</x>
-     <y>133</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>147</x>
-     <y>277</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>label_DNI</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>46</x>
-     <y>131</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>49</x>
-     <y>216</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>label_Nombre</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>67</x>
-     <y>124</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>70</x>
-     <y>244</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>label_Apellidos</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>77</x>
-     <y>129</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>88</x>
-     <y>267</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>label_Direccion</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>173</x>
-     <y>128</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>326</x>
-     <y>217</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>label_Telefono</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>193</x>
-     <y>131</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>316</x>
-     <y>253</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_Direccion</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>228</x>
-     <y>129</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>399</x>
-     <y>221</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_Telefono</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>136</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>378</x>
-     <y>248</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>pushButton_eliminar</sender>
    <signal>clicked&lt;java.lang.Boolean&gt;</signal>
@@ -1743,56 +2064,8 @@
      <y>159</y>
     </hint>
     <hint type="destinationlabel">
-     <x>70</x>
-     <y>218</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_eliminar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_DNI</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>267</x>
-     <y>163</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>269</x>
-     <y>216</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_consultar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>label_DNI</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>362</x>
-     <y>128</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>67</x>
-     <y>214</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_consultar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_DNI</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>482</x>
-     <y>122</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>186</x>
-     <y>214</y>
+     <x>79</x>
+     <y>101</y>
     </hint>
    </hints>
   </connection>
@@ -1807,24 +2080,8 @@
      <y>162</y>
     </hint>
     <hint type="destinationlabel">
-     <x>85</x>
-     <y>210</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_modificar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>lineEdit_DNI</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>323</x>
-     <y>151</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>166</x>
-     <y>211</y>
+     <x>94</x>
+     <y>101</y>
     </hint>
    </hints>
   </connection>
@@ -1839,8 +2096,8 @@
      <y>156</y>
     </hint>
     <hint type="destinationlabel">
-     <x>85</x>
-     <y>249</y>
+     <x>97</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>
@@ -1855,8 +2112,8 @@
      <y>159</y>
     </hint>
     <hint type="destinationlabel">
-     <x>224</x>
-     <y>250</y>
+     <x>297</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>
@@ -1903,8 +2160,8 @@
      <y>158</y>
     </hint>
     <hint type="destinationlabel">
-     <x>355</x>
-     <y>209</y>
+     <x>364</x>
+     <y>237</y>
     </hint>
    </hints>
   </connection>
@@ -1935,8 +2192,8 @@
      <y>163</y>
     </hint>
     <hint type="destinationlabel">
-     <x>342</x>
-     <y>241</y>
+     <x>364</x>
+     <y>280</y>
     </hint>
    </hints>
   </connection>
@@ -1951,8 +2208,152 @@
      <y>162</y>
     </hint>
     <hint type="destinationlabel">
-     <x>568</x>
-     <y>241</y>
+     <x>571</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_modificar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>lineEdit_DNI</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>323</x>
+     <y>151</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>235</x>
+     <y>99</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>label_Direccion</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>326</x>
+     <y>217</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>label_Telefono</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>193</x>
+     <y>131</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>364</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>lineEdit_Nombre</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>203</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>label_Nombre</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>67</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>82</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>lineEdit_Direccion</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>228</x>
+     <y>129</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>221</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>lineEdit_Apellidos</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>150</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>277</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>lineEdit_Telefono</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>571</x>
+     <y>279</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_ingresar</sender>
+   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <receiver>label_Apellidos</receiver>
+   <slot>setDisabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>136</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>68</x>
+     <y>268</y>
     </hint>
    </hints>
   </connection>
