@@ -19,8 +19,7 @@ public class ClienteController {
     private ClienteService clienteService;
 
     @GetMapping("/clientes")
-    public ResponseEntity<Set<Cliente>> getClientes(@RequestParam(value =
-            "id", defaultValue = "") String id) {
+    public ResponseEntity<Set<Cliente>> getClientes(@RequestParam(value = "id", defaultValue = "") String id) {
         Set<Cliente> cliente = null;
         Set<Cliente> cliente2 = null;
         if (id.equals(""))
