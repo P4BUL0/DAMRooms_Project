@@ -27,12 +27,25 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
+    public Set<Reserva> findByFechaInicio(String fechaInicio) {
+        return reservaRepository.findByFechaInicio(fechaInicio);
+    }
+
+    @Override
     public Reserva addReserva(Reserva reserva){
         return reservaRepository.save(reserva);
     }
 
     @Override
     public Reserva modifyReserva(long id, Reserva newReserva){
+        Reserva reserva = reservaRepository.findById(id)
+                .orElseThrow(() -> new ReservaNotFoundException(id));
+        newReserva.setIdReserva(reserva.getIdReserva());
+        return reservaRepository.save(newReserva);
+    }
+
+    @Override
+    public Reserva modifyReservaEstado(long id, String estado, Reserva newReserva) {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservaNotFoundException(id));
         newReserva.setIdReserva(reserva.getIdReserva());

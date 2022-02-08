@@ -6,36 +6,54 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Reserva {
-    @EmbeddedId
-    private ReservaId idReserva = new ReservaId();;
 
-    @ManyToOne
-    @MapsId("dni")
-    private Cliente cliente;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idReserva")
+    private long idReserva;
 
-    @ManyToOne
-    @MapsId("numero")
-    private Habitaciones habitaciones;
+    @Column(name = "fechaInicio")
+    private LocalDate fechaInicio;
 
+    @Column(name = "fechaFin")
     private LocalDate fechaFin;
 
+    @Column(name = "importeTotal")
     private float importeTotal;
 
+    @Column(name = "estado")
+    private String estado;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "reserva_cliente",
+            joinColumns = {@JoinColumn(name = "idReserva")},
+            inverseJoinColumns = {@JoinColumn(name = "dniCLiente")})
+    private Cliente clientes;
+
+    @OneToMany
+    @JoinTable(name = "reserva_habitaciones",
+            joinColumns = {@JoinColumn(name = "idReserva")},
+            inverseJoinColumns = {@JoinColumn(name = "numeroHabitacion")})
+    private List<Habitaciones> habitaciones;
+
     public void calcImporteTotal(float importeNoche){
-        Period period = Period.between(idReserva.getFechaInicio(), this.fechaFin);
+        long total_dias = DAYS.between(fechaInicio, fechaFin);
+
+        /*Period period = Period.between(this.fechaInicio, this.fechaFin);
         int diferencia_anyos = period.getYears() * 360;
         int diferencia_meses = period.getMonths() * 12;
         int diferencia_dias = period.getDays();
-        int total_dias = diferencia_anyos + diferencia_meses + diferencia_dias;
+        int total_dias = diferencia_anyos + diferencia_meses + diferencia_dias;*/
         this.importeTotal = importeNoche * total_dias;
     }
-
-    //private String estado = "Pendiente";
 }
 

@@ -25,10 +25,7 @@ public class Habitaciones {
 
     @Column(name = "importe_noche")
     private float importe_noche;
-/*
-    @ManyToMany
-    @JoinTable(name = "habitacion_reserva",
-            joinColumns = { @JoinColumn(name = "numero") },
-            inverseJoinColumns = { @JoinColumn(name = "dni") })
-    private List<Reserva> reserva;*/
+
+    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "habitaciones")
+    private List<Reserva> reservas;
 }
