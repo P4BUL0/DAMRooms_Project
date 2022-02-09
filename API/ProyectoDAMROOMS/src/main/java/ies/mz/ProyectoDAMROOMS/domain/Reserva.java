@@ -34,19 +34,21 @@ public class Reserva {
     private String estado;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "reserva_cliente",
+    @JoinColumn(name = "clienteDni", nullable = false)
+    /*@JoinTable(name = "reserva_cliente",
             joinColumns = {@JoinColumn(name = "idReserva")},
-            inverseJoinColumns = {@JoinColumn(name = "dniCLiente")})
+            inverseJoinColumns = {@JoinColumn(name = "dniCLiente")})*/
     private Cliente clientes;
 
-    @OneToMany
-    @JoinTable(name = "reserva_habitaciones",
+    @OneToOne
+    @JoinColumn(name = "numeroHabitacion", nullable = false)
+    /*@JoinTable(name = "reserva_habitaciones",
             joinColumns = {@JoinColumn(name = "idReserva")},
-            inverseJoinColumns = {@JoinColumn(name = "numeroHabitacion")})
-    private List<Habitaciones> habitaciones;
+            inverseJoinColumns = {@JoinColumn(name = "numeroHabitacion")})*/
+    private Habitaciones habitaciones;
 
     public void calcImporteTotal(float importeNoche){
-        long total_dias = DAYS.between(fechaInicio, fechaFin);
+        long total_dias = DAYS.between(this.fechaInicio, this.fechaFin);
 
         /*Period period = Period.between(this.fechaInicio, this.fechaFin);
         int diferencia_anyos = period.getYears() * 360;

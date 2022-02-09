@@ -26,6 +26,6 @@ public class Habitaciones {
     @Column(name = "importe_noche")
     private float importe_noche;
 
-    @ManyToMany(cascade = CascadeType.DETACH, mappedBy = "habitaciones")
-    private List<Reserva> reservas;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Reserva reservas;
 }

@@ -1,5 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
+import ies.mz.ProyectoDAMROOMS.domain.Habitaciones;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.ReservaNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.ReservaRepository;
@@ -33,6 +34,9 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public Reserva addReserva(Reserva reserva){
+
+        reserva.calcImporteTotal(reserva.getHabitaciones().getImporte_noche());
+        reserva.setEstado("Pendiente");
         return reservaRepository.save(reserva);
     }
 
@@ -45,10 +49,20 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public Reserva modifyReservaEstado(long id, String estado, Reserva newReserva) {
+    public Reserva modifyReservaCheckIn(long id, Reserva newReserva) {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservaNotFoundException(id));
         newReserva.setIdReserva(reserva.getIdReserva());
+        newReserva.setEstado("Activa");
+        return reservaRepository.save(newReserva);
+    }
+
+    @Override
+    public Reserva modifyReservaCheckOut(long id, Reserva newReserva) {
+        Reserva reserva = reservaRepository.findById(id)
+                .orElseThrow(() -> new ReservaNotFoundException(id));
+        newReserva.setIdReserva(reserva.getIdReserva());
+        newReserva.setEstado("Completada");
         return reservaRepository.save(newReserva);
     }
 

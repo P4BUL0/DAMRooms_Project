@@ -44,10 +44,7 @@ public class ReservaController {
 
     @PostMapping("/reservas")
     public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
-        Habitaciones habitaciones = null;
         Reserva addedReserva = reservaService.addReserva(reserva);
-        float importeNoche = habitaciones.getImporte_noche();
-        addedReserva.calcImporteTotal(importeNoche);
         return new ResponseEntity<>(addedReserva, HttpStatus.OK);
     }
 
@@ -58,14 +55,15 @@ public class ReservaController {
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
 
-    @PutMapping("/reservas/{idReserva}/estado")
-    public ResponseEntity<Reserva> modifyReservaEstado(@PathVariable long idReserva, String estado, @RequestBody Reserva newReserva) {
-        if (estado.equals("checkIn")) {
-            newReserva.setEstado("Ocupada");
-        }else if (estado.equals("checkOut")) {
-            newReserva.setEstado("Libre");
-        }
-        Reserva reserva = reservaService.modifyReservaEstado(idReserva, estado, newReserva);
+    @PutMapping("/reservas/{idReserva}/checkIn")
+    public ResponseEntity<Reserva> modifyReservaCheckIn(@PathVariable long idReserva,  @RequestBody Reserva newReserva) {
+        Reserva reserva = reservaService.modifyReservaCheckIn(idReserva, newReserva);
+        return new ResponseEntity<>(reserva, HttpStatus.OK);
+    }
+
+    @PutMapping("/reservas/{idReserva}/checkOut")
+    public ResponseEntity<Reserva> modifyReservaCheckOut(@PathVariable long idReserva, @RequestBody Reserva newReserva) {
+        Reserva reserva = reservaService.modifyReservaCheckOut(idReserva, newReserva);
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
 

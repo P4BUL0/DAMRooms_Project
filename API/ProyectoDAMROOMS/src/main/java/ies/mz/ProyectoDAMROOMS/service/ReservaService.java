@@ -11,6 +11,7 @@ public interface ReservaService {
     Set<Reserva> findByFechaInicio(String fechaInicio);
     Reserva addReserva(Reserva reserva);
     Reserva modifyReserva(long id, Reserva reserva);
-    Reserva modifyReservaEstado(long id, String estado, Reserva reserva);
+    Reserva modifyReservaCheckIn(long id, Reserva reserva);
+    Reserva modifyReservaCheckOut(long id, Reserva reserva);
     void deleteReserva(long id);
 }
