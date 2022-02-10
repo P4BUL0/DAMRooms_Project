@@ -1,5 +1,8 @@
 package ies.mz.ProyectoDAMROOMS.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "clientes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "reservas"})
+
 public class Cliente {
     @Id
     @Column(name = "dni")
@@ -29,6 +34,7 @@ public class Cliente {
     @Column(name = "telefono")
     private int telefono;
 
-    @OneToMany(mappedBy = "clientes", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "clientes",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonProperty("reservas")
     private List<Reserva> reservas;
 }
