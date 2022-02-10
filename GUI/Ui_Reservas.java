@@ -1,7 +1,7 @@
 /********************************************************************************
  ** Form generated from reading ui file 'Reservas.jui'
  **
- ** Created by: Qt User Interface Compiler version 4.8.6
+ ** Created by: Qt User Interface Compiler version 4.8.7
  **
  ** WARNING! All changes made in this file will be lost when recompiling ui file!
  ********************************************************************************/
@@ -302,7 +302,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         listView_reservas.setAutoFillBackground(false);
         layoutWidget_4 = new QWidget(Reservas);
         layoutWidget_4.setObjectName("layoutWidget_4");
-        layoutWidget_4.setGeometry(new QRect(10, 790, 591, 27));
+        layoutWidget_4.setGeometry(new QRect(10, 790, 591, 41));
         layoutWidget_4.setMinimumSize(new QSize(0, 23));
         horizontalLayout = new QHBoxLayout(layoutWidget_4);
         horizontalLayout.setObjectName("horizontalLayout");
