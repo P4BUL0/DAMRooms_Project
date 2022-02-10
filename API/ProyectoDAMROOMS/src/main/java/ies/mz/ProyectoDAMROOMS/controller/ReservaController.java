@@ -1,13 +1,16 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
+import ies.mz.ProyectoDAMROOMS.domain.Cliente;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
+import ies.mz.ProyectoDAMROOMS.service.ClienteService;
 import ies.mz.ProyectoDAMROOMS.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +19,9 @@ public class ReservaController {
 
     @Autowired
     private ReservaService reservaService;
+
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping("/reservas/{idReserva}")
     public ResponseEntity<Optional<Reserva>> getReservasById(@PathVariable long idReserva) {
@@ -33,6 +39,22 @@ public class ReservaController {
         else
         reservas = reservaService.findByFechaInicio(fechaInicio);
 
+        return new ResponseEntity<>(reservas, HttpStatus.OK);
+    }
+
+    @GetMapping("/reservas/getDni/{id}")
+    public ResponseEntity<String> getDniFromReserva(@PathVariable long id){
+        Optional<Reserva> reserva = reservaService.findById(id);
+        String dni = reservaService.getDni(reserva);
+
+        return new ResponseEntity<>(dni, HttpStatus.OK);
+    }
+
+    @GetMapping("/reservas/cliente/{dni}")
+    public ResponseEntity<List<Reserva>> getReservasFromDni(@PathVariable String dni){
+        Set<Cliente> cliente = clienteService.findByDni(dni);
+        Cliente cliente1 = cliente.iterator().next();
+        List<Reserva> reservas = cliente1.getReservas();
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 

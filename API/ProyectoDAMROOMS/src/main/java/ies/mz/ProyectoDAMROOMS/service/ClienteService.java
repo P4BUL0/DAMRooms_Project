@@ -12,5 +12,4 @@ public interface ClienteService {
     Cliente modifyCliente(String dni, Cliente cliente);
     void deleteByDni(String dni);
     void deleteAllByDni(String dni);
-    //void deleteByNombre(String nombre);
 }

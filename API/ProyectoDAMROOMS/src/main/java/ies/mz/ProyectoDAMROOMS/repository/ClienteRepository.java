@@ -14,5 +14,4 @@ public interface ClienteRepository extends CrudRepository<Cliente, Long> {
     Set<Cliente> findByDni(String dni);
     void deleteByDni(String dni);
     Set<Habitacion> deleteAllByDni(String dni);
-    void deleteByNombre(String nombre);
 }

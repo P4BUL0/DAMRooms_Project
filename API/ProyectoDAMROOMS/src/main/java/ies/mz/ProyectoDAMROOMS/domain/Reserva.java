@@ -14,7 +14,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//@JsonIgnoreProperties({"habitaciones", "clientes"})
 public class Reserva {
 
     @Id
@@ -34,20 +33,13 @@ public class Reserva {
     @Column(name = "estado")
     private String estado;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
-    //@JsonProperty("clientes")
+    @ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.DETACH)
     @JoinColumn(name = "clienteDni", nullable = false)
-    /*@JoinTable(name = "reserva_cliente",
-            joinColumns = {@JoinColumn(name = "idReserva")},
-            inverseJoinColumns = {@JoinColumn(name = "dniCLiente")})*/
     private Cliente clientes;
 
-    @OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
-    //@JsonProperty("habitaciones")
+
+    @OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.DETACH)
     @JoinColumn(name = "numeroHabitacion", nullable = false)
-    /*@JoinTable(name = "reserva_habitaciones",
-            joinColumns = {@JoinColumn(name = "idReserva")},
-            inverseJoinColumns = {@JoinColumn(name = "numeroHabitacion")})*/
     private Habitacion habitacion;
 
     public void calcImporteTotal(){

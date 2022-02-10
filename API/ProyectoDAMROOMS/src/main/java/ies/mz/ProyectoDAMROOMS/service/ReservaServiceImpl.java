@@ -52,6 +52,7 @@ public class ReservaServiceImpl implements ReservaService {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservaNotFoundException(id));
         newReserva.setIdReserva(reserva.getIdReserva());
+        newReserva.calcImporteTotal();
         newReserva.setEstado("Activa");
         return reservaRepository.save(newReserva);
     }
@@ -61,8 +62,14 @@ public class ReservaServiceImpl implements ReservaService {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservaNotFoundException(id));
         newReserva.setIdReserva(reserva.getIdReserva());
+        newReserva.calcImporteTotal();
         newReserva.setEstado("Completada");
         return reservaRepository.save(newReserva);
+    }
+
+    @Override
+    public String getDni(Optional<Reserva> reserva){
+        return reserva.get().getClientes().getDni();
     }
 
     @Override
