@@ -62,26 +62,24 @@
 
 
 {
-    "idReserva": {
-        "dni": "99999999A",
-        "numero": 1,
-        "fechaInicio": "2022-02-07"
-    },
-    "cliente": {
+    "idReserva": 1,
+    "fechaInicio": "2022-02-07",
+    "fechaFin": "2022-02-05",
+    "importeTotal": 1700.0,
+    "estado": "Pendiente",
+    "clientes": {
         "dni": "99999999A",
         "nombre": "Lázaro",
         "apellidos": "Ortega Boix",
         "direccion": "Calle Castelar nº37",
-        "telefono": 111111111,
-        "reservas": []
+        "telefono": 111111111
     },
     "habitaciones": {
         "numero": 1,
         "tipo": "Individual",
         "caracteristicas": "Grande",
         "importe_noche": 50.0
-    },
-    "fechaFin": "2022-02-09"
+    }
 }
 
 Reserva(idReserva=ReservaId(dni=99999999A, numero=1, fechaInicio=2022-02-07),

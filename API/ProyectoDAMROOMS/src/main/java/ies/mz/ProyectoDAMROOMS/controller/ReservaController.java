@@ -20,12 +20,10 @@ public class ReservaController {
 
     @Autowired
     private ReservaService reservaService;
-    @Autowired
-    private ClienteService clienteService;
 
     @GetMapping("/reservas/{idReserva}")
     public ResponseEntity<Optional<Reserva>> getReservasById(@PathVariable long idReserva) {
-        Optional<Reserva> reservas = null;
+        Optional<Reserva> reservas;
         reservas = reservaService.findById(idReserva);
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
