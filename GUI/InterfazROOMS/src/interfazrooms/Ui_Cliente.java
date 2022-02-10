@@ -9,6 +9,7 @@ package interfazrooms;
 
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
+import static com.trolltech.qt.gui.QAccessible.Role.Dialog;
 import javax.swing.JOptionPane;
 
 public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
@@ -45,16 +46,15 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
     public Ui_Cliente() { super(); }
 
     public void mensaje(){
-        JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.");
+        JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","Enhorabuena", JOptionPane.INFORMATION_MESSAGE);
     }
     public void mensajeError(){
-        JOptionPane.showMessageDialog(null, "Error", "Failure", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "El DNI no es correcto", "Error", JOptionPane.ERROR_MESSAGE);
     }
     
     public boolean comprobarDNI(){
         String dni = lineEdit_DNI.text();
         String letraMayuscula = "";
-        //if (!dni.isEmpty()) {
             
            if(dni.length() !=9 || Character.isLetter(dni.charAt(8)) == false){
             mensajeError();
@@ -71,8 +71,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
                 mensajeError();
                 return false;
             } 
-        //}
-        
+
     }
     private boolean soloNumeros(){
         String dni = lineEdit_DNI.text();
@@ -529,32 +528,30 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         QWidget.setTabOrder(pushButton_aceptar, pushButton_cancelar);
         retranslateUi(Cliente);
        
-        pushButton_ingresar.clicked.connect(this, "comprobarDNI()");
-        
-        
+        pushButton_ingresar.clicked.connect(this, "comprobarDNI()"); 
 
-                pushButton_eliminar.clicked.connect(label_DNI, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(label_DNI, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(label_Nombre, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(label_Direccion, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(label_Telefono, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
-                pushButton_modificar.clicked.connect(lineEdit_DNI, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
+        pushButton_eliminar.clicked.connect(label_DNI, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(label_DNI, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(label_Nombre, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(label_Direccion, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(label_Telefono, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
+        pushButton_modificar.clicked.connect(lineEdit_DNI, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
+        pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
         
-
-            
+        pushButton_cancelar.clicked.connect(Cliente, "close()");
+         
         Cliente.connectSlotsByName();
     } // setupUi
 

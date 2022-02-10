@@ -676,6 +676,8 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         retranslateUi(Habitaciones);
         pushButton_ingresar.clicked.connect(groupBox_2, "setDisabled(boolean)");
         pushButton_modificar.clicked.connect(groupBox_2, "setDisabled(boolean)");
+        
+        pushButton_cancelar.clicked.connect(Habitaciones, "close()");
 
         Habitaciones.connectSlotsByName();
     } // setupUi

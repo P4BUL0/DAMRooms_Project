@@ -1,15 +1,13 @@
 package ies.mz.ProyectoDAMROOMS.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -34,4 +32,12 @@ public class Habitacion {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonProperty("reservas")
     private Reserva reservas;
+
+    public Habitacion(long numero, String tipo, String caracteristicas, float importe_noche) {
+        this.numero = numero;
+        this.tipo = tipo;
+        this.caracteristicas = caracteristicas;
+        this.importe_noche = importe_noche;
+    }
+
 }
