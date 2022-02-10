@@ -1,5 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
+import ies.mz.ProyectoDAMROOMS.domain.Cliente;
 import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.service.HabitacionService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class HabitacionController {
@@ -20,6 +22,14 @@ public class HabitacionController {
     public ResponseEntity<Optional<Habitacion>> getHabitacionById(@PathVariable long numero) {
         Optional<Habitacion> habitacion = null;
             habitacion = habitacionService.findById(numero);
+        return new ResponseEntity<>(habitacion, HttpStatus.OK);
+    }
+
+    @GetMapping("/habitaciones")
+    public ResponseEntity<Set<Habitacion>> getHabitaciones(@RequestParam(value = "id", defaultValue = "") String id){
+        Set<Habitacion> habitacion = null;
+        if (id.equals(""))
+            habitacion = habitacionService.findAll();
         return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
 

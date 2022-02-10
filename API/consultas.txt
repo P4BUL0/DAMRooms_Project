@@ -62,7 +62,6 @@
 
 
 {
-    "idReserva": 1,
     "fechaInicio": "2022-02-05",
     "fechaFin": "2022-02-07",
     "estado": "Pendiente",
