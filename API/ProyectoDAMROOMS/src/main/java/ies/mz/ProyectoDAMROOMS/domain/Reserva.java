@@ -1,15 +1,11 @@
 package ies.mz.ProyectoDAMROOMS.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -52,9 +48,10 @@ public class Reserva {
     /*@JoinTable(name = "reserva_habitaciones",
             joinColumns = {@JoinColumn(name = "idReserva")},
             inverseJoinColumns = {@JoinColumn(name = "numeroHabitacion")})*/
-    private Habitaciones habitaciones;
+    private Habitacion habitacion;
 
-    public void calcImporteTotal(float importeNoche){
+    public void calcImporteTotal(){
+        float importeNoche = this.getHabitacion().getImporte_noche();
         long total_dias = DAYS.between(this.fechaInicio, this.fechaFin);
 
         /*Period period = Period.between(this.fechaInicio, this.fechaFin);

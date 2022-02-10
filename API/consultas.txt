@@ -63,9 +63,8 @@
 
 {
     "idReserva": 1,
-    "fechaInicio": "2022-02-07",
-    "fechaFin": "2022-02-05",
-    "importeTotal": 1700.0,
+    "fechaInicio": "2022-02-05",
+    "fechaFin": "2022-02-07",
     "estado": "Pendiente",
     "clientes": {
         "dni": "99999999A",
@@ -74,7 +73,7 @@
         "direccion": "Calle Castelar nº37",
         "telefono": 111111111
     },
-    "habitaciones": {
+    "habitacion": {
         "numero": 1,
         "tipo": "Individual",
         "caracteristicas": "Grande",

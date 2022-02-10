@@ -1,9 +1,7 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
-import ies.mz.ProyectoDAMROOMS.domain.Habitaciones;
 import ies.mz.ProyectoDAMROOMS.exception.ClienteNotFoundException;
-import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

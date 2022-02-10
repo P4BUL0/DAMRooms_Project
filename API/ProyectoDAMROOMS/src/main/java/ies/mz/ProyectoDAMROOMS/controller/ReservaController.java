@@ -1,17 +1,13 @@
 package ies.mz.ProyectoDAMROOMS.controller;
 
-import ies.mz.ProyectoDAMROOMS.domain.Cliente;
-import ies.mz.ProyectoDAMROOMS.domain.Habitaciones;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
-import ies.mz.ProyectoDAMROOMS.service.ClienteService;
 import ies.mz.ProyectoDAMROOMS.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,27 +38,29 @@ public class ReservaController {
 
     @PostMapping("/reservas")
     public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
+        System.out.println("-------------------------------");
+        System.out.println(reserva.toString());
         Reserva addedReserva = reservaService.addReserva(reserva);
         return new ResponseEntity<>(addedReserva, HttpStatus.OK);
     }
 
     @PutMapping("/reservas/{idReserva}")
     public ResponseEntity<Reserva> modifyReserva(@PathVariable long idReserva, @RequestBody Reserva newReserva) {
-        newReserva.setEstado("Reservada");
+        //newReserva.setEstado("Reservada");
         Reserva reserva = reservaService.modifyReserva(idReserva, newReserva);
         return new ResponseEntity<>(reserva, HttpStatus.OK);
     }
 
     @PutMapping("/reservas/{idReserva}/checkIn")
     public ResponseEntity<Reserva> modifyReservaCheckIn(@PathVariable long idReserva,  @RequestBody Reserva newReserva) {
-        Reserva reserva = reservaService.modifyReservaCheckIn(idReserva, newReserva);
-        return new ResponseEntity<>(reserva, HttpStatus.OK);
+        Reserva modifyReserva = reservaService.modifyReservaCheckIn(idReserva, newReserva);
+        return new ResponseEntity<>(modifyReserva, HttpStatus.OK);
     }
 
     @PutMapping("/reservas/{idReserva}/checkOut")
     public ResponseEntity<Reserva> modifyReservaCheckOut(@PathVariable long idReserva, @RequestBody Reserva newReserva) {
-        Reserva reserva = reservaService.modifyReservaCheckOut(idReserva, newReserva);
-        return new ResponseEntity<>(reserva, HttpStatus.OK);
+        Reserva modifyReserva = reservaService.modifyReservaCheckOut(idReserva, newReserva);
+        return new ResponseEntity<>(modifyReserva, HttpStatus.OK);
     }
 
     @DeleteMapping("/reservas/{idReserva}")
