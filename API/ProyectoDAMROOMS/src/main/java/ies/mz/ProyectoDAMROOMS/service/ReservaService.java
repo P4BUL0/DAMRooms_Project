@@ -13,5 +13,6 @@ public interface ReservaService {
     Reserva modifyReserva(long id, Reserva reserva);
     Reserva modifyReservaCheckIn(long id, Reserva reserva);
     Reserva modifyReservaCheckOut(long id, Reserva reserva);
+    String getDni(Optional<Reserva> reserva);
     void deleteReserva(long id);
 }

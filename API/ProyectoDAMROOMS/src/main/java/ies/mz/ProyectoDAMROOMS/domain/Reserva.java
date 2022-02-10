@@ -1,15 +1,11 @@
 package ies.mz.ProyectoDAMROOMS.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -18,7 +14,6 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @NoArgsConstructor
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//@JsonIgnoreProperties({"habitaciones", "clientes"})
 public class Reserva {
 
     @Id
@@ -38,23 +33,17 @@ public class Reserva {
     @Column(name = "estado")
     private String estado;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
-    //@JsonProperty("clientes")
+    @ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.DETACH)
     @JoinColumn(name = "clienteDni", nullable = false)
-    /*@JoinTable(name = "reserva_cliente",
-            joinColumns = {@JoinColumn(name = "idReserva")},
-            inverseJoinColumns = {@JoinColumn(name = "dniCLiente")})*/
     private Cliente clientes;
 
-    @OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
-    //@JsonProperty("habitaciones")
-    @JoinColumn(name = "numeroHabitacion", nullable = false)
-    /*@JoinTable(name = "reserva_habitaciones",
-            joinColumns = {@JoinColumn(name = "idReserva")},
-            inverseJoinColumns = {@JoinColumn(name = "numeroHabitacion")})*/
-    private Habitaciones habitaciones;
 
-    public void calcImporteTotal(float importeNoche){
+    @OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.DETACH)
+    @JoinColumn(name = "numeroHabitacion", nullable = false)
+    private Habitacion habitacion;
+
+    public void calcImporteTotal(){
+        float importeNoche = this.getHabitacion().getImporte_noche();
         long total_dias = DAYS.between(this.fechaInicio, this.fechaFin);
 
         /*Period period = Period.between(this.fechaInicio, this.fechaFin);

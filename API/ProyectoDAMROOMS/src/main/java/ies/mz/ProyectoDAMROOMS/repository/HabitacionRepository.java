@@ -1,6 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.repository;
 
-import ies.mz.ProyectoDAMROOMS.domain.Habitaciones;
+import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,8 +9,8 @@ import java.util.Optional;
 import java.util.Set;
 
 @Repository
-public interface HabitacionRepository extends CrudRepository<Habitaciones, Long> {
-    Set<Habitaciones> findAll();
-    Optional<Habitaciones> findById(long id);
-    Set<Habitaciones> deleteByTipo(String tipo);
+public interface HabitacionRepository extends CrudRepository<Habitacion, Long> {
+    Set<Habitacion> findAll();
+    Optional<Habitacion> findById(long id);
+    Set<Habitacion> deleteByTipo(String tipo);
 }

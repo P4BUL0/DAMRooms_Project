@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @Table(name = "habitaciones")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "reservas"})
-public class Habitaciones {
+public class Habitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long numero;

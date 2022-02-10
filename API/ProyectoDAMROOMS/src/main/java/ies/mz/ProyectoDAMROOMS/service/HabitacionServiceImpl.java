@@ -1,6 +1,6 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
-import ies.mz.ProyectoDAMROOMS.domain.Habitaciones;
+import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import ies.mz.ProyectoDAMROOMS.exception.HabitacionNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.HabitacionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +17,23 @@ public class HabitacionServiceImpl implements HabitacionService {
     private HabitacionRepository habitacionRepository;
 
     @Override
-    public Set<Habitaciones> findAll(){
+    public Set<Habitacion> findAll(){
         return habitacionRepository.findAll();
     }
 
     @Override
-    public Optional<Habitaciones> findById(long id){
+    public Optional<Habitacion> findById(long id){
         return habitacionRepository.findById(id);
     }
 
     @Override
-    public Habitaciones addHabitacion(Habitaciones habitacion){
+    public Habitacion addHabitacion(Habitacion habitacion){
         return habitacionRepository.save(habitacion);
     }
 
     @Override
-    public Habitaciones modifyHabitacion(long id, Habitaciones newHabitacion){
-        Habitaciones habitacion = habitacionRepository.findById(id)
+    public Habitacion modifyHabitacion(long id, Habitacion newHabitacion){
+        Habitacion habitacion = habitacionRepository.findById(id)
                 .orElseThrow(() -> new HabitacionNotFoundException(id));
         newHabitacion.setNumero(habitacion.getNumero());
         return habitacionRepository.save(newHabitacion);
