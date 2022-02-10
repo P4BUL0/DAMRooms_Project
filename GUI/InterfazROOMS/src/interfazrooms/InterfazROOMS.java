@@ -15,6 +15,7 @@ public class InterfazROOMS {
             QDialog mw = new QDialog();
             Ui_MainWindow mainWindow = new Ui_MainWindow();
             mainWindow.setupUi(mw);
+            mw.setModal(true);
             mw.show();
         QApplication.execStatic();
     }

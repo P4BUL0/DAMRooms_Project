@@ -26,6 +26,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog>
         Ui_Reservas reservas = new Ui_Reservas();
         QDialog dialog = new QDialog();
         reservas.setupUi(dialog);
+        dialog.setModal(true);
         dialog.show();
     }
     
@@ -33,6 +34,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog>
         Ui_Cliente clientes = new Ui_Cliente();
         QDialog dialog = new QDialog();
         clientes.setupUi(dialog);
+        dialog.setModal(true);
         dialog.show();
     }
     
@@ -40,6 +42,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog>
         Ui_Habitaciones habitaciones = new Ui_Habitaciones();
         QDialog dialog = new QDialog();
         habitaciones.setupUi(dialog);
+        dialog.setModal(true);
         dialog.show();
     }           
 

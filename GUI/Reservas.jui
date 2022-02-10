@@ -1977,8 +1977,8 @@
      <widget class="QPushButton" name="pushButton_cancelar">
       <property name="minimumSize">
        <size>
-        <width>0</width>
-        <height>23</height>
+        <width>82</width>
+        <height>24</height>
        </size>
       </property>
       <property name="palette">
