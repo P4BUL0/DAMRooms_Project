@@ -32,7 +32,7 @@ public class RestClient {
         }
     }
 
-    public void verHabitacion(float numero){
+    public void verHabitacion(int numero){
         String resultado = this.client.target("http://localhost:8080/habitaciones/"+numero)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)

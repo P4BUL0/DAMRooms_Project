@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ProyectoDamroomsApplication {
 
 	public static void main(String[] args) {
-		RestClient restClient = new RestClient();
 
 		SpringApplication.run(ProyectoDamroomsApplication.class, args);
 
+		RestClient restClient = new RestClient();
 		restClient.verHabitacion(1);
 	}
 
