@@ -30,6 +30,14 @@ public class ReservaController {
         return new ResponseEntity<>(reservas, HttpStatus.OK);
     }
 
+    @GetMapping("/reservas")
+    public ResponseEntity<Set<Reserva>> getReservas(@RequestParam(value = "id", defaultValue = "") String id) {
+        Set<Reserva> reserva = null;
+        if (id.equals(""))
+            reserva = reservaService.findAll();
+        return new ResponseEntity<>(reserva, HttpStatus.OK);
+    }
+
     @GetMapping("/reservasFecha")
     public ResponseEntity<Set<Reserva>> getReserva(@RequestParam String fechaInicio) {
         Set<Reserva> reservas = null;
