@@ -1,7 +1,4 @@
-package ies.mz.ProyectoDAMROOMS.microservicios;
-
-
-import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
+package APIRest;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
@@ -15,11 +12,11 @@ public class RestClient {
         this.client = ClientBuilder.newClient();
     }
 
-    public void crearHabitacion(){
+    public void crearHabitacion(String tipo, String caracteristicas, float importe_noche){
 
         try{
-            Habitacion habitacion = new Habitacion(3l, "Doble", "Aire acondicionado", 850.0f);
-            WebTarget wt = this.client.target("http://localhost:8080/hotel/");
+            Habitacion habitacion = new Habitacion(tipo, caracteristicas, importe_noche);
+            WebTarget wt = this.client.target("http://localhost:8080/habitaciones");
             Invocation.Builder invocationBuilder =
                     wt.request(MediaType.APPLICATION_JSON);
             Response response =
@@ -32,12 +29,13 @@ public class RestClient {
         }
     }
 
-    public void verHabitacion(int numero){
+    public String verHabitacion(long numero){
         String resultado = this.client.target("http://localhost:8080/habitaciones/"+numero)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(String.class);
 
         System.out.println("Resultado: \n" + resultado);
+        return resultado;
     }
 }

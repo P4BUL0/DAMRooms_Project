@@ -9,7 +9,6 @@ package interfazrooms;
 
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
-import static com.trolltech.qt.gui.QAccessible.Role.Dialog;
 import javax.swing.JOptionPane;
 
 public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
@@ -41,10 +40,12 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
     public QGroupBox groupBox_cliente_2;
     public QLabel label_DNI;
     public QLineEdit lineEdit_DNI;
+    
 
     //public boolean dniCorrecto = false;
     public Ui_Cliente() { super(); }
-
+    
+    
     public void mensaje(){
         JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","Enhorabuena", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -56,22 +57,22 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         String dni = lineEdit_DNI.text();
         String letraMayuscula = "";
             
-           if(dni.length() !=9 || Character.isLetter(dni.charAt(8)) == false){
-            mensajeError();
-            return false;
-            }
-        
-            letraMayuscula = dni.substring(8).toUpperCase();
-        
-            if(soloNumeros() == true && letraDNI().equals(letraMayuscula)){
-                
-                mensaje();     
-                return true;
-            }else{
-                mensajeError();
-                return false;
-            } 
+        if(dni.length() !=9 || Character.isLetter(dni.charAt(8)) == false && !dni.isBlank()){
+         mensajeError();
+         return false;
+         }
 
+         letraMayuscula = dni.substring(8).toUpperCase();
+
+         if(soloNumeros() == true && letraDNI().equals(letraMayuscula)){
+
+             mensaje();     
+             return true;
+         }else if(!dni.isBlank()){
+             mensajeError();
+             
+         } 
+        return false;
     }
     private boolean soloNumeros(){
         String dni = lineEdit_DNI.text();
@@ -529,6 +530,18 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         retranslateUi(Cliente);
        
         pushButton_ingresar.clicked.connect(this, "comprobarDNI()"); 
+        if (pushButton_ingresar.isChecked()) {
+            if (comprobarDNI()) {
+                pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
+                pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
+                pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
+                pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
+                pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
+                pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
+                pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
+                pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
+            }
+        }
 
         pushButton_eliminar.clicked.connect(label_DNI, "setDisabled(boolean)");
         pushButton_modificar.clicked.connect(label_DNI, "setDisabled(boolean)");
@@ -541,14 +554,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_modificar.clicked.connect(label_Telefono, "setDisabled(boolean)");
         pushButton_modificar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
         pushButton_modificar.clicked.connect(lineEdit_DNI, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
-        pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
+
         
         pushButton_cancelar.clicked.connect(Cliente, "close()");
          
