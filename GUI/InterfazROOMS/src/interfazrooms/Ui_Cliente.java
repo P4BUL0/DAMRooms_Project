@@ -1,17 +1,15 @@
 package interfazrooms;
 
-import com.trolltech.qt.core.*;
-import com.trolltech.qt.gui.*;
 import APIRest.Cliente;
-import APIRest.RestClient;
+import APIRest.RestClientCliente;
 import com.google.gson.Gson;
-import com.trolltech.qt.core.*;
+import com.trolltech.qt.core.QRect;
+import com.trolltech.qt.core.QSize;
 import com.trolltech.qt.gui.*;
 
 import javax.swing.*;
 
-public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
-{
+public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     public QWidget layoutWidget_4;
     public QHBoxLayout horizontalLayout;
     public QSpacerItem horizontalSpacer_2;
@@ -43,9 +41,10 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
 
     public Ui_Cliente() { super(); }
 
+    //Métodos API
     public void insertarCliente(){
 
-        RestClient restClient = new RestClient();
+        RestClientCliente restClientCliente = new RestClientCliente();
 
         String dni;
         String nombre;
@@ -59,7 +58,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         direccion = lineEdit_Direccion.text();
         telefono = Integer.parseInt(lineEdit_Telefono.text());
 
-        restClient.crearCliente(dni, nombre, apellidos, direccion, telefono);
+        restClientCliente.crear(dni, nombre, apellidos, direccion, telefono);
     }
 
     public void consultarCliente(){
@@ -67,9 +66,9 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         String resultado = "";
         Gson gson = new Gson();
 
-        RestClient restClient = new RestClient();
+        RestClientCliente restClientCliente = new RestClientCliente();
         dni = lineEdit_DNI.text();
-        resultado = restClient.verCliente(dni);
+        resultado = restClientCliente.consultar(dni);
         Cliente[] c = gson.fromJson(resultado, Cliente[].class);
 
         lineEdit_Nombre.setText(c[0].getNombre());
@@ -78,14 +77,25 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         lineEdit_Telefono.setText(String.valueOf(c[0].getTelefono()));
     }
 
+    public void eliminarCliente(){
+        RestClientCliente restClientCliente = new RestClientCliente();
+        if(comprobarDNI()){
+            restClientCliente.eliminar(lineEdit_DNI.text());
+        }
+    }
+
+    public void modificarCliente(){}
+
+    //Métodos mensajes
     public void mensajeOPCorrecta(){
         JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","OK", JOptionPane.INFORMATION_MESSAGE);
     }
+
     public void mensajeERRORformatoDNI(){
         JOptionPane.showMessageDialog(null, "El DNI no es correcto", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
-    //Métodos dni
+    //Métodos DNI
     public boolean comprobarDNI(){
         String dni = lineEdit_DNI.text();
         String letraMayuscula = "";
@@ -151,6 +161,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         return miLetra;
     }
 
+    //Métodos GUI
     public void setupUi(QDialog Cliente) {
         Cliente.setObjectName("Cliente");
         Cliente.setEnabled(true);
@@ -220,6 +231,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_cancelar.setFont(font1);
         pushButton_cancelar.setStyleSheet("");
         pushButton_cancelar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Salir.png")));
+        pushButton_cancelar.clicked.connect(Cliente, "close()");
 
         horizontalLayout.addWidget(pushButton_cancelar);
 
@@ -630,8 +642,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         Cliente.connectSlotsByName();
     } // setupUi
 
-    void retranslateUi(QDialog Cliente)
-    {
+    void retranslateUi(QDialog Cliente) {
         Cliente.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Clientes", null));
         label_confirmacion.setText("");
         pushButton_aceptar.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Aceptar", null));

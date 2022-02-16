@@ -3,8 +3,7 @@ package interfazrooms;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
-public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
-{
+public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog> {
     public QGroupBox groupBox_Reservas;
     public QWidget layoutWidget_3;
     public QGridLayout gridLayout_3;
@@ -35,8 +34,17 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 
     public Ui_Reservas() { super(); }
 
-    public void setupUi(QDialog Reservas)
-    {
+    //Métodos API
+    public void insertarRes(){}
+
+    public void consultarRes(){}
+
+    public void eliminarRes(){}
+
+    public void modificarRes(){}
+
+    //Métodos GUI
+    public void setupUi(QDialog Reservas) {
         Reservas.setObjectName("Reservas");
         Reservas.resize(new QSize(607, 846).expandedTo(Reservas.minimumSizeHint()));
         Reservas.setWindowIcon(new QIcon(new QPixmap("Resources/Logos/logo_Icon.png")));
@@ -524,14 +532,17 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         dateEditFin.dateChanged.connect(calendarWidget_Fin, "setFocus()");
         dateEditFin.dateChanged.connect(calendarWidget_Fin, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Fin.clicked.connect(dateEditFin, "setDate(com.trolltech.qt.core.QDate)");
-        
+
         pushButton_cancelar.clicked.connect(Reservas, "close()");
+        //Crear boton consultas.
+        pushButton_reservar.clicked.connect(Reservas, "insertarRes()");
+        pushButton_eliminar.clicked.connect(Reservas, "eliminarRes()");
+        pushButton_modificar.clicked.connect(Reservas, "modificarRes()");
 
         Reservas.connectSlotsByName();
     } // setupUi
 
-    void retranslateUi(QDialog Reservas)
-    {
+    void retranslateUi(QDialog Reservas) {
         Reservas.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Reservas", null));
         groupBox_Reservas.setTitle(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Reserva", null));
         label_FechaInicio.setText(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Fecha inicio:", null));

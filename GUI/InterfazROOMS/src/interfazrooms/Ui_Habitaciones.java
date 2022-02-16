@@ -1,13 +1,12 @@
 package interfazrooms;
 
 import APIRest.Habitacion;
-import APIRest.RestClient;
+import APIRest.RestClientHabitacion;
 import com.google.gson.Gson;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
-public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
-{
+public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
     public QLabel label_Titulo;
     public QWidget layoutWidget_4;
     public QHBoxLayout horizontalLayout;
@@ -57,10 +56,11 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
 
     public Ui_Habitaciones() { super(); }
 
+    //Métodos API
     public void insertarHab(){
         String tipo = "", caracteristica = "";
         float importeNoche = 0f;
-        RestClient restClient = new RestClient();
+        RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         importeNoche = Float.parseFloat(lineEdit_ImporteNoche.text());
         if (radioButton_Individual.isChecked()){
             tipo = "Individual";
@@ -100,7 +100,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
             caracteristica += ", AC";
         }
 
-        restClient.crearHabitacion(tipo, caracteristica, importeNoche);
+        restClientHabitacion.crear(tipo, caracteristica, importeNoche);
         lineEdit_ImporteNoche.clear();
         radioButton_Individual.setChecked(false);
         radioButton_Doble.setChecked(false);
@@ -125,14 +125,15 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
 
         groupBox_2.setDisabled(true);
     }
+
     public void consultarHab(){
         long numero;
         String resultado = "";
         Gson gson = new Gson();
 
-        RestClient restClient = new RestClient();
+        RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         numero = Long.parseLong(String.valueOf(spinBox_NumeroHabitacion.value()));
-        resultado = restClient.verHabitacion(numero);
+        resultado = restClientHabitacion.consultar(numero);
         Habitacion h = gson.fromJson(resultado, Habitacion.class);
 
         lineEdit_ImporteNoche.setText(String.valueOf(h.getImporte_noche()));
@@ -191,15 +192,18 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         }
         groupBox_2.setDisabled(true);
     }
+
     public void eliminarHab(){
         long numero;
-        RestClient restClient = new RestClient();
+        RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         numero = Long.parseLong(String.valueOf(spinBox_NumeroHabitacion.value()));
-        restClient.borrarHabitacion(numero);
+        restClientHabitacion.eliminar(numero);
     }
 
-    public void setupUi(QDialog Habitaciones)
-    {
+    public void modificarHab(){}
+
+    //Métodos GUI
+    public void setupUi(QDialog Habitaciones) {
         Habitaciones.setObjectName("Habitaciones");
         Habitaciones.setWindowModality(com.trolltech.qt.core.Qt.WindowModality.WindowModal);
         Habitaciones.setEnabled(true);

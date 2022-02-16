@@ -10,8 +10,7 @@ package interfazrooms;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
-public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog>
-{
+public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog> {
     public QWidget layoutWidget;
     public QGridLayout gridLayout;
     public QPushButton pushButton_mainReserva;
@@ -176,8 +175,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog>
         MainWindow.connectSlotsByName();
     } // setupUi
 
-    void retranslateUi(QDialog MainWindow)
-    {
+    void retranslateUi(QDialog MainWindow) {
         MainWindow.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Men\u00fa", null));
         pushButton_mainReserva.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Reserva", null));
         pushButton_mainSalir.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Salir", null));
