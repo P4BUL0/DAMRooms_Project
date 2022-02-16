@@ -82,14 +82,14 @@ public class ReservaController {
     }
 
     @PutMapping("/reservas/{idReserva}/checkIn")
-    public ResponseEntity<Reserva> modifyReservaCheckIn(@PathVariable long idReserva,  @RequestBody Reserva newReserva) {
-        Reserva modifyReserva = reservaService.modifyReservaCheckIn(idReserva, newReserva);
+    public ResponseEntity<Reserva> modifyReservaCheckIn(@PathVariable long idReserva) {
+        Reserva modifyReserva = reservaService.modifyReservaCheckIn(idReserva);
         return new ResponseEntity<>(modifyReserva, HttpStatus.OK);
     }
 
     @PutMapping("/reservas/{idReserva}/checkOut")
-    public ResponseEntity<Reserva> modifyReservaCheckOut(@PathVariable long idReserva, @RequestBody Reserva newReserva) {
-        Reserva modifyReserva = reservaService.modifyReservaCheckOut(idReserva, newReserva);
+    public ResponseEntity<Reserva> modifyReservaCheckOut(@PathVariable long idReserva) {
+        Reserva modifyReserva = reservaService.modifyReservaCheckOut(idReserva);
         return new ResponseEntity<>(modifyReserva, HttpStatus.OK);
     }
 

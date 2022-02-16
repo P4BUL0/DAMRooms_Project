@@ -48,23 +48,23 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public Reserva modifyReservaCheckIn(long id, Reserva newReserva) {
+    public Reserva modifyReservaCheckIn(long id) {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservaNotFoundException(id));
-        newReserva.setIdReserva(reserva.getIdReserva());
-        newReserva.calcImporteTotal();
-        newReserva.setEstado("Activa");
-        return reservaRepository.save(newReserva);
+
+        reserva.setEstado("Activa");
+
+        return reservaRepository.save(reserva);
     }
 
     @Override
-    public Reserva modifyReservaCheckOut(long id, Reserva newReserva) {
+    public Reserva modifyReservaCheckOut(long id) {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservaNotFoundException(id));
-        newReserva.setIdReserva(reserva.getIdReserva());
-        newReserva.calcImporteTotal();
-        newReserva.setEstado("Completada");
-        return reservaRepository.save(newReserva);
+
+        reserva.setEstado("Completada");
+
+        return reservaRepository.save(reserva);
     }
 
     @Override
