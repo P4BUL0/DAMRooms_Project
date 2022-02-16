@@ -96,7 +96,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         }else if (checkBox_Tele.isChecked()){
             caracteristica += ", TV";
         }else if (checkBox_Aire.isChecked()){
-            caracteristica += ", Aire acondicionado";
+            caracteristica += ", AC";
         }
 
         restClient.crearHabitacion(tipo, caracteristica, importeNoche);
@@ -133,9 +133,6 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         numero = Long.parseLong(String.valueOf(spinBox_NumeroHabitacion.value()));
         resultado = restClient.verHabitacion(numero);
         Habitacion h = gson.fromJson(resultado, Habitacion.class);
-
-        
-
     }
 
     public void setupUi(QDialog Habitaciones)
@@ -789,7 +786,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         checkBox_Jacuzzi.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Jacuzzi", null));
         checkBox_WiFi.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Wi-Fi", null));
         checkBox_Bar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Mini bar", null));
-        checkBox_Aire.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Aire acond", null));
+        checkBox_Aire.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "AC", null));
         label_Cama.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Cama:", null));
         radioButton_CamaIndividual.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Individual", null));
         checkBox_Luminosa.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Luminosa", null));

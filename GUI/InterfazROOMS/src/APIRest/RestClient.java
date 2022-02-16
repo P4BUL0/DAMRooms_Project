@@ -12,6 +12,7 @@ public class RestClient {
         this.client = ClientBuilder.newClient();
     }
 
+    //Métodos habitación
     public void crearHabitacion(String tipo, String caracteristicas, float importe_noche){
 
         try{
@@ -38,4 +39,37 @@ public class RestClient {
         System.out.println("Resultado: \n" + resultado);
         return resultado;
     }
+
+
+    //Métodos cliente
+
+    public void crearCliente(String dni, String nombre, String apellidos, String direccion, int telefono){
+
+        try{
+            Cliente c = new Cliente(dni, nombre, apellidos, direccion, telefono);
+            WebTarget wt = this.client.target("http://localhost:8080/clientes");
+            Invocation.Builder invocationBuilder =
+                    wt.request(MediaType.APPLICATION_JSON);
+            Response response =
+                    invocationBuilder.post(Entity.entity(c.toString(),MediaType.APPLICATION_JSON));
+            System.out.println(response.getStatus());
+            System.out.println(response.readEntity(String.class));
+            System.out.println();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public String verCliente(String dni){
+        String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class);
+
+        System.out.println("Resultado: \n" + resultado);
+        return resultado;
+    }
+
+
+    //Métodos reserva
 }

@@ -1,12 +1,8 @@
-/********************************************************************************
- ** Form generated from reading ui file 'Clientes.jui'
- **
- ** Created by: Qt User Interface Compiler version 4.8.6
- **
- ** WARNING! All changes made in this file will be lost when recompiling ui file!
- ********************************************************************************/
 package interfazrooms;
 
+import APIRest.Cliente;
+import APIRest.RestClient;
+import com.google.gson.Gson;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 import javax.swing.JOptionPane;
@@ -40,40 +36,76 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
     public QGroupBox groupBox_cliente_2;
     public QLabel label_DNI;
     public QLineEdit lineEdit_DNI;
-    
 
-    //public boolean dniCorrecto = false;
     public Ui_Cliente() { super(); }
-    
-    
-    public void mensaje(){
-        JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","Enhorabuena", JOptionPane.INFORMATION_MESSAGE);
+
+    public void insertarCliente(){
+
+        RestClient restClient = new RestClient();
+
+        String dni;
+        String nombre;
+        String apellidos;
+        String direccion;
+        int telefono;
+
+        dni = lineEdit_DNI.text();
+        nombre = lineEdit_Nombre.text();
+        apellidos = lineEdit_Apellidos.text();
+        direccion = lineEdit_Direccion.text();
+        telefono = Integer.parseInt(lineEdit_Telefono.text());
+
+        restClient.crearCliente(dni, nombre, apellidos, direccion, telefono);
     }
-    public void mensajeError(){
+
+    public void consultarCliente(){
+        String dni;
+        String resultado = "";
+        Gson gson = new Gson();
+
+        RestClient restClient = new RestClient();
+        dni = String.valueOf(lineEdit_DNI.text());
+        resultado = restClient.verCliente(dni);
+        Cliente c = gson.fromJson(resultado, Cliente.class);
+    }
+    
+    public void mensajeOPCorrecta(){
+        JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","OK", JOptionPane.INFORMATION_MESSAGE);
+    }
+    public void mensajeERRORformatoDNI(){
         JOptionPane.showMessageDialog(null, "El DNI no es correcto", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
+    //Métodos dni
     public boolean comprobarDNI(){
         String dni = lineEdit_DNI.text();
         String letraMayuscula = "";
             
-        if(dni.length() !=9 || Character.isLetter(dni.charAt(8)) == false && !dni.isBlank()){
-         mensajeError();
+        if(dni.length() !=9 || !Character.isLetter(dni.charAt(8)) && !dni.isBlank()){
+         mensajeERRORformatoDNI();
          return false;
          }
 
          letraMayuscula = dni.substring(8).toUpperCase();
 
-         if(soloNumeros() == true && letraDNI().equals(letraMayuscula)){
-
-             mensaje();     
+         if(soloNumeros() && letraDNI().equals(letraMayuscula)){
+             mensajeOPCorrecta();
+             pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
+             pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
+             pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
+             pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
+             pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
+             pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
+             pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
+             pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
              return true;
          }else if(!dni.isBlank()){
-             mensajeError();
-             
-         } 
-        return false;
+             mensajeERRORformatoDNI();
+         }
+
+         return false;
     }
+
     private boolean soloNumeros(){
         String dni = lineEdit_DNI.text();
         int i, j = 0;
@@ -529,8 +561,8 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         QWidget.setTabOrder(pushButton_aceptar, pushButton_cancelar);
         retranslateUi(Cliente);
        
-        pushButton_ingresar.clicked.connect(this, "comprobarDNI()"); 
-        if (pushButton_ingresar.isChecked()) {
+        pushButton_ingresar.clicked.connect(this, "comprobarDNI()");
+        /*if (pushButton_ingresar.isChecked()) {
             if (comprobarDNI()) {
                 pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
                 pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
@@ -541,9 +573,10 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
                 pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
                 pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
             }
-        }
+        }*/
 
         pushButton_eliminar.clicked.connect(label_DNI, "setDisabled(boolean)");
+
         pushButton_modificar.clicked.connect(label_DNI, "setDisabled(boolean)");
         pushButton_modificar.clicked.connect(label_Nombre, "setDisabled(boolean)");
         pushButton_modificar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
@@ -555,7 +588,8 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_modificar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
         pushButton_modificar.clicked.connect(lineEdit_DNI, "setDisabled(boolean)");
 
-        
+        pushButton_consultar.clicked.connect(this,"consultarCliente()");
+        pushButton_aceptar.clicked.connect(this,"insertarCliente()");
         pushButton_cancelar.clicked.connect(Cliente, "close()");
          
         Cliente.connectSlotsByName();
