@@ -41,6 +41,16 @@ public class RestClient {
     }
 
 
+    public void borrarHabitacion(long numero){
+        String resultado = this.client.target("http://localhost:8080/habitaciones/"+numero)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .delete(String.class);
+
+        System.out.println("Resultado: \n" + resultado);
+    }
+
+
     //Métodos cliente
 
     public void crearCliente(String dni, String nombre, String apellidos, String direccion, int telefono){

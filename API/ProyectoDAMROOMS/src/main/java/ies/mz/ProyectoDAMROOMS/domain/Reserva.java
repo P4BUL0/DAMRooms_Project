@@ -45,12 +45,6 @@ public class Reserva {
     public void calcImporteTotal(){
         float importeNoche = this.getHabitacion().getImporte_noche();
         long total_dias = DAYS.between(this.fechaInicio, this.fechaFin);
-
-        /*Period period = Period.between(this.fechaInicio, this.fechaFin);
-        int diferencia_anyos = period.getYears() * 360;
-        int diferencia_meses = period.getMonths() * 12;
-        int diferencia_dias = period.getDays();
-        int total_dias = diferencia_anyos + diferencia_meses + diferencia_dias;*/
         this.importeTotal = importeNoche * total_dias;
     }
 }

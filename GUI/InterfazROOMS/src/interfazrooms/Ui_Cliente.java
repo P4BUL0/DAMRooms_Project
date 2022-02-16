@@ -64,9 +64,14 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         Gson gson = new Gson();
 
         RestClient restClient = new RestClient();
-        dni = String.valueOf(lineEdit_DNI.text());
+        dni = lineEdit_DNI.text();
         resultado = restClient.verCliente(dni);
-        Cliente c = gson.fromJson(resultado, Cliente.class);
+        Cliente[] c = gson.fromJson(resultado, Cliente[].class);
+
+        lineEdit_Nombre.setText(c[0].getNombre());
+        lineEdit_Apellidos.setText(c[0].getApellidos());
+        lineEdit_Direccion.setText(c[0].getDireccion());
+        lineEdit_Telefono.setText(String.valueOf(c[0].getTelefono()));
     }
     
     public void mensajeOPCorrecta(){
