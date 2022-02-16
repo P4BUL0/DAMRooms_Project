@@ -1,17 +1,21 @@
 package interfazrooms;
 
+import com.trolltech.qt.core.*;
+import com.trolltech.qt.gui.*;
 import APIRest.Cliente;
 import APIRest.RestClient;
 import com.google.gson.Gson;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
-import javax.swing.JOptionPane;
+
+import javax.swing.*;
 
 public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
 {
     public QWidget layoutWidget_4;
     public QHBoxLayout horizontalLayout;
     public QSpacerItem horizontalSpacer_2;
+    public QLabel label_confirmacion;
     public QPushButton pushButton_aceptar;
     public QPushButton pushButton_cancelar;
     public QLabel label_Titulo;
@@ -73,7 +77,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         lineEdit_Direccion.setText(c[0].getDireccion());
         lineEdit_Telefono.setText(String.valueOf(c[0].getTelefono()));
     }
-    
+
     public void mensajeOPCorrecta(){
         JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","OK", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -85,30 +89,30 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
     public boolean comprobarDNI(){
         String dni = lineEdit_DNI.text();
         String letraMayuscula = "";
-            
-        if(dni.length() !=9 || !Character.isLetter(dni.charAt(8)) && !dni.isBlank()){
-         mensajeERRORformatoDNI();
-         return false;
-         }
 
-         letraMayuscula = dni.substring(8).toUpperCase();
+        if(dni.length() !=9 || !Character.isLetter(dni.charAt(8))){
+            mensajeERRORformatoDNI();
+            return false;
+        }
 
-         if(soloNumeros() && letraDNI().equals(letraMayuscula)){
-             mensajeOPCorrecta();
-             pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
-             pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
-             pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
-             pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
-             pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
-             pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
-             pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
-             pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
-             return true;
-         }else if(!dni.isBlank()){
-             mensajeERRORformatoDNI();
-         }
+        letraMayuscula = dni.substring(8).toUpperCase();
 
-         return false;
+        if(soloNumeros() && letraDNI().equals(letraMayuscula)){
+            mensajeOPCorrecta();
+            pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
+            pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
+            pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
+            pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
+            pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
+            pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
+            pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
+            pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
+            return true;
+        }else if(!lineEdit_DNI.text().isEmpty()){
+            mensajeERRORformatoDNI();
+        }
+
+        return false;
     }
 
     private boolean soloNumeros(){
@@ -125,30 +129,29 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
                 }
             }
         }
-        
+
         if (miDNI.length() != 8){
             return false;
         }else{
             return true;
         }
     }
-    
+
     private String letraDNI(){
         String dni = lineEdit_DNI.text();
         int miDNI = Integer.parseInt(dni.substring(0,8));
         int resto = 0;
         String miLetra = "";
         String[] asignacionLetra = {"T","R","W","A","G","M","Y","F","T","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"};
-        
+
         resto = miDNI % 23;
-        
+
         miLetra = asignacionLetra[resto];
-        
+
         return miLetra;
     }
-    
-    public void setupUi(QDialog Cliente)
-    {
+
+    public void setupUi(QDialog Cliente) {
         Cliente.setObjectName("Cliente");
         Cliente.setEnabled(true);
         Cliente.resize(new QSize(600, 362).expandedTo(Cliente.minimumSizeHint()));
@@ -161,6 +164,12 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         horizontalSpacer_2 = new QSpacerItem(40, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
 
         horizontalLayout.addItem(horizontalSpacer_2);
+
+        label_confirmacion = new QLabel(layoutWidget_4);
+        label_confirmacion.setObjectName("label_confirmacion");
+        label_confirmacion.setEnabled(true);
+
+        horizontalLayout.addWidget(label_confirmacion);
 
         pushButton_aceptar = new QPushButton(layoutWidget_4);
         pushButton_aceptar.setObjectName("pushButton_aceptar");
@@ -251,6 +260,8 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_consultar.setFont(font3);
         pushButton_consultar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_consultar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Buscar.png")));
+        pushButton_consultar.setCheckable(true);
+        pushButton_consultar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_consultar, 0, 1, 1, 1);
 
@@ -276,12 +287,14 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_modificar.setFont(font4);
         pushButton_modificar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_modificar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Modificar.png")));
+        pushButton_modificar.setCheckable(true);
+        pushButton_modificar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_modificar, 1, 1, 1, 1);
 
         groupBox_DatosCliente = new QGroupBox(layoutWidget);
         groupBox_DatosCliente.setObjectName("groupBox_DatosCliente");
-        groupBox_DatosCliente.setEnabled(true);
+        groupBox_DatosCliente.setEnabled(false);
         QPalette palette4= new QPalette();
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.WindowText, new QColor(0, 0, 0));
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(152, 210, 236));
@@ -439,6 +452,8 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_eliminar.setFont(font11);
         pushButton_eliminar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_eliminar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
+        pushButton_eliminar.setCheckable(true);
+        pushButton_eliminar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_eliminar, 1, 0, 1, 1);
 
@@ -464,6 +479,8 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_ingresar.setFont(font12);
         pushButton_ingresar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_ingresar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Guardar.png")));
+        pushButton_ingresar.setCheckable(true);
+        pushButton_ingresar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_ingresar, 0, 0, 1, 1);
 
@@ -565,44 +582,58 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog>
         QWidget.setTabOrder(lineEdit_Telefono, pushButton_aceptar);
         QWidget.setTabOrder(pushButton_aceptar, pushButton_cancelar);
         retranslateUi(Cliente);
-       
-        pushButton_ingresar.clicked.connect(this, "comprobarDNI()");
-        /*if (pushButton_ingresar.isChecked()) {
-            if (comprobarDNI()) {
-                pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
-                pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
-            }
-        }*/
+        pushButton_ingresar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(label_Nombre, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(label_Direccion, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(label_Telefono, "setEnabled(boolean)");
+        pushButton_ingresar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
 
-        pushButton_eliminar.clicked.connect(label_DNI, "setDisabled(boolean)");
+        pushButton_modificar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(label_Nombre, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(label_Direccion, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(label_Telefono, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
 
-        pushButton_modificar.clicked.connect(label_DNI, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(label_Nombre, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(label_Direccion, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(label_Telefono, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
-        pushButton_modificar.clicked.connect(lineEdit_DNI, "setDisabled(boolean)");
+        pushButton_consultar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(label_Nombre, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(label_Direccion, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(label_Telefono, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
 
-        pushButton_consultar.clicked.connect(this,"consultarCliente()");
-        pushButton_aceptar.clicked.connect(this,"insertarCliente()");
-        pushButton_cancelar.clicked.connect(Cliente, "close()");
-         
+
+        if (pushButton_ingresar.isEnabled()) {
+            pushButton_aceptar.clicked.connect(this, "insertarCliente()");
+        }
+        if (pushButton_consultar.isEnabled()) {
+            pushButton_aceptar.clicked.connect(this, "consultarCliente()");
+        }
+//        if (pushButton_modificar.isEnabled()) {
+//            pushButton_aceptar.clicked.connect(this, "modificarCliente()");
+//        }
+//        if (pushButton_eliminar.isEnabled()) {
+//            pushButton_aceptar.clicked.connect(this, "eliminarCliente()");
+//        }
+
+
         Cliente.connectSlotsByName();
     } // setupUi
 
     void retranslateUi(QDialog Cliente)
     {
         Cliente.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Clientes", null));
+        label_confirmacion.setText("");
         pushButton_aceptar.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Aceptar", null));
         pushButton_cancelar.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Cancelar", null));
         label_Titulo.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Gesti\u00f3n clientes", null));

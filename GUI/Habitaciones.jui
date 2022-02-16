@@ -2,6 +2,9 @@
 <ui version="4.0" language="jambi">
  <class>Habitaciones</class>
  <widget class="QDialog" name="Habitaciones">
+  <property name="windowModality">
+   <enum>com.trolltech.qt.core.Qt.WindowModality.WindowModal</enum>
+  </property>
   <property name="enabled">
    <bool>true</bool>
   </property>
@@ -19,6 +22,9 @@
   <property name="windowIcon">
    <iconset>
     <normaloff>Resources/Logos/logo_Icon.png</normaloff>Resources/Logos/logo_Icon.png</iconset>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <widget class="QLabel" name="label_Titulo">
    <property name="geometry">
@@ -66,6 +72,13 @@
        </size>
       </property>
      </spacer>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_confirmacion">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_aceptar">
@@ -506,6 +519,12 @@
        <iconset>
         <normaloff>Resources/Iconos/Buscar.png</normaloff>Resources/Iconos/Buscar.png</iconset>
       </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item row="1" column="1">
@@ -643,6 +662,12 @@
       <property name="icon">
        <iconset>
         <normaloff>Resources/Iconos/Modificar.png</normaloff>Resources/Iconos/Modificar.png</iconset>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -2029,6 +2054,12 @@
        <iconset>
         <normaloff>Resources/Iconos/Eliminar.png</normaloff>Resources/Iconos/Eliminar.png</iconset>
       </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item row="0" column="0">
@@ -2169,6 +2200,12 @@
       <property name="icon">
        <iconset>
         <normaloff>Resources/Iconos/Guardar.png</normaloff>Resources/Iconos/Guardar.png</iconset>
+      </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -2723,49 +2760,49 @@
  <connections>
   <connection>
    <sender>pushButton_ingresar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
+   <signal>toggled&lt;java.lang.Boolean&gt;</signal>
    <receiver>groupBox_2</receiver>
-   <slot>setDisabled(boolean)</slot>
+   <slot>setEnabled(boolean)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>71</x>
-     <y>131</y>
+     <x>183</x>
+     <y>135</y>
     </hint>
     <hint type="destinationlabel">
-     <x>234</x>
-     <y>199</y>
+     <x>184</x>
+     <y>197</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_consultar</sender>
+   <signal>toggled&lt;java.lang.Boolean&gt;</signal>
+   <receiver>groupBox_2</receiver>
+   <slot>setEnabled(boolean)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>336</x>
+     <y>134</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>336</x>
+     <y>210</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>pushButton_modificar</sender>
-   <signal>clicked&lt;java.lang.Boolean&gt;</signal>
-   <receiver>groupBox_2</receiver>
-   <slot>setDisabled(boolean)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>372</x>
-     <y>163</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>360</x>
-     <y>204</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>radioButton_Individual</sender>
    <signal>toggled&lt;java.lang.Boolean&gt;</signal>
-   <receiver>radioButton_Individual</receiver>
-   <slot>toggle()</slot>
+   <receiver>groupBox_2</receiver>
+   <slot>setEnabled(boolean)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>145</x>
-     <y>257</y>
+     <x>508</x>
+     <y>172</y>
     </hint>
     <hint type="destinationlabel">
-     <x>186</x>
-     <y>255</y>
+     <x>501</x>
+     <y>207</y>
     </hint>
    </hints>
   </connection>

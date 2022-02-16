@@ -12,6 +12,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
     public QWidget layoutWidget_4;
     public QHBoxLayout horizontalLayout;
     public QSpacerItem horizontalSpacer_2;
+    public QLabel label_confirmacion;
     public QPushButton pushButton_aceptar;
     public QPushButton pushButton_cancelar;
     public QWidget layoutWidget;
@@ -62,15 +63,15 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         RestClient restClient = new RestClient();
         importeNoche = Float.parseFloat(lineEdit_ImporteNoche.text());
         if (radioButton_Individual.isChecked()){
-             tipo = "Individual";
+            tipo = "Individual";
         }else if (radioButton_Doble.isChecked()){
-             tipo = "Doble";
+            tipo = "Doble";
         }else if (radioButton_Familiar.isChecked()){
-             tipo = "Familiar";
+            tipo = "Familiar";
         }else if (radioButton_Suite.isChecked()){
-             tipo = "Suit";
+            tipo = "Suit";
         }else if (radioButton_GranSuite.isChecked()){
-             tipo = "Gran Suit";
+            tipo = "Gran Suit";
         }
         if (radioButton_CamaIndividual.isChecked()){
             caracteristica = "Cama individual";
@@ -81,21 +82,21 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         }
         if (checkBox_Luminosa.isChecked()){
             caracteristica += ", Luminosa";
-        }else if (checkBox_WiFi.isChecked()){
-            caracteristica += ", Wi-FI";
-        }else if (checkBox_Terraza.isChecked()){
+        }if (checkBox_WiFi.isChecked()){
+            caracteristica += ", Wi-Fi";
+        }if (checkBox_Terraza.isChecked()){
             caracteristica += ", Terraza";
-        }else if (checkBox_Cafe.isChecked()){
+        }if (checkBox_Cafe.isChecked()){
             caracteristica += ", Cafetera";
-        }else if (checkBox_Bar.isChecked()){
+        }if (checkBox_Bar.isChecked()){
             caracteristica += ", Mini Bar";
-        }else if (checkBox_Banera.isChecked()){
+        }if (checkBox_Banera.isChecked()){
             caracteristica += ", Bañera";
-        }else if (checkBox_Jacuzzi.isChecked()){
+        }if (checkBox_Jacuzzi.isChecked()){
             caracteristica += ", Jacuzzi";
-        }else if (checkBox_Tele.isChecked()){
+        }if (checkBox_Tele.isChecked()){
             caracteristica += ", TV";
-        }else if (checkBox_Aire.isChecked()){
+        }if (checkBox_Aire.isChecked()){
             caracteristica += ", AC";
         }
 
@@ -133,14 +134,78 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         numero = Long.parseLong(String.valueOf(spinBox_NumeroHabitacion.value()));
         resultado = restClient.verHabitacion(numero);
         Habitacion h = gson.fromJson(resultado, Habitacion.class);
+
+        lineEdit_ImporteNoche.setText(String.valueOf(h.getImporte_noche()));
+
+        if (h.getTipo().equalsIgnoreCase("Individual")){
+            radioButton_Individual.setChecked(true);
+        }
+        if (h.getTipo().equalsIgnoreCase("Doble")){
+            radioButton_Doble.setChecked(true);
+        }
+        if (h.getTipo().equalsIgnoreCase("Familiar")){
+            radioButton_Familiar.setChecked(true);
+        }
+        if (h.getTipo().equalsIgnoreCase("Suite")){
+            radioButton_Suite.setChecked(true);
+        }
+        if (h.getTipo().equalsIgnoreCase("Gran Suite")){
+            radioButton_GranSuite.setChecked(true);
+        }
+        if (h.getTipo().equalsIgnoreCase("Cama individual")){
+            radioButton_CamaIndividual.setChecked(true);
+        }
+        if (h.getTipo().equalsIgnoreCase("Cama de matrimonio")){
+            radioButton_CamaMatrimonio.setChecked(true);
+        }
+        if (h.getTipo().equalsIgnoreCase("Cama KingSize")){
+            radioButton_CamaKing.setChecked(true);
+        }
+
+        if (h.getCaracteristicas().contains("Luminosa")){
+            checkBox_Luminosa.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("Wi-Fi")){
+            checkBox_WiFi.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("Terraza")){
+            checkBox_Terraza.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("Cafetera")){
+            checkBox_Cafe.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("Mini Bar")){
+            checkBox_Bar.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("Bañera")){
+            checkBox_Banera.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("Jacuzzi")){
+            checkBox_Jacuzzi.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("TV")){
+            checkBox_Tele.setChecked(true);
+        }
+        if (h.getCaracteristicas().contains("Aire acondicionado")){
+            checkBox_Aire.setChecked(true);
+        }
+        groupBox_2.setDisabled(true);
+    }
+    public void eliminarHab(){
+        long numero;
+        RestClient restClient = new RestClient();
+        numero = Long.parseLong(String.valueOf(spinBox_NumeroHabitacion.value()));
+        restClient.borrarHabitacion(numero);
     }
 
     public void setupUi(QDialog Habitaciones)
     {
         Habitaciones.setObjectName("Habitaciones");
+        Habitaciones.setWindowModality(com.trolltech.qt.core.Qt.WindowModality.WindowModal);
         Habitaciones.setEnabled(true);
         Habitaciones.resize(new QSize(571, 498).expandedTo(Habitaciones.minimumSizeHint()));
         Habitaciones.setWindowIcon(new QIcon(new QPixmap("Resources/Logos/logo_Icon.png")));
+        Habitaciones.setModal(true);
         label_Titulo = new QLabel(Habitaciones);
         label_Titulo.setObjectName("label_Titulo");
         label_Titulo.setGeometry(new QRect(20, 10, 211, 31));
@@ -159,6 +224,11 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         horizontalSpacer_2 = new QSpacerItem(40, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
 
         horizontalLayout.addItem(horizontalSpacer_2);
+
+        label_confirmacion = new QLabel(layoutWidget_4);
+        label_confirmacion.setObjectName("label_confirmacion");
+
+        horizontalLayout.addWidget(label_confirmacion);
 
         pushButton_aceptar = new QPushButton(layoutWidget_4);
         pushButton_aceptar.setObjectName("pushButton_aceptar");
@@ -239,6 +309,8 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_consultar.setFont(font3);
         pushButton_consultar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_consultar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Buscar.png")));
+        pushButton_consultar.setCheckable(true);
+        pushButton_consultar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_consultar, 0, 1, 1, 1);
 
@@ -264,6 +336,8 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_modificar.setFont(font4);
         pushButton_modificar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_modificar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Modificar.png")));
+        pushButton_modificar.setCheckable(true);
+        pushButton_modificar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_modificar, 1, 1, 1, 1);
 
@@ -611,6 +685,8 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_eliminar.setFont(font23);
         pushButton_eliminar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_eliminar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
+        pushButton_eliminar.setCheckable(true);
+        pushButton_eliminar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_eliminar, 1, 0, 1, 1);
 
@@ -636,6 +712,8 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_ingresar.setFont(font24);
         pushButton_ingresar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_ingresar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Guardar.png")));
+        pushButton_ingresar.setCheckable(true);
+        pushButton_ingresar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_ingresar, 0, 0, 1, 1);
 
@@ -755,14 +833,21 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         QWidget.setTabOrder(radioButton_CamaKing, pushButton_aceptar);
         QWidget.setTabOrder(pushButton_aceptar, pushButton_cancelar);
         retranslateUi(Habitaciones);
-        pushButton_ingresar.clicked.connect(groupBox_2, "setDisabled(boolean)");
-        pushButton_aceptar.clicked.connect(this,"insertarHab()");
-        pushButton_modificar.clicked.connect(groupBox_2, "setDisabled(boolean)");
-        pushButton_consultar.clicked.connect(this, "consultarHab()");
+        pushButton_ingresar.toggled.connect(groupBox_2, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(groupBox_2, "setEnabled(boolean)");
+        pushButton_modificar.toggled.connect(groupBox_2, "setEnabled(boolean)");
+        pushButton_eliminar.toggled.connect(this, "consultarHab()");
 
+        if (pushButton_ingresar.isEnabled()) {
+            pushButton_aceptar.clicked.connect(this, "insertarHab()");
+        }
+        if (pushButton_consultar.isEnabled()) {
+            pushButton_aceptar.clicked.connect(this, "consultarHab()");
+        }
+        if (pushButton_eliminar.isEnabled()) {
+            pushButton_aceptar.clicked.connect(this, "eliminarHab()");
+        }
 
-
-        pushButton_cancelar.clicked.connect(Habitaciones, "close()");
         Habitaciones.connectSlotsByName();
     } // setupUi
 
@@ -770,6 +855,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
     {
         Habitaciones.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Habitaciones", null));
         label_Titulo.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Gesti\u00f3n habitaciones", null));
+        label_confirmacion.setText("");
         pushButton_aceptar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Aceptar", null));
         pushButton_cancelar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Cancelar", null));
         pushButton_consultar.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Buscar habitaci\u00f3n", null));
@@ -786,7 +872,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         checkBox_Jacuzzi.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Jacuzzi", null));
         checkBox_WiFi.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Wi-Fi", null));
         checkBox_Bar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Mini bar", null));
-        checkBox_Aire.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "AC", null));
+        checkBox_Aire.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Aire acond", null));
         label_Cama.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Cama:", null));
         radioButton_CamaIndividual.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Individual", null));
         checkBox_Luminosa.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Luminosa", null));
@@ -797,7 +883,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog>
         radioButton_CamaMatrimonio.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Matrimonio", null));
         radioButton_CamaKing.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "KingSize", null));
         label_ImporteNoche.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Importe noche:", null));
-        lineEdit_ImporteNoche.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Introduzca el importe por noche", null));
+        lineEdit_ImporteNoche.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Introduzca su tel\u00e9fono", null));
         lineEdit_ImporteNoche.setPlaceholderText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "\u20ac", null));
         pushButton_eliminar.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Eliminar habitaci\u00f3n", null));
         pushButton_eliminar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Eliminar", null));

@@ -31,6 +31,7 @@ public class RestClient {
     }
 
     public String verHabitacion(long numero){
+        System.out.println(numero);
         String resultado = this.client.target("http://localhost:8080/habitaciones/"+numero)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -71,7 +72,7 @@ public class RestClient {
     }
 
     public String verCliente(String dni){
-        String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
+        String resultado = this.client.target("http://localhost:8080/clientesdni?dni="+dni)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(String.class);

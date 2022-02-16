@@ -29,7 +29,7 @@ public class ClienteController {
         return new ResponseEntity<>(cliente, HttpStatus.OK);
     }
 
-    @GetMapping("/clientes/{dni}")
+    @GetMapping("/clientesdni")
     public ResponseEntity<Set<Cliente>> getClienteByDni(@RequestParam(value = "dni", defaultValue = "") String dni) {
         Set<Cliente> cliente = null;
         if (dni.equals(""))
