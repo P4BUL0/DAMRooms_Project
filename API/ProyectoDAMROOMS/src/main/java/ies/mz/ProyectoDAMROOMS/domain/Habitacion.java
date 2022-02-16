@@ -1,20 +1,43 @@
 package ies.mz.ProyectoDAMROOMS.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import javax.persistence.*;
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "habitaciones")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "reservas"})
 public class Habitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int numero;
+    private long numero;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tipo")
     private String tipo;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "caracteristicas")
     private String caracteristicas;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "importe_noche")
     private float importe_noche;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonProperty("reservas")
+    private Reserva reservas;
+
+    public Habitacion(long numero, String tipo, String caracteristicas, float importe_noche) {
+        this.numero = numero;
+        this.tipo = tipo;
+        this.caracteristicas = caracteristicas;
+        this.importe_noche = importe_noche;
+    }
+
 }

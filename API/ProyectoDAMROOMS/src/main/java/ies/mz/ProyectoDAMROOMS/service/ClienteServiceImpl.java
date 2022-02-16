@@ -1,6 +1,7 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
 import ies.mz.ProyectoDAMROOMS.domain.Cliente;
+import ies.mz.ProyectoDAMROOMS.exception.ClienteNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,15 +32,33 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public Cliente addCliente(Cliente vuelo) {
-        return clienteRepository.save(vuelo);
+    public Cliente addCliente(Cliente cliente) {
+        return clienteRepository.save(cliente);
     }
 
     @Override
     public Cliente modifyCliente(String dni, Cliente newCliente) {
-        Cliente c = (Cliente) clienteRepository.findByDni(dni);
-        newCliente.setDni(c.getDni());
+        Cliente cliente = clienteRepository.findByDni(dni).stream().findFirst().get();
+        newCliente.setDni(cliente.getDni());
+
         return clienteRepository.save(newCliente);
+    }
+
+    @Override
+    public void deleteByDni(String dni){
+        try{
+            clienteRepository.findByDni(dni);
+        }catch (ClienteNotFoundException cnfe){
+           cnfe.printStackTrace();
+           cnfe.getMessage();
+        }
+
+        clienteRepository.deleteByDni(dni);
+    }
+
+    @Override
+    public void deleteAllByDni(String dni) {
+        clienteRepository.deleteByDni(dni);
     }
 
 }

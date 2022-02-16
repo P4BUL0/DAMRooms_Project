@@ -1,0 +1,109 @@
+-- Post cliente --
+{
+   "dni": "48781825K",
+   "nombre": "Pablo",
+   "apellidos": "Guijarro",
+   "direccion": "Mi casa",
+   "telefono": 677426876
+}
+
+{
+   "dni": "99999999A",
+   "nombre": "Lázaro",
+   "apellidos": "Ortega Boix",
+   "direccion": "Calle Castelar nº37",
+   "telefono": 111111111
+}
+
+
+
+
+-- Put cliente --
+{
+   "dni": "48781825K",
+   "nombre": "Pablito",
+   "apellidos": "Guijarro",
+   "direccion": "Home",
+   "telefono": 677426876
+}
+
+
+
+
+-- Post habitaciones --
+{
+   "caracteristicas": "Grande",
+   "importe_noche": "150",
+   "tipo": "Suit"
+}
+
+{
+   "caracteristicas": "Grande",
+   "importe_noche": "50",
+   "tipo": "Individual"
+}
+
+
+
+
+
+
+-- Post reservas --
+{
+	"fecha_inicio": "2018-03-29T13:34:00.000",
+	"fecha_fin": "2018-04-15T13:34:00.000",
+	"importe_total": 1700.0,
+	"cliente_dni": "99999999A",
+	"habitaciones_numero": 1
+}
+
+
+
+
+
+{
+    "fechaInicio": "2022-02-05",
+    "fechaFin": "2022-02-07",
+    "estado": "Pendiente",
+    "clientes": {
+        "dni": "99999999A",
+        "nombre": "Lázaro",
+        "apellidos": "Ortega Boix",
+        "direccion": "Calle Castelar nº37",
+        "telefono": 111111111
+    },
+    "habitacion": {
+        "numero": 1,
+        "tipo": "Individual",
+        "caracteristicas": "Grande",
+        "importe_noche": 50.0
+    }
+}
+
+{
+        "idReserva": 2,
+        "fechaInicio": "2022-01-05",
+        "fechaFin": "2022-01-16",
+        "importeTotal": 1435.5,
+        "estado": "Pendiente",
+        "clientes": {
+            "dni": "99999999A",
+            "nombre": "Lázaro",
+            "apellidos": "Ortega Boix",
+            "direccion": "Calle Castelar nº37",
+            "telefono": 111111111
+        },
+        "habitacion": {
+            "numero": 2,
+            "tipo": "Individual",
+            "caracteristicas": "Grande",
+            "importe_noche": 50.0
+        }
+    }
+
+
+
+Reserva(idReserva=ReservaId(dni=99999999A, numero=1, fechaInicio=2022-02-07),
+ cliente=Cliente(dni=99999999A, nombre=Lázaro, apellidos=Ortega Boix, direccion=Calle Castelar nº37, telefono=111111111, reservas=[]),
+ habitaciones=Habitaciones(numero=1, tipo=Individual, caracteristicas=Grande, importe_noche=75.0), fechaFin=2040-02-17)
+
