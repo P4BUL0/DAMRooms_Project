@@ -1,7 +1,9 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
+import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.ReservaNotFoundException;
+import ies.mz.ProyectoDAMROOMS.repository.HabitacionRepository;
 import ies.mz.ProyectoDAMROOMS.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import java.util.Set;
 public class ReservaServiceImpl implements ReservaService {
     @Autowired
     private ReservaRepository reservaRepository;
+    @Autowired
+    private HabitacionRepository habitacionRepository;
 
     @Override
     public Set<Reserva> findAll(){
@@ -33,6 +37,9 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public Reserva addReserva(Reserva reserva){
+        long numHab = reserva.getHabitacion().getNumero();
+        Optional<Habitacion> habitacion =  habitacionRepository.findById(numHab);
+        reserva.setHabitacion(habitacion.get());
         reserva.calcImporteTotal();
         reserva.setEstado("Pendiente");
         return reservaRepository.save(reserva);
