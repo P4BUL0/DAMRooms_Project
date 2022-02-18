@@ -81,25 +81,8 @@
 }
 
 {
-        "idReserva": 2,
-        "fechaInicio": "2022-01-05",
-        "fechaFin": "2022-01-16",
-        "importeTotal": 1435.5,
-        "estado": "Pendiente",
-        "clientes": {
-            "dni": "99999999A",
-            "nombre": "Lázaro",
-            "apellidos": "Ortega Boix",
-            "direccion": "Calle Castelar nº37",
-            "telefono": 111111111
-        },
-        "habitacion": {
-            "numero": 2,
-            "tipo": "Individual",
-            "caracteristicas": "Grande",
-            "importe_noche": 50.0
-        }
-    }
+
+	
 
 
 
