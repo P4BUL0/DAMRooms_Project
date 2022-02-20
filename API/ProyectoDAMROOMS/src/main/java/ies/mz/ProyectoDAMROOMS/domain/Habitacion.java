@@ -22,11 +22,11 @@ public class Habitacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long numero;
 
-    @Schema(description = "Tipo de habitacion", example = "", required = true)
+    @Schema(description = "Tipo de habitacion", example = "Individual doble", required = true)
     @Column(name = "tipo")
     private String tipo;
 
-    @Schema(description = "Caracteristicas de habitacion", example = "", required = true)
+    @Schema(description = "Caracteristicas de habitacion", example = "Terraza", required = true)
     @Column(name = "caracteristicas")
     private String caracteristicas;
 
