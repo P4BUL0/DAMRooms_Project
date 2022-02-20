@@ -55,11 +55,10 @@ public class RestClientCliente {
         System.out.println("Resultado: \n" + resultado);
     }
 
-    public void modificar(String dni){
+    public void modificar(String dni, String nombre, String apellidos, String dirección, int telefono){
         try{
             Gson gson = new Gson();
-            Type collectionType = new TypeToken<Collection<Cliente>>(){}.getType();
-            Collection<Cliente> c = gson.fromJson(consultar(dni), collectionType);
+            Cliente c = new Cliente(dni, nombre, apellidos, dirección, telefono);
             WebTarget wt = this.client.target("http://localhost:8080/clientes/" + dni);
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
             Response response = invocationBuilder.put(Entity.entity(c.toString(),MediaType.APPLICATION_JSON));

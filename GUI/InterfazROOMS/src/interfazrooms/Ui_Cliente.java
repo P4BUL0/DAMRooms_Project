@@ -91,10 +91,15 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     }
 
     public void modificarCliente(){
-        String dni;
+        String dni, nombre, apellidos, direccion;
+        int telefono;
         RestClientCliente restClientCliente = new RestClientCliente();
         dni = lineEdit_DNI.text();
-        restClientCliente.modificar(dni);
+        nombre = lineEdit_Nombre.text();
+        apellidos = lineEdit_Apellidos.text();
+        direccion = lineEdit_Direccion.text();
+        telefono = Integer.parseInt(lineEdit_Telefono.text());
+        restClientCliente.modificar(dni, nombre, apellidos, direccion, telefono);
     }
 
     //Métodos mensajes
