@@ -629,7 +629,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
 
         if (pushButton_ingresar.isEnabled()) {
-            pushButton_ingresar.clicked.connect(this, "insertarCliente()");
+            pushButton_aceptar.clicked.connect(this, "insertarCliente()");
         }
 //        if (pushButton_consultar.isEnabled()) {
 //            pushButton_aceptar.clicked.connect(this, "consultarCliente()");
