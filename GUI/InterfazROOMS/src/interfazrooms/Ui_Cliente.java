@@ -79,10 +79,11 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     }
 
     public void eliminarCliente(){
+        String dni;
         RestClientCliente restClientCliente = new RestClientCliente();
-        if(comprobarDNI()){
-            restClientCliente.eliminar(lineEdit_DNI.text());
-        }
+        dni = lineEdit_DNI.text();
+            restClientCliente.eliminar(dni);
+
     }
 
     public void modificarCliente(){}
@@ -465,8 +466,8 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_eliminar.setFont(font11);
         pushButton_eliminar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_eliminar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
-//        pushButton_eliminar.setCheckable(true);
-//        pushButton_eliminar.setAutoExclusive(true);
+        pushButton_eliminar.setCheckable(true);
+        pushButton_eliminar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_eliminar, 1, 0, 1, 1);
 
@@ -628,20 +629,17 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_consultar.toggled.connect(this, "consultarCliente()");
 
 
-        if (pushButton_ingresar.isEnabled()) {
-            pushButton_aceptar.clicked.connect(this, "insertarCliente()");
+        if (pushButton_ingresar.isEnabled()){
+            pushButton_ingresar.clicked.connect(this,"insertarCliente()");
         }
-//        if (pushButton_consultar.isEnabled()) {
-//            pushButton_aceptar.clicked.connect(this, "consultarCliente()");
-//        }
         if (pushButton_modificar.isEnabled()) {
-            pushButton_aceptar.clicked.connect(this, "modificarCliente()");
+            pushButton_modificar.clicked.connect(this, "modificarCliente()");
         }
         if (pushButton_eliminar.isEnabled()) {
 //            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar el cliente?", "Eliminar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 //            if (confirmar == 0){
 //                pushButton_eliminar.clicked.connect(this,"eliminarCliente()");
-            pushButton_aceptar.clicked.connect(this, "eliminarCliente()");
+            pushButton_eliminar.clicked.connect(this, "eliminarCliente()");
         }
 
         pushButton_cancelar.clicked.connect(Cliente, "close()");
