@@ -1,5 +1,7 @@
 package APIRest;
 
+import com.google.gson.Gson;
+
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -25,13 +27,16 @@ public class RestClientCliente {
         }
     }
 
-    public Cliente consultar(String dni){
+    public String consultar(String dni){
+        Gson gson = new Gson();
         Cliente c = new Cliente();
 
         String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(String.class);
+
+        c = gson.fromJson(resultado, Cliente.class);
 
         System.out.println("Resultado: \n" + resultado);
         return resultado;
@@ -48,8 +53,6 @@ public class RestClientCliente {
 
     public void modificar(String dni, String nombre, String apellidos, String direccion, int telefono){
         try{
-
-
             Cliente c = new Cliente(dni, nombre, apellidos, direccion, telefono);
             WebTarget wt = this.client.target("http://localhost:8080/clientes");
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);

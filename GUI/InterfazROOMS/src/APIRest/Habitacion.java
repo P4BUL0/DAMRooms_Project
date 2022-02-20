@@ -17,7 +17,7 @@ public class Habitacion {
     public String toString() {
         return "{" +
                 "\"tipo\": \"" + tipo + "\"" +
-                ", \"caracteristicas\": \"" + caracteristicas + "\""+
+                ", \"caracteristicas\": \"" + caracteristicas + "\"" +
                 ", \"importe_noche\": \"" + importe_noche +
                 "\"}";
     }

@@ -20,8 +20,8 @@ public class Cliente {
     @Override
     public String toString(){
         return "{"+
-                "\"dni\":\"" + dni +"\""+
-                ", \"nombre\": \""+ nombre + "\""+
+                "\"dni\": \"" + dni + "\"" +
+                ", \"nombre\": \"" + nombre + "\"" +
                 ", \"apellidos\": \""+ apellidos + "\""+
                 ", \"direccion\": \""+ direccion + "\""+
                 ", \"telefono\": \"" + telefono +

@@ -71,10 +71,11 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         resultado = restClientCliente.consultar(dni);
         Cliente[] c = gson.fromJson(resultado, Cliente[].class);
 
-        lineEdit_Nombre.setText(c[0].getNombre());
-        lineEdit_Apellidos.setText(c[0].getApellidos());
-        lineEdit_Direccion.setText(c[0].getDireccion());
-        lineEdit_Telefono.setText(String.valueOf(c[0].getTelefono()));
+            lineEdit_Nombre.setText(c[0].getNombre());
+            lineEdit_Apellidos.setText(c[0].getApellidos());
+            lineEdit_Direccion.setText(c[0].getDireccion());
+            lineEdit_Telefono.setText(String.valueOf(c[0].getTelefono()));
+
     }
 
     public void eliminarCliente(){
@@ -464,8 +465,8 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_eliminar.setFont(font11);
         pushButton_eliminar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_eliminar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
-        pushButton_eliminar.setCheckable(true);
-        pushButton_eliminar.setAutoExclusive(true);
+//        pushButton_eliminar.setCheckable(true);
+//        pushButton_eliminar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_eliminar, 1, 0, 1, 1);
 
@@ -614,31 +615,39 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_modificar.toggled.connect(label_Telefono, "setEnabled(boolean)");
         pushButton_modificar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
 
-        pushButton_consultar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(label_Nombre, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(label_Direccion, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(label_Telefono, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(label_Nombre, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(label_Direccion, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(label_Telefono, "setEnabled(boolean)");
+//        pushButton_consultar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
+
+        pushButton_consultar.toggled.connect(this, "consultarCliente()");
 
 
         if (pushButton_ingresar.isEnabled()) {
-            pushButton_aceptar.clicked.connect(this, "insertarCliente()");
+            pushButton_ingresar.clicked.connect(this, "insertarCliente()");
         }
-        if (pushButton_consultar.isEnabled()) {
-            pushButton_aceptar.clicked.connect(this, "consultarCliente()");
+//        if (pushButton_consultar.isEnabled()) {
+//            pushButton_aceptar.clicked.connect(this, "consultarCliente()");
+//        }
+        if (pushButton_modificar.isEnabled()) {
+            pushButton_aceptar.clicked.connect(this, "modificarCliente()");
         }
-//        if (pushButton_modificar.isEnabled()) {
-//            pushButton_aceptar.clicked.connect(this, "modificarCliente()");
-//        }
-//        if (pushButton_eliminar.isEnabled()) {
-//            pushButton_aceptar.clicked.connect(this, "eliminarCliente()");
-//        }
+        //if (pushButton_eliminar.isChecked()) {
+            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar el cliente?", "Eliminar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmar == 0){
+                pushButton_eliminar.clicked.connect(this,"eliminarCliente()");
+            //
 
 
+            //pushButton_eliminar.clicked.connect(this, "eliminarCliente()");
+        }
+
+        pushButton_cancelar.clicked.connect(Cliente, "close()");
         Cliente.connectSlotsByName();
     } // setupUi
 

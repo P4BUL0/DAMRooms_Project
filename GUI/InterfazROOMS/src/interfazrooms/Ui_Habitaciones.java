@@ -838,20 +838,18 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         QWidget.setTabOrder(pushButton_aceptar, pushButton_cancelar);
         retranslateUi(Habitaciones);
         pushButton_ingresar.toggled.connect(groupBox_2, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(groupBox_2, "setEnabled(boolean)");
+        pushButton_consultar.toggled.connect(this, "consultarHab()");
         pushButton_modificar.toggled.connect(groupBox_2, "setEnabled(boolean)");
         pushButton_eliminar.toggled.connect(this, "consultarHab()");
 
         if (pushButton_ingresar.isEnabled()) {
-            pushButton_aceptar.clicked.connect(this, "insertarHab()");
-        }
-        if (pushButton_consultar.isEnabled()) {
-            pushButton_aceptar.clicked.connect(this, "consultarHab()");
+            pushButton_ingresar.clicked.connect(this, "insertarHab()");
         }
         if (pushButton_eliminar.isEnabled()) {
-            pushButton_aceptar.clicked.connect(this, "eliminarHab()");
+            pushButton_eliminar.clicked.connect(this, "eliminarHab()");
         }
 
+        pushButton_cancelar.clicked.connect(Habitaciones, "close()");
         Habitaciones.connectSlotsByName();
     } // setupUi
 
