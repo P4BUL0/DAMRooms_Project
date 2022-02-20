@@ -3,11 +3,14 @@ package interfazrooms;
 import APIRest.Cliente;
 import APIRest.RestClientCliente;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.trolltech.qt.core.QRect;
 import com.trolltech.qt.core.QSize;
 import com.trolltech.qt.gui.*;
 
 import javax.swing.*;
+import java.lang.reflect.Type;
+import java.util.Collection;
 
 public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     public QWidget layoutWidget_4;
@@ -69,12 +72,13 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         RestClientCliente restClientCliente = new RestClientCliente();
         dni = lineEdit_DNI.text();
         resultado = restClientCliente.consultar(dni);
-        Cliente[] c = gson.fromJson(resultado, Cliente[].class);
+        Type collectionType = new TypeToken<Collection<Cliente>>(){}.getType();
+        Collection<Cliente> clientes = gson.fromJson(resultado, collectionType);
 
-            lineEdit_Nombre.setText(c[0].getNombre());
-            lineEdit_Apellidos.setText(c[0].getApellidos());
-            lineEdit_Direccion.setText(c[0].getDireccion());
-            lineEdit_Telefono.setText(String.valueOf(c[0].getTelefono()));
+            lineEdit_Nombre.setText(clientes.stream().findFirst().get().getNombre());
+            lineEdit_Apellidos.setText(clientes.stream().findFirst().get().getApellidos());
+            lineEdit_Direccion.setText(clientes.stream().findFirst().get().getDireccion());
+            lineEdit_Telefono.setText(String.valueOf(clientes.stream().findFirst().get().getTelefono()));
 
     }
 
@@ -86,7 +90,12 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
     }
 
-    public void modificarCliente(){}
+    public void modificarCliente(){
+        String dni;
+        RestClientCliente restClientCliente = new RestClientCliente();
+        dni = lineEdit_DNI.text();
+        restClientCliente.modificar(dni);
+    }
 
     //Métodos mensajes
     public void mensajeOPCorrecta(){
