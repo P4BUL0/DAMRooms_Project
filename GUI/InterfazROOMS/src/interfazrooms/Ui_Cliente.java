@@ -637,7 +637,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         if (pushButton_modificar.isEnabled()) {
             pushButton_aceptar.clicked.connect(this, "modificarCliente()");
         }
-        if (pushButton_eliminar.isChecked()) {
+        if (pushButton_eliminar.isEnabled()) {
 //            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar el cliente?", "Eliminar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 //            if (confirmar == 0){
 //                pushButton_eliminar.clicked.connect(this,"eliminarCliente()");
