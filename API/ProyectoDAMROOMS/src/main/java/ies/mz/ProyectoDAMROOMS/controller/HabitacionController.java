@@ -67,16 +67,24 @@ public class HabitacionController {
     @Operation(summary = "Modifica una habitacion en el listado")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Se modifica la habitacion",
-                    content = @Content(schema = @Schema(implementation = Cliente.class))),
-            @ApiResponse(responseCode = "404", description = "la habitacion no existe",
+                    content = @Content(schema = @Schema(implementation = Habitacion.class))),
+            @ApiResponse(responseCode = "404", description = "La habitacion no existe",
                     content = @Content(schema = @Schema(implementation = Response.class)))
     })
-    @PutMapping("/habitaciones/{numero}")
+    @PutMapping(value = "/habitaciones/{numero}", produces = "application/json",
+            consumes = "application/json")
     public ResponseEntity<Habitacion> modifyHabitacion(@PathVariable long numero, @RequestBody Habitacion newHabitacion) {
         Habitacion habitacion = habitacionService.modifyHabitacion(numero, newHabitacion);
         return new ResponseEntity<>(habitacion, HttpStatus.OK);
     }
 
+    @Operation(summary = "Elimina una habitacion")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Se elimina la habitacion",
+                    content = @Content(schema = @Schema(implementation = Response.class))),
+            @ApiResponse(responseCode = "404", description = "La habitacion no existe",
+                    content = @Content(schema = @Schema(implementation = Response.class)))
+    })
     @DeleteMapping("/habitaciones/{numero}")
     public ResponseEntity<Response> deleteHabitacion(@PathVariable long numero)
     {
@@ -85,7 +93,14 @@ public class HabitacionController {
                 HttpStatus.OK);
     }
 
-    @DeleteMapping("/HabitacionesTipo/{tipo}")
+    @Operation(summary = "Elimina un listado de habitaciones por su tipo")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Se eliminan las habitaciones",
+                    content = @Content(schema = @Schema(implementation = Response.class))),
+            @ApiResponse(responseCode = "404", description = "Las habitaciones no existen",
+                    content = @Content(schema = @Schema(implementation = Response.class)))
+    })
+    @DeleteMapping("/habitacionesTipo/{tipo}")
     public ResponseEntity<Response> deletAllHabitaciones(@PathVariable String tipo)
     {
         habitacionService.deleteAll(tipo);
