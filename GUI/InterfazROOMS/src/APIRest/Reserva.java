@@ -14,9 +14,8 @@ public class Reserva {
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private float importeTotal;
-    private String estado;
-    private Cliente clientes;//Comprobar
-    private Habitacion habitacion;//Comprobar
+    private Cliente clientes;
+    private Habitacion habitacion;
 
     public void calcImporteTotal(){
         float importeNoche = this.getHabitacion().getImporte_noche();
@@ -27,10 +26,9 @@ public class Reserva {
     @Override
     public String toString(){
         return "{" +
-                "\"fechaInicio\": \"" + fechaInicio + "\"" +
-                "\"fechaFin\": \"" + fechaFin + "\"" +
-                "\"importeTotal\": \"" + importeTotal + "\"" +
-                "\"estado\": \"" + estado +
-                "\"}";
+                " \"fechaInicio\": \"" + fechaInicio + "\"" +
+                ", \"fechaFin\": \"" + fechaFin + "\"" +
+                ", \"importeTotal\": \"" + importeTotal + "\"" +
+                ", \"}";
     }
 }

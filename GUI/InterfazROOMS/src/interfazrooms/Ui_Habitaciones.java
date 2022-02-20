@@ -69,9 +69,9 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         }else if (radioButton_Familiar.isChecked()){
             tipo = "Familiar";
         }else if (radioButton_Suite.isChecked()){
-            tipo = "Suit";
+            tipo = "Suite";
         }else if (radioButton_GranSuite.isChecked()){
-            tipo = "Gran Suit";
+            tipo = "Gran Suite";
         }
         if (radioButton_CamaIndividual.isChecked()){
             caracteristica = "Cama individual";
@@ -138,7 +138,9 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
 
         lineEdit_ImporteNoche.setText(String.valueOf(h.getImporte_noche()));
 
+        //Tipo de habitación
         if (h.getTipo().equalsIgnoreCase("Individual")){
+            System.out.println(h.getTipo());
             radioButton_Individual.setChecked(true);
         }
         if (h.getTipo().equalsIgnoreCase("Doble")){
@@ -151,18 +153,23 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
             radioButton_Suite.setChecked(true);
         }
         if (h.getTipo().equalsIgnoreCase("Gran Suite")){
+
             radioButton_GranSuite.setChecked(true);
         }
-        if (h.getTipo().equalsIgnoreCase("Cama individual")){
+
+
+        //Cama de la habitación
+        if (h.getCaracteristicas().contains("Cama individual")){
             radioButton_CamaIndividual.setChecked(true);
         }
-        if (h.getTipo().equalsIgnoreCase("Cama de matrimonio")){
+        if (h.getCaracteristicas().contains("Cama de matrimonio")){
             radioButton_CamaMatrimonio.setChecked(true);
         }
-        if (h.getTipo().equalsIgnoreCase("Cama KingSize")){
+        if (h.getCaracteristicas().contains("Cama KingSize")){
             radioButton_CamaKing.setChecked(true);
         }
 
+        //Características de la habitación
         if (h.getCaracteristicas().contains("Luminosa")){
             checkBox_Luminosa.setChecked(true);
         }
@@ -200,7 +207,52 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         restClientHabitacion.eliminar(numero);
     }
 
-    public void modificarHab(){}
+    public void modificarHab(){
+        long numero;
+        String tipo = "", caracteristica = "";
+        float importe_noche;
+        RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
+        numero = spinBox_NumeroHabitacion.value();
+        importe_noche = Float.parseFloat(lineEdit_ImporteNoche.text());
+        if (radioButton_Individual.isChecked()){
+            tipo = "Individual";
+        }else if (radioButton_Doble.isChecked()){
+            tipo = "Doble";
+        }else if (radioButton_Familiar.isChecked()){
+            tipo = "Familiar";
+        }else if (radioButton_Suite.isChecked()){
+            tipo = "Suite";
+        }else if (radioButton_GranSuite.isChecked()){
+            tipo = "Gran Suite";
+        }
+        if (radioButton_CamaIndividual.isChecked()){
+            caracteristica = "Cama individual";
+        }else if (radioButton_CamaMatrimonio.isChecked()){
+            caracteristica = "Cama de matrimonio";
+        }else if (radioButton_CamaKing.isChecked()){
+            caracteristica = "Cama KingSize";
+        }
+        if (checkBox_Luminosa.isChecked()){
+            caracteristica += ", Luminosa";
+        }if (checkBox_WiFi.isChecked()){
+            caracteristica += ", Wi-Fi";
+        }if (checkBox_Terraza.isChecked()){
+            caracteristica += ", Terraza";
+        }if (checkBox_Cafe.isChecked()){
+            caracteristica += ", Cafetera";
+        }if (checkBox_Bar.isChecked()){
+            caracteristica += ", Mini Bar";
+        }if (checkBox_Banera.isChecked()){
+            caracteristica += ", Bañera";
+        }if (checkBox_Jacuzzi.isChecked()){
+            caracteristica += ", Jacuzzi";
+        }if (checkBox_Tele.isChecked()){
+            caracteristica += ", TV";
+        }if (checkBox_Aire.isChecked()){
+            caracteristica += ", AC";
+        }
+        restClientHabitacion.modificar(numero, tipo, caracteristica, importe_noche);
+    }
 
     //Métodos GUI
     public void setupUi(QDialog Habitaciones) {
@@ -847,6 +899,9 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         }
         if (pushButton_eliminar.isEnabled()) {
             pushButton_eliminar.clicked.connect(this, "eliminarHab()");
+        }
+        if (pushButton_modificar.isEnabled()) {
+            pushButton_modificar.clicked.connect(this, "modificarHab()");
         }
 
         pushButton_cancelar.clicked.connect(Habitaciones, "close()");

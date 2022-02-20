@@ -3,6 +3,8 @@ package APIRest;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import javax.swing.*;
+import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -32,8 +34,6 @@ public class RestClientCliente {
 
     public String consultar(String dni){
         Gson gson = new Gson();
-        Cliente c = new Cliente();
-
         String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -47,17 +47,24 @@ public class RestClientCliente {
     }
 
     public void eliminar(String dni){
-        String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
-                .request(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .delete(String.class);
 
-        System.out.println("Resultado: \n" + resultado);
+        try{
+            String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
+                    .request(MediaType.APPLICATION_JSON)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .delete(String.class);
+
+            System.out.println("Resultado: \n" + resultado);
+        }catch (InternalServerErrorException isee){
+            isee.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Existe una reserva con este cliente", "Error al borrar el cliente",JOptionPane.ERROR_MESSAGE);
+            System.out.println("Existe una reserva con este cliente");
+        }
+
     }
 
     public void modificar(String dni, String nombre, String apellidos, String dirección, int telefono){
         try{
-            Gson gson = new Gson();
             Cliente c = new Cliente(dni, nombre, apellidos, dirección, telefono);
             WebTarget wt = this.client.target("http://localhost:8080/clientes/" + dni);
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);

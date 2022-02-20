@@ -16,7 +16,7 @@ public class Habitacion {
     @Override
     public String toString() {
         return "{" +
-                "\"tipo\": \"" + tipo + "\"" +
+                " \"tipo\": \"" + tipo + "\"" +
                 ", \"caracteristicas\": \"" + caracteristicas + "\"" +
                 ", \"importe_noche\": \"" + importe_noche +
                 "\"}";
