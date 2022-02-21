@@ -79,19 +79,19 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         String[] getImporteNoche = listWidget_habitaciones.currentItem().text().split(", ");
         LocalDate fechaInicio = LocalDate.parse(calendarWidget_Inicio.selectedDate().toString("yyyy-MM-dd"));
         LocalDate fechaFin = LocalDate.parse(calendarWidget_Fin.selectedDate().toString("yyyy-MM-dd"));
+
         float importeNoche = Float.parseFloat(getImporteNoche[getImporteNoche.length-1]);
         long total_dias = DAYS.between(fechaInicio, fechaFin);
+
         if (total_dias <= 0){
             JOptionPane.showMessageDialog(null, "La fecha de inicio tiene que ser anterior a la fecha final", "Error en la elección de la fecha", JOptionPane.ERROR_MESSAGE);
         }else{
             float importeTotal = importeNoche * total_dias;
             label_importeTotalRes.setText(importeTotal + " €");
         }
-
     }
 
     public void insertar(){
-
         RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         RestClientReserva restClientReserva = new RestClientReserva();
         RestClientCliente restClientCliente = new RestClientCliente();
@@ -103,6 +103,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         float importeTotal;
         Cliente cliente;
         Habitacion habitacion;
+
         try{
             numero = listWidget_habitaciones.currentItem().text().substring(0,listWidget_habitaciones.currentItem().text().indexOf(","));
             habitacion = restClientHabitacion.GetHabitacion(Long.parseLong(numero));
@@ -127,13 +128,11 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
             System.out.println("No se ha calculado el importe");
             JOptionPane.showMessageDialog(null, "No se ha calculado el importe", "Importe no calculado", JOptionPane.ERROR_MESSAGE);
         }
-
-
-
     }
 
     public void eliminar(){
         RestClientReserva restClientReserva = new RestClientReserva();
+
         try{
             String numero = listWidget_reservas.currentItem().text().substring(3, listWidget_reservas.currentItem().text().indexOf(" "));
             int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar la reserva?", "Eliminar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -153,11 +152,13 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         RestClientCliente restClientCliente = new RestClientCliente();
         RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         RestClientReserva restClientReserva = new RestClientReserva();
+
         String dni;
         String numero;
         LocalDate fechaInicio;
         LocalDate fechaFin;
         float importeTotal;
+
         Cliente cliente;
         Habitacion habitacion;
 
@@ -171,6 +172,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
                 fechaFin = LocalDate.parse(dateEditFin.date().toString("yyyy-MM-dd"));
                 importeTotal = Float.parseFloat(label_importeTotalRes.text().replace(" €", ""));
                 habitacion = restClientHabitacion.GetHabitacion(Long.parseLong(numero));
+
                 int confirmar = JOptionPane.showConfirmDialog(null,"Quieres modificar la reserva?", "Modificar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (confirmar == 0) {
                     restClientReserva.modificar(Long.parseLong(idReserva),fechaInicio,fechaFin,importeTotal, cliente, habitacion);
@@ -182,6 +184,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
                 System.out.println("No se ha seleccionado la habitación");
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado habitación", "Habitación no seleccionada", JOptionPane.ERROR_MESSAGE);
             }
+
         }catch (NullPointerException npe){
             npe.printStackTrace();
             System.out.println("No se ha seleccionado la reserva");
@@ -191,7 +194,6 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
             System.out.println("No se ha calculado el importe");
             JOptionPane.showMessageDialog(null, "No se ha calculado el importe", "Importe no calculado", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     public void setupUi(QDialog Reservas)
@@ -701,7 +703,6 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_CalcularImporte.clicked.connect(this, "calcularImporte()");
         pushButton_reservar.clicked.connect(this, "insertar()");
 
-
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setFocus()");
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Inicio.clicked.connect(dateEditInicio, "setDate(com.trolltech.qt.core.QDate)");
@@ -709,13 +710,10 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         dateEditFin.dateChanged.connect(calendarWidget_Fin, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Fin.clicked.connect(dateEditFin, "setDate(com.trolltech.qt.core.QDate)");
 
-
         pushButton_modificar.clicked.connect(this, "modificar()");
         pushButton_eliminar.clicked.connect(this, "eliminar()");
 
-
         pushButton_cancelar.clicked.connect(Reservas, "close()");
-
 
         mostrarClientesDni();
         mostrarhabitaciones();

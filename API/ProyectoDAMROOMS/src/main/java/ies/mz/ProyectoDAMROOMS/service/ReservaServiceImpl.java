@@ -64,13 +64,14 @@ public class ReservaServiceImpl implements ReservaService {
         String dniCli = reserva.getCliente().getDni();
         Set<Cliente> cliente = clienteRepository.findByDni(dniCli);
         Optional<Habitacion> habitacion =  habitacionRepository.findById(numHab);
+
         newReserva.calcImporteTotal();
         reserva.setHabitacion(habitacion.get());
         reserva.calcImporteTotal();
         reserva.setFechaInicio(newReserva.getFechaInicio());
         reserva.setFechaFin(newReserva.getFechaFin());
-        //reserva.setEstado("Pendiente");
         reserva.setCliente(cliente.stream().findFirst().get());
+
         return reservaRepository.save(reserva);
     }
 

@@ -52,6 +52,7 @@ public class RestClientHabitacion {
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(String.class);
+
         h = gson.fromJson(resultado, Habitacion.class);
 
         return h;
@@ -67,21 +68,22 @@ public class RestClientHabitacion {
             System.out.println("Resultado: \n" + resultado);
         }catch (InternalServerErrorException isee){
             isee.printStackTrace();
+
             JOptionPane.showMessageDialog(null, "Existe una reserva con esta habitación", "Error al borrar la habitación",JOptionPane.ERROR_MESSAGE);
             System.out.println("Existe una reserva con esta habitación");
         }
-
     }
 
     public void modificar(long numero, String tipo, String caracteristicas, float importe_noche){
         try{
             Habitacion h = new Habitacion(numero, tipo, caracteristicas, importe_noche);
+
             WebTarget wt = this.client.target("http://localhost:8080/habitaciones/" + numero);
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
             Response response = invocationBuilder.put(Entity.entity(h.toString(),MediaType.APPLICATION_JSON));
+
             System.out.println(response.getStatus());
             System.out.println(response.readEntity(String.class));
-            System.out.println();
         }catch(Exception e){
             e.printStackTrace();
         }

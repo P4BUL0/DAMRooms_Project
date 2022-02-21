@@ -54,7 +54,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     }
     //Métodos API
     public void insertarCliente(){
-
         RestClientCliente restClientCliente = new RestClientCliente();
 
         String dni;
@@ -64,7 +63,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         int telefono;
 
         dni = lineEdit_DNI.text();
-
         nombre = lineEdit_Nombre.text();
         apellidos = lineEdit_Apellidos.text();
         direccion = lineEdit_Direccion.text();
@@ -82,13 +80,16 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     }
 
     public void consultarCliente(){
+        RestClientCliente restClientCliente = new RestClientCliente();
+
         String dni;
         String resultado = "";
         Gson gson = new Gson();
 
-        RestClientCliente restClientCliente = new RestClientCliente();
         dni = lineEdit_DNI.text();
+
         resultado = restClientCliente.consultar(dni);
+
         Type collectionType = new TypeToken<Collection<Cliente>>(){}.getType();
         Collection<Cliente> clientes = gson.fromJson(resultado, collectionType);
 
@@ -109,8 +110,9 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     }
 
     public void eliminarCliente(){
-        String dni;
         RestClientCliente restClientCliente = new RestClientCliente();
+
+        String dni;
         dni = lineEdit_DNI.text();
 
         if (comprobarDNI(dni)){
@@ -124,9 +126,11 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     }
 
     public void modificarCliente(){
+        RestClientCliente restClientCliente = new RestClientCliente();
+
         String dni, nombre, apellidos, direccion;
         int telefono;
-        RestClientCliente restClientCliente = new RestClientCliente();
+
         dni = lineEdit_DNI.text();
         nombre = lineEdit_Nombre.text();
         apellidos = lineEdit_Apellidos.text();
@@ -179,6 +183,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         String numero = "";
         String miDNI = "";
         String[] unoNueve = {"0","1","2","3","4","5","6","7","8","9"};
+
         for (i = 0; i < 9; i++) {
             numero = dni.substring(i, i+1);
             for(j = 0; j < 9; j++){
@@ -321,7 +326,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_consultar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_consultar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Buscar.png")));
 
-
         gridLayout.addWidget(pushButton_consultar, 0, 1, 1, 1);
 
         pushButton_modificar = new QPushButton(layoutWidget);
@@ -352,7 +356,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         groupBox_DatosCliente = new QGroupBox(layoutWidget);
         groupBox_DatosCliente.setObjectName("groupBox_DatosCliente");
-        //groupBox_DatosCliente.setEnabled(false);
+
         QPalette palette4= new QPalette();
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.WindowText, new QColor(0, 0, 0));
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(152, 210, 236));
@@ -416,13 +420,12 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         gridLayout_2.setObjectName("gridLayout_2");
         lineEdit_Direccion = new QLineEdit(layoutWidget1);
         lineEdit_Direccion.setObjectName("lineEdit_Direccion");
-        //lineEdit_Direccion.setEnabled(false);
 
         gridLayout_2.addWidget(lineEdit_Direccion, 0, 3, 1, 1);
 
         lineEdit_Telefono = new QLineEdit(layoutWidget1);
         lineEdit_Telefono.setObjectName("lineEdit_Telefono");
-        //lineEdit_Telefono.setEnabled(false);
+
         QFont font6 = new QFont();
         font6.setPointSize(8);
         lineEdit_Telefono.setFont(font6);
@@ -431,7 +434,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Telefono = new QLabel(layoutWidget1);
         label_Telefono.setObjectName("label_Telefono");
-        //label_Telefono.setEnabled(false);
+
         QFont font7 = new QFont();
         font7.setPointSize(8);
         font7.setBold(true);
@@ -442,7 +445,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Direccion = new QLabel(layoutWidget1);
         label_Direccion.setObjectName("label_Direccion");
-        //label_Direccion.setEnabled(false);
+
         QFont font8 = new QFont();
         font8.setPointSize(8);
         font8.setBold(true);
@@ -453,7 +456,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Nombre = new QLabel(layoutWidget1);
         label_Nombre.setObjectName("label_Nombre");
-        //label_Nombre.setEnabled(false);
+
         QFont font9 = new QFont();
         font9.setPointSize(8);
         font9.setBold(true);
@@ -464,7 +467,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Apellidos = new QLabel(layoutWidget1);
         label_Apellidos.setObjectName("label_Apellidos");
-        //label_Apellidos.setEnabled(false);
+
         QFont font10 = new QFont();
         font10.setPointSize(8);
         font10.setBold(true);
@@ -475,16 +478,13 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         lineEdit_Nombre = new QLineEdit(layoutWidget1);
         lineEdit_Nombre.setObjectName("lineEdit_Nombre");
-        //lineEdit_Nombre.setEnabled(false);
 
         gridLayout_2.addWidget(lineEdit_Nombre, 0, 1, 1, 1);
 
         lineEdit_Apellidos = new QLineEdit(layoutWidget1);
         lineEdit_Apellidos.setObjectName("lineEdit_Apellidos");
-        //lineEdit_Apellidos.setEnabled(false);
 
         gridLayout_2.addWidget(lineEdit_Apellidos, 1, 1, 1, 1);
-
 
         gridLayout.addWidget(groupBox_DatosCliente, 2, 0, 1, 2);
 
@@ -511,7 +511,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_eliminar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_eliminar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
 
-
         gridLayout.addWidget(pushButton_eliminar, 1, 0, 1, 1);
 
         pushButton_ingresar = new QPushButton(layoutWidget);
@@ -536,7 +535,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_ingresar.setFont(font12);
         pushButton_ingresar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_ingresar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Guardar.png")));
-
 
         gridLayout.addWidget(pushButton_ingresar, 0, 0, 1, 1);
 
@@ -637,7 +635,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         QWidget.setTabOrder(lineEdit_Telefono, pushButton_informe);
         QWidget.setTabOrder(pushButton_informe, pushButton_cancelar);
         retranslateUi(Cliente);
-
 
         pushButton_consultar.clicked.connect(this, "consultarCliente()");
         pushButton_ingresar.clicked.connect(this,"insertarCliente()");
