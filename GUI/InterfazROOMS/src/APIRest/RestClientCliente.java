@@ -29,6 +29,7 @@ public class RestClientCliente {
             System.out.println(response.getStatus());
             System.out.println(response.readEntity(String.class));
             System.out.println();
+
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -54,6 +55,9 @@ public class RestClientCliente {
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(String.class);
+
+        resultado = resultado.replace("[", "");
+        resultado = resultado.replace("]", "");
 
         Cliente cliente = new Gson().fromJson(resultado, Cliente.class);
 

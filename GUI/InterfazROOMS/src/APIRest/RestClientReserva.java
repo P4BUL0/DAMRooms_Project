@@ -29,7 +29,9 @@ public class RestClientReserva {
         //En el constructor hay que añadir cliente y habitación? Seteandole el primary key correspondiente?
 
         try{
+
             Reserva res = new Reserva(fechaInicio, fechaFin, importeTotal, c ,h);
+            System.out.println(res);
             WebTarget wt = this.client.target("http://localhost:8080/reservas");
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
             Response response = invocationBuilder.post(Entity.entity(res.toString(),MediaType.APPLICATION_JSON));

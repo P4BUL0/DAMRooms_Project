@@ -6,6 +6,9 @@ import com.trolltech.qt.gui.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.FormatStyle;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -63,30 +66,36 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 
     public void calcularImporte(){
 
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        System.out.println(dateTimeFormatter);
-        LocalDate fechaInicio;
-        LocalDate fechaFin;
+
+        LocalDate fechaInicio = LocalDate.parse(calendarWidget_Inicio.selectedDate().toString("yyyy-MM-dd"));
+        LocalDate fechaFin = LocalDate.parse(calendarWidget_Fin.selectedDate().toString("yyyy-MM-dd"));
         float importeNoche = 50;
-        long total_dias = DAYS.between(LocalDate.parse(dateEditInicio.date().toString()), LocalDate.parse(dateEditFin.date().toString()));
+        long total_dias = DAYS.between(fechaInicio, fechaFin);
         float importeTotal = importeNoche * total_dias;
-        label_importeTotal.setText(String.valueOf(importeTotal));
+        label_importeTotalRes.setText(String.valueOf(importeTotal) + " €");
     }
     public void insertar(){
 
+        RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         RestClientReserva restClientReserva = new RestClientReserva();
         RestClientCliente restClientCliente = new RestClientCliente();
 
         String dni;
+        String numero;
         LocalDate fechaInicio;
         LocalDate fechaFin;
         float importeTotal;
         Cliente cliente;
         Habitacion habitacion;
+        //numero = String.valueOf(listWidget_habitaciones.selectedItems().stream().findFirst().get());
+        numero = listWidget_habitaciones.currentItem().text().substring(0,listWidget_habitaciones.currentItem().text().indexOf(","));
         dni = comboBox.currentText();
         cliente = restClientCliente.obtenerClienteByDni(dni);
-        fechaInicio = LocalDate.parse(dateEditInicio.date().toString());
-        fechaFin = LocalDate.parse(dateEditFin.date().toString());
+        fechaInicio = LocalDate.parse(dateEditInicio.date().toString("yyyy-MM-dd"));
+        fechaFin = LocalDate.parse(dateEditFin.date().toString("yyyy-MM-dd"));
+        importeTotal = Float.parseFloat(label_importeTotalRes.text().replace(" €", ""));
+        habitacion = restClientHabitacion.GetHabitacion(Long.parseLong(numero));
+        restClientReserva.crear(fechaInicio,fechaFin,importeTotal, cliente, habitacion);
 
     }
 
@@ -605,6 +614,8 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_ActualizarHab.clicked.connect(this, "mostrarhabitaciones()");
         pushButton_ActualizarHab.clicked.connect(this, "mostrarClientesDni()");
         comboBox.activated.connect(this, "mostrarClientesDni()");
+        pushButton_reservar.clicked.connect(this, "insertar()");
+
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setFocus()");
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Inicio.clicked.connect(dateEditInicio, "setDate(com.trolltech.qt.core.QDate)");

@@ -45,6 +45,19 @@ public class RestClientHabitacion {
         return resultado;
     }
 
+    public Habitacion GetHabitacion(long numero){
+        Gson gson = new Gson();
+        Habitacion h = new Habitacion();
+
+        String resultado = this.client.target("http://localhost:8080/habitaciones/"+numero)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class);
+        h = gson.fromJson(resultado, Habitacion.class);
+
+        return h;
+    }
+
     public void eliminar(long numero){
         try{
             String resultado = this.client.target("http://localhost:8080/habitaciones/"+numero)
