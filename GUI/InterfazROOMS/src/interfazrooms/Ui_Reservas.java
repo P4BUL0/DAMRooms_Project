@@ -565,6 +565,8 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         dateEditFin.dateChanged.connect(calendarWidget_Fin, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Fin.clicked.connect(dateEditFin, "setDate(com.trolltech.qt.core.QDate)");
 
+        pushButton_cancelar.clicked.connect(Reservas, "close()");
+
         Reservas.connectSlotsByName();
     } // setupUi
 
