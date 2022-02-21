@@ -6,13 +6,15 @@ import com.google.gson.Gson;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
+import javax.swing.*;
+
 public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
     public QLabel label_Titulo;
     public QWidget layoutWidget_4;
     public QHBoxLayout horizontalLayout;
     public QSpacerItem horizontalSpacer_2;
     public QLabel label_confirmacion;
-    public QPushButton pushButton_aceptar;
+    public QPushButton pushButton_informe;
     public QPushButton pushButton_cancelar;
     public QWidget layoutWidget;
     public QGridLayout gridLayout;
@@ -122,8 +124,6 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         checkBox_Jacuzzi.setChecked(false);
         checkBox_Tele.setChecked(false);
         checkBox_Aire.setChecked(false);
-
-        groupBox_2.setDisabled(true);
     }
 
     public void consultarHab(){
@@ -197,14 +197,16 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         if (h.getCaracteristicas().contains("Aire acondicionado")){
             checkBox_Aire.setChecked(true);
         }
-        groupBox_2.setDisabled(true);
     }
 
     public void eliminarHab(){
         long numero;
         RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         numero = Long.parseLong(String.valueOf(spinBox_NumeroHabitacion.value()));
-        restClientHabitacion.eliminar(numero);
+        int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar la habitación?", "Eliminar habitación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirmar == 0) {
+            restClientHabitacion.eliminar(numero);
+        }
     }
 
     public void modificarHab(){
@@ -286,9 +288,9 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
 
         horizontalLayout.addWidget(label_confirmacion);
 
-        pushButton_aceptar = new QPushButton(layoutWidget_4);
-        pushButton_aceptar.setObjectName("pushButton_aceptar");
-        pushButton_aceptar.setMinimumSize(new QSize(0, 25));
+        pushButton_informe = new QPushButton(layoutWidget_4);
+        pushButton_informe.setObjectName("pushButton_informe");
+        pushButton_informe.setMinimumSize(new QSize(0, 25));
         QPalette palette= new QPalette();
         palette.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(19, 151, 213));
         palette.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.ButtonText, new QColor(255, 255, 255));
@@ -302,15 +304,15 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.ButtonText, new QColor(120, 120, 120));
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Base, new QColor(19, 151, 213));
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Window, new QColor(19, 151, 213));
-        pushButton_aceptar.setPalette(palette);
+        pushButton_informe.setPalette(palette);
         QFont font1 = new QFont();
         font1.setBold(true);
         font1.setWeight(75);
-        pushButton_aceptar.setFont(font1);
-        pushButton_aceptar.setStyleSheet("background-color:rgb(19, 151, 213)");
-        pushButton_aceptar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Aceptar.png")));
+        pushButton_informe.setFont(font1);
+        pushButton_informe.setStyleSheet("background-color:rgb(19, 151, 213)");
+        pushButton_informe.setIcon(new QIcon(new QPixmap("Resources/Iconos/Informe.png")));
 
-        horizontalLayout.addWidget(pushButton_aceptar);
+        horizontalLayout.addWidget(pushButton_informe);
 
         pushButton_cancelar = new QPushButton(layoutWidget_4);
         pushButton_cancelar.setObjectName("pushButton_cancelar");
@@ -365,8 +367,6 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_consultar.setFont(font3);
         pushButton_consultar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_consultar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Buscar.png")));
-        pushButton_consultar.setCheckable(true);
-        pushButton_consultar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_consultar, 0, 1, 1, 1);
 
@@ -392,14 +392,11 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_modificar.setFont(font4);
         pushButton_modificar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_modificar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Modificar.png")));
-        pushButton_modificar.setCheckable(true);
-        pushButton_modificar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_modificar, 1, 1, 1, 1);
 
         groupBox_2 = new QGroupBox(layoutWidget);
         groupBox_2.setObjectName("groupBox_2");
-        groupBox_2.setEnabled(false);
         QPalette palette4= new QPalette();
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.WindowText, new QColor(0, 0, 0));
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(152, 210, 236));
@@ -741,8 +738,6 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_eliminar.setFont(font23);
         pushButton_eliminar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_eliminar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
-        pushButton_eliminar.setCheckable(true);
-        pushButton_eliminar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_eliminar, 1, 0, 1, 1);
 
@@ -768,8 +763,6 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_ingresar.setFont(font24);
         pushButton_ingresar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_ingresar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Guardar.png")));
-        pushButton_ingresar.setCheckable(true);
-        pushButton_ingresar.setAutoExclusive(true);
 
         gridLayout.addWidget(pushButton_ingresar, 0, 0, 1, 1);
 
@@ -784,7 +777,6 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         label_Logo.setWordWrap(false);
         groupBox_cliente_2 = new QGroupBox(Habitaciones);
         groupBox_cliente_2.setObjectName("groupBox_cliente_2");
-        groupBox_cliente_2.setEnabled(true);
         groupBox_cliente_2.setGeometry(new QRect(10, 50, 421, 61));
         QPalette palette8= new QPalette();
         palette8.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.WindowText, new QColor(0, 0, 0));
@@ -886,34 +878,25 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         QWidget.setTabOrder(checkBox_Aire, radioButton_CamaIndividual);
         QWidget.setTabOrder(radioButton_CamaIndividual, radioButton_CamaMatrimonio);
         QWidget.setTabOrder(radioButton_CamaMatrimonio, radioButton_CamaKing);
-        QWidget.setTabOrder(radioButton_CamaKing, pushButton_aceptar);
-        QWidget.setTabOrder(pushButton_aceptar, pushButton_cancelar);
+        QWidget.setTabOrder(radioButton_CamaKing, pushButton_informe);
+        QWidget.setTabOrder(pushButton_informe, pushButton_cancelar);
         retranslateUi(Habitaciones);
-        pushButton_ingresar.toggled.connect(groupBox_2, "setEnabled(boolean)");
-        pushButton_consultar.toggled.connect(this, "consultarHab()");
-        pushButton_modificar.toggled.connect(groupBox_2, "setEnabled(boolean)");
-        pushButton_eliminar.toggled.connect(this, "consultarHab()");
 
-        if (pushButton_ingresar.isEnabled()) {
-            pushButton_ingresar.clicked.connect(this, "insertarHab()");
-        }
-        if (pushButton_eliminar.isEnabled()) {
-            pushButton_eliminar.clicked.connect(this, "eliminarHab()");
-        }
-        if (pushButton_modificar.isEnabled()) {
-            pushButton_modificar.clicked.connect(this, "modificarHab()");
-        }
+        pushButton_ingresar.clicked.connect(this, "insertarHab()");
+        pushButton_consultar.clicked.connect(this, "consultarHab()");
+        pushButton_eliminar.clicked.connect(this, "eliminarHab()");
+        pushButton_modificar.clicked.connect(this, "modificarHab()");
 
         pushButton_cancelar.clicked.connect(Habitaciones, "close()");
+
         Habitaciones.connectSlotsByName();
     } // setupUi
 
-    void retranslateUi(QDialog Habitaciones)
-    {
+    void retranslateUi(QDialog Habitaciones){
         Habitaciones.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Habitaciones", null));
         label_Titulo.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Gesti\u00f3n habitaciones", null));
         label_confirmacion.setText("");
-        pushButton_aceptar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Aceptar", null));
+        pushButton_informe.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Informe", null));
         pushButton_cancelar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Cancelar", null));
         pushButton_consultar.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Buscar habitaci\u00f3n", null));
         pushButton_consultar.setText(com.trolltech.qt.core.QCoreApplication.translate("Habitaciones", "Consultar", null));

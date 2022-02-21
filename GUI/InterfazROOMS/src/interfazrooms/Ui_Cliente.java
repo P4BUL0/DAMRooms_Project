@@ -17,7 +17,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     public QHBoxLayout horizontalLayout;
     public QSpacerItem horizontalSpacer_2;
     public QLabel label_confirmacion;
-    public QPushButton pushButton_aceptar;
+    public QPushButton pushButton_informe;
     public QPushButton pushButton_cancelar;
     public QLabel label_Titulo;
     public QWidget layoutWidget;
@@ -86,7 +86,12 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         String dni;
         RestClientCliente restClientCliente = new RestClientCliente();
         dni = lineEdit_DNI.text();
+        int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar el cliente?", "Eliminar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirmar == 0) {
             restClientCliente.eliminar(dni);
+        }
+
+
 
     }
 
@@ -198,9 +203,9 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         horizontalLayout.addWidget(label_confirmacion);
 
-        pushButton_aceptar = new QPushButton(layoutWidget_4);
-        pushButton_aceptar.setObjectName("pushButton_aceptar");
-        pushButton_aceptar.setMinimumSize(new QSize(0, 23));
+        pushButton_informe = new QPushButton(layoutWidget_4);
+        pushButton_informe.setObjectName("pushButton_informe");
+        pushButton_informe.setMinimumSize(new QSize(0, 23));
         QPalette palette= new QPalette();
         palette.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(19, 151, 213));
         palette.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.ButtonText, new QColor(255, 255, 255));
@@ -214,15 +219,15 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.ButtonText, new QColor(120, 120, 120));
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Base, new QColor(19, 151, 213));
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Window, new QColor(19, 151, 213));
-        pushButton_aceptar.setPalette(palette);
+        pushButton_informe.setPalette(palette);
         QFont font = new QFont();
         font.setBold(true);
         font.setWeight(75);
-        pushButton_aceptar.setFont(font);
-        pushButton_aceptar.setStyleSheet("background-color:rgb(19, 151, 213)");
-        pushButton_aceptar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Aceptar.png")));
+        pushButton_informe.setFont(font);
+        pushButton_informe.setStyleSheet("background-color:rgb(19, 151, 213)");
+        pushButton_informe.setIcon(new QIcon(new QPixmap("Resources/Iconos/Informe.png")));
 
-        horizontalLayout.addWidget(pushButton_aceptar);
+        horizontalLayout.addWidget(pushButton_informe);
 
         pushButton_cancelar = new QPushButton(layoutWidget_4);
         pushButton_cancelar.setObjectName("pushButton_cancelar");
@@ -288,8 +293,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_consultar.setFont(font3);
         pushButton_consultar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_consultar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Buscar.png")));
-        pushButton_consultar.setCheckable(true);
-        pushButton_consultar.setAutoExclusive(true);
+
 
         gridLayout.addWidget(pushButton_consultar, 0, 1, 1, 1);
 
@@ -315,14 +319,13 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_modificar.setFont(font4);
         pushButton_modificar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_modificar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Modificar.png")));
-        pushButton_modificar.setCheckable(true);
-        pushButton_modificar.setAutoExclusive(true);
+
 
         gridLayout.addWidget(pushButton_modificar, 1, 1, 1, 1);
 
         groupBox_DatosCliente = new QGroupBox(layoutWidget);
         groupBox_DatosCliente.setObjectName("groupBox_DatosCliente");
-        groupBox_DatosCliente.setEnabled(false);
+        //groupBox_DatosCliente.setEnabled(false);
         QPalette palette4= new QPalette();
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.WindowText, new QColor(0, 0, 0));
         palette4.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(152, 210, 236));
@@ -386,13 +389,13 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         gridLayout_2.setObjectName("gridLayout_2");
         lineEdit_Direccion = new QLineEdit(layoutWidget1);
         lineEdit_Direccion.setObjectName("lineEdit_Direccion");
-        lineEdit_Direccion.setEnabled(false);
+        //lineEdit_Direccion.setEnabled(false);
 
         gridLayout_2.addWidget(lineEdit_Direccion, 0, 3, 1, 1);
 
         lineEdit_Telefono = new QLineEdit(layoutWidget1);
         lineEdit_Telefono.setObjectName("lineEdit_Telefono");
-        lineEdit_Telefono.setEnabled(false);
+        //lineEdit_Telefono.setEnabled(false);
         QFont font6 = new QFont();
         font6.setPointSize(8);
         lineEdit_Telefono.setFont(font6);
@@ -401,7 +404,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Telefono = new QLabel(layoutWidget1);
         label_Telefono.setObjectName("label_Telefono");
-        label_Telefono.setEnabled(false);
+        //label_Telefono.setEnabled(false);
         QFont font7 = new QFont();
         font7.setPointSize(8);
         font7.setBold(true);
@@ -412,7 +415,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Direccion = new QLabel(layoutWidget1);
         label_Direccion.setObjectName("label_Direccion");
-        label_Direccion.setEnabled(false);
+        //label_Direccion.setEnabled(false);
         QFont font8 = new QFont();
         font8.setPointSize(8);
         font8.setBold(true);
@@ -423,7 +426,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Nombre = new QLabel(layoutWidget1);
         label_Nombre.setObjectName("label_Nombre");
-        label_Nombre.setEnabled(false);
+        //label_Nombre.setEnabled(false);
         QFont font9 = new QFont();
         font9.setPointSize(8);
         font9.setBold(true);
@@ -434,7 +437,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         label_Apellidos = new QLabel(layoutWidget1);
         label_Apellidos.setObjectName("label_Apellidos");
-        label_Apellidos.setEnabled(false);
+        //label_Apellidos.setEnabled(false);
         QFont font10 = new QFont();
         font10.setPointSize(8);
         font10.setBold(true);
@@ -445,13 +448,13 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
         lineEdit_Nombre = new QLineEdit(layoutWidget1);
         lineEdit_Nombre.setObjectName("lineEdit_Nombre");
-        lineEdit_Nombre.setEnabled(false);
+        //lineEdit_Nombre.setEnabled(false);
 
         gridLayout_2.addWidget(lineEdit_Nombre, 0, 1, 1, 1);
 
         lineEdit_Apellidos = new QLineEdit(layoutWidget1);
         lineEdit_Apellidos.setObjectName("lineEdit_Apellidos");
-        lineEdit_Apellidos.setEnabled(false);
+        //lineEdit_Apellidos.setEnabled(false);
 
         gridLayout_2.addWidget(lineEdit_Apellidos, 1, 1, 1, 1);
 
@@ -480,8 +483,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_eliminar.setFont(font11);
         pushButton_eliminar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_eliminar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
-        pushButton_eliminar.setCheckable(true);
-        pushButton_eliminar.setAutoExclusive(true);
+
 
         gridLayout.addWidget(pushButton_eliminar, 1, 0, 1, 1);
 
@@ -507,8 +509,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         pushButton_ingresar.setFont(font12);
         pushButton_ingresar.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_ingresar.setIcon(new QIcon(new QPixmap("Resources/Iconos/Guardar.png")));
-        pushButton_ingresar.setCheckable(true);
-        pushButton_ingresar.setAutoExclusive(true);
+
 
         gridLayout.addWidget(pushButton_ingresar, 0, 0, 1, 1);
 
@@ -523,7 +524,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         label_Logo.setWordWrap(false);
         groupBox_cliente_2 = new QGroupBox(Cliente);
         groupBox_cliente_2.setObjectName("groupBox_cliente_2");
-        groupBox_cliente_2.setEnabled(true);
         groupBox_cliente_2.setGeometry(new QRect(40, 60, 361, 51));
         QPalette palette7= new QPalette();
         palette7.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.WindowText, new QColor(0, 0, 0));
@@ -607,54 +607,14 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         QWidget.setTabOrder(lineEdit_Nombre, lineEdit_Direccion);
         QWidget.setTabOrder(lineEdit_Direccion, lineEdit_Apellidos);
         QWidget.setTabOrder(lineEdit_Apellidos, lineEdit_Telefono);
-        QWidget.setTabOrder(lineEdit_Telefono, pushButton_aceptar);
-        QWidget.setTabOrder(pushButton_aceptar, pushButton_cancelar);
+        QWidget.setTabOrder(lineEdit_Telefono, pushButton_informe);
+        QWidget.setTabOrder(pushButton_informe, pushButton_cancelar);
         retranslateUi(Cliente);
-        pushButton_ingresar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(label_Nombre, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(label_Direccion, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(label_Telefono, "setEnabled(boolean)");
-        pushButton_ingresar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
 
-        pushButton_modificar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(label_Nombre, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(label_Direccion, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(label_Telefono, "setEnabled(boolean)");
-        pushButton_modificar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
-
-//        pushButton_consultar.toggled.connect(groupBox_DatosCliente, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(label_Nombre, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(lineEdit_Nombre, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(label_Apellidos, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(lineEdit_Apellidos, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(label_Direccion, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(lineEdit_Direccion, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(label_Telefono, "setEnabled(boolean)");
-//        pushButton_consultar.toggled.connect(lineEdit_Telefono, "setEnabled(boolean)");
-
-        pushButton_consultar.toggled.connect(this, "consultarCliente()");
-
-
-        if (pushButton_ingresar.isEnabled()){
-            pushButton_ingresar.clicked.connect(this,"insertarCliente()");
-        }
-        if (pushButton_modificar.isEnabled()) {
-            pushButton_modificar.clicked.connect(this, "modificarCliente()");
-        }
-        if (pushButton_eliminar.isEnabled()) {
-//            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar el cliente?", "Eliminar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-//            if (confirmar == 0){
-//                pushButton_eliminar.clicked.connect(this,"eliminarCliente()");
-            pushButton_eliminar.clicked.connect(this, "eliminarCliente()");
-        }
+        pushButton_consultar.clicked.connect(this, "consultarCliente()");
+        pushButton_ingresar.clicked.connect(this,"insertarCliente()");
+        pushButton_modificar.clicked.connect(this, "modificarCliente()");
+        pushButton_eliminar.clicked.connect(this, "eliminarCliente()");
 
         pushButton_cancelar.clicked.connect(Cliente, "close()");
         Cliente.connectSlotsByName();
@@ -663,7 +623,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     void retranslateUi(QDialog Cliente) {
         Cliente.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Clientes", null));
         label_confirmacion.setText("");
-        pushButton_aceptar.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Aceptar", null));
+        pushButton_informe.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Informe", null));
         pushButton_cancelar.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Cancelar", null));
         label_Titulo.setText(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Gesti\u00f3n clientes", null));
         pushButton_consultar.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Cliente", "Consultar cliente", null));
