@@ -44,22 +44,6 @@ public class RestClientReserva {
         }
     }
 
-    public String consultar(long numero){
-        Gson gson = new Gson();
-        Reserva r = new Reserva();
-
-        String resultado = this.client.target("http://localhost:8080/reservas/"+numero)
-                .request(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .get(String.class);
-
-        //r = gson.fromJson(resultado, Reserva.class);
-        Type collectionType = new TypeToken<Collection<Cliente>>(){}.getType();
-        Collection<Cliente> clientes = gson.fromJson(resultado, collectionType);
-
-        System.out.println("Resultado: \n" + clientes);
-        return resultado;
-    }
     public List<Habitacion> consultarListaHab(){
         List<Habitacion> habitacionList = new ArrayList<>();
 
@@ -76,8 +60,6 @@ public class RestClientReserva {
         }
         return  habitacionList;
     }
-
-
 
     public String[] consultarListaRes(){
         List<Reserva> reservaList = new ArrayList<>();

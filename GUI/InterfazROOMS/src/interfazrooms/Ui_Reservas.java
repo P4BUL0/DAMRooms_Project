@@ -110,6 +110,12 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 
     }
 
+    public void eliminar(){
+        RestClientReserva restClientReserva = new RestClientReserva();
+        String numero = listWidget_reservas.currentItem().text().substring(3, listWidget_reservas.currentItem().text().indexOf(" "));
+        restClientReserva.eliminar(Long.parseLong(numero));
+    }
+
     public void setupUi(QDialog Reservas)
     {
         Reservas.setObjectName("Reservas");
@@ -615,7 +621,6 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         QWidget.setTabOrder(pushButton_reservar, pushButton_cancelar);
         retranslateUi(Reservas);
         pushButton_CalcularImporte.clicked.connect(this, "calcularImporte()");
-        comboBox.activated.connect(this, "mostrarClientesDni()");
         pushButton_reservar.clicked.connect(this, "insertar()");
 
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setFocus()");
@@ -625,7 +630,13 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         dateEditFin.dateChanged.connect(calendarWidget_Fin, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Fin.clicked.connect(dateEditFin, "setDate(com.trolltech.qt.core.QDate)");
 
+
+        //pushButton_modificar.clicked.connect(this, "modificar()");
+        pushButton_eliminar.clicked.connect(this, "eliminar()");
+
+
         pushButton_cancelar.clicked.connect(Reservas, "close()");
+
 
         mostrarClientesDni();
         mostrarhabitaciones();
