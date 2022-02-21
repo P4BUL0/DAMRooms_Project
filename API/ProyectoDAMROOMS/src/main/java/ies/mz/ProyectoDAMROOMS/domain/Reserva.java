@@ -41,7 +41,7 @@ public class Reserva {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade =  CascadeType.DETACH)
     @JoinColumn(name = "clienteDni", nullable = false)
-    private Cliente clientes;
+    private Cliente cliente;
 
     @OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.DETACH)
     @JoinColumn(name = "numeroHabitacion", nullable = false)

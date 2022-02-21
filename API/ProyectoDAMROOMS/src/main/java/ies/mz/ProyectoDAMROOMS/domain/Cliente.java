@@ -37,7 +37,7 @@ public class Cliente {
     @Column(name = "telefono")
     private int telefono;
 
-    @OneToMany(mappedBy = "clientes",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cliente",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonProperty("reservas")
     private List<Reserva> reservas;
 }

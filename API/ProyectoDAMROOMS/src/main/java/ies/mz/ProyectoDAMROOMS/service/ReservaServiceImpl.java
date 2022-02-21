@@ -1,9 +1,11 @@
 package ies.mz.ProyectoDAMROOMS.service;
 
+import ies.mz.ProyectoDAMROOMS.domain.Cliente;
 import ies.mz.ProyectoDAMROOMS.domain.Habitacion;
 import ies.mz.ProyectoDAMROOMS.domain.Reserva;
 import ies.mz.ProyectoDAMROOMS.exception.ReservaNotFoundException;
 import ies.mz.ProyectoDAMROOMS.repository.HabitacionRepository;
+import ies.mz.ProyectoDAMROOMS.repository.ClienteRepository;
 import ies.mz.ProyectoDAMROOMS.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ public class ReservaServiceImpl implements ReservaService {
     private ReservaRepository reservaRepository;
     @Autowired
     private HabitacionRepository habitacionRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @Override
     public Set<Reserva> findAll(){
@@ -38,10 +42,15 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     public Reserva addReserva(Reserva reserva){
         long numHab = reserva.getHabitacion().getNumero();
+        String dniCli = reserva.getCliente().getDni();
+        Set<Cliente> cliente = clienteRepository.findByDni(dniCli);
         Optional<Habitacion> habitacion =  habitacionRepository.findById(numHab);
+
         reserva.setHabitacion(habitacion.get());
         reserva.calcImporteTotal();
         reserva.setEstado("Pendiente");
+        reserva.setCliente(cliente.stream().findFirst().get());
+
         return reservaRepository.save(reserva);
     }
 
@@ -76,7 +85,7 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public String getDni(Optional<Reserva> reserva){
-        return reserva.get().getClientes().getDni();
+        return reserva.get().getCliente().getDni();
     }
 
     @Override

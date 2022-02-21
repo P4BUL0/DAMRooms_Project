@@ -47,7 +47,6 @@
 
 
 
-
 -- Post reservas --
 {
 	"fecha_inicio": "2018-03-29T13:34:00.000",
@@ -58,31 +57,16 @@
 }
 
 
-
-
-
 {
-    "fechaInicio": "2022-02-05",
+"fechaInicio": "2022-02-05",
     "fechaFin": "2022-02-07",
-    "estado": "Pendiente",
-    "clientes": {
-        "dni": "99999999A",
-        "nombre": "Lázaro",
-        "apellidos": "Ortega Boix",
-        "direccion": "Calle Castelar nº37",
-        "telefono": 111111111
+    "cliente": {
+        "dni": "99999999A"
     },
     "habitacion": {
-        "numero": 1,
-        "tipo": "Individual",
-        "caracteristicas": "Grande",
-        "importe_noche": 50.0
+        "numero": 4
     }
 }
-
-{
-
-	
 
 
 

@@ -114,12 +114,22 @@ public class ReservaController {
                     content = @Content(schema = @Schema(implementation = Reserva.class)))
     })
     @PostMapping(value = "/reservas", produces = "application/json")
-    public ResponseEntity<Reserva> addReserva(@RequestBody Reserva reserva) {
+    public ResponseEntity<?> addReserva(@RequestBody Reserva reserva) {
         System.out.println("-------------------------------");
         System.out.println(reserva.toString());
-        Reserva addedReserva = reservaService.addReserva(reserva);
 
-        return new ResponseEntity<>(addedReserva, HttpStatus.OK);
+        if (reserva.getFechaInicio().isBefore(reserva.getFechaFin())){
+            System.out.println("Las fechas estan BIEN, FECHA IN:" + reserva.getFechaInicio() + " y FECHA FIN:" + reserva.getFechaFin());
+
+            Reserva addedReserva = reservaService.addReserva(reserva);
+            return new ResponseEntity<Reserva>(addedReserva, HttpStatus.OK);
+        }
+        else {
+            System.out.println("Las fechas estan MAL, " + reserva.getFechaInicio() + " y " + reserva.getFechaFin());
+
+            return new ResponseEntity<Response>(Response.errorFecha(), HttpStatus.NOT_ACCEPTABLE);
+        }
+
     }
 
     @Operation(summary = "Modifica una reserva en el listado")
