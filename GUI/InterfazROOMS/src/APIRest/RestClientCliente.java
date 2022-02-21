@@ -13,6 +13,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author Pablo, Boix y Lazaro
+ * @version 1.0
+ * @since 2022-02-22
+ */
 public class RestClientCliente {
     Client client;
 
@@ -20,6 +25,15 @@ public class RestClientCliente {
         this.client = ClientBuilder.newClient();
     }
 
+    /**
+     * Metodo POST de Cliente
+     *
+     * @param dni DNI del cliente
+     * @param nombre Nombre del cliente
+     * @param apellidos Apellidos del cliente
+     * @param direccion Direccion del cliente
+     * @param telefono Telefono del cliente
+     */
     public void crear(String dni, String nombre, String apellidos, String direccion, int telefono){
         try{
             Cliente c = new Cliente(dni, nombre, apellidos, direccion, telefono);
@@ -35,6 +49,12 @@ public class RestClientCliente {
         }
     }
 
+    /**
+     * Metodo GET de Cliente por su DNI
+     *
+     * @param dni DNI del cliente
+     * @return Devuelve un String con el json sacado de la API con la peticion GET
+     */
     public String consultar(String dni){
         Gson gson = new Gson();
 
@@ -51,6 +71,12 @@ public class RestClientCliente {
         return resultado;
     }
 
+    /**
+     * Metodo GET de Cliente por su DNI
+     *
+     * @param dni DNI del cliente
+     * @return Devuelve un Cliente sacado de la API con la peticion GET
+     */
     public Cliente obtenerClienteByDni(String dni){
         String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
                 .request(MediaType.APPLICATION_JSON)
@@ -65,6 +91,11 @@ public class RestClientCliente {
         return cliente;
     }
 
+    /**
+     * Metodo GET de todos los clientes
+     *
+     * @return Devuelve una lista de clientes
+     */
     public List<Cliente> consultarLista(){
         List<Cliente> clienteList = new ArrayList<>();
 
@@ -83,12 +114,18 @@ public class RestClientCliente {
         return clienteList;
     }
 
-    public String[] jsonToArray(String s ){
+    /**
+     * Metodo para traducir el array que devuelve la API
+     *
+     * @param array Un String con el formato de llaves siguiente: [{"ejemplo": "esto es un ejemplo"},{"ejemplo": "este es otro ejemplo"}]
+     * @return Devuelve un array con los objetos separados
+     */
+    public String[] jsonToArray(String array){
 
-        s = s.replace("[", "");
-        s = s.replace("]", "");
-        System.out.println(s);
-        String[] lista = s.split("}");
+        array = array.replace("[", "");
+        array = array.replace("]", "");
+        System.out.println(array);
+        String[] lista = array.split("}");
 
         for (int i = 0; i < lista.length; i++) {
             if (i>=1){
@@ -107,7 +144,11 @@ public class RestClientCliente {
         return lista;
     }
 
-
+    /**
+     * Metodo DELETE de Cliente por su DNI
+     *
+     * @param dni DNI del cliente
+     */
     public void eliminar(String dni){
         try{
             String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
@@ -124,6 +165,15 @@ public class RestClientCliente {
         }
     }
 
+    /**
+     * Metodo PUT de Cliente
+     *
+     * @param dni DNI del cliente
+     * @param nombre Nombre del cliente
+     * @param apellidos Apellidos del cliente
+     * @param direccion Direccion del cliente
+     * @param telefono Telefono del cliente
+     */
     public void modificar(String dni, String nombre, String apellidos, String direccion, int telefono){
         try{
             Cliente c = new Cliente(dni, nombre, apellidos, direccion, telefono);

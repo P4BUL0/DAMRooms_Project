@@ -8,6 +8,12 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+/**
+ * @author Pablo, Boix y Lazaro
+ * @version 1.0
+ * @since 2022-02-22
+ */
 public class Reserva {
 
     private long idReserva;
@@ -17,6 +23,10 @@ public class Reserva {
     private Cliente cliente;
     private Habitacion habitacion;
 
+    /**
+     *
+     * @return Devuelve un String del objeto con formato de json
+     */
     @Override
     public String toString(){
         return "{" +

@@ -8,6 +8,11 @@ import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * @author Pablo, Boix y Lazaro
+ * @version 1.0
+ * @since 2022-02-22
+ */
 public class RestClientHabitacion {
     Client client;
 
@@ -15,6 +20,14 @@ public class RestClientHabitacion {
         this.client = ClientBuilder.newClient();
     }
 
+    /**
+     * Metodo POST de Habitacion
+     *
+     * @param numero ID de la habitacion
+     * @param tipo Tipo de la habitacion. Opciones: "Individual", "Doble", "Familiar", "Suite" y "Gran Suite"
+     * @param caracteristicas Caracteristicas de la habitacion, incluyendo el tipo de cama. Ejemplo: "Luminosa, Wifi, Matrimonio"
+     * @param importe_noche Importe por noche de la habitacion
+     */
     public void crear(long numero, String tipo, String caracteristicas, float importe_noche){
         try{
             Habitacion habitacion = new Habitacion(numero, tipo, caracteristicas, importe_noche);
@@ -29,6 +42,12 @@ public class RestClientHabitacion {
         }
     }
 
+    /**
+     * Metodo GET de Habitacion por su ID
+     *
+     * @param numero ID de la habitacion
+     * @return Devuelve un String con el json sacado de la API con la peticion GET
+     */
     public String consultar(long numero){
         Gson gson = new Gson();
         Habitacion h = new Habitacion();
@@ -44,6 +63,12 @@ public class RestClientHabitacion {
         return resultado;
     }
 
+    /**
+     * Metodo GET de Habitacion por su ID
+     *
+     * @param numero ID de la habitacion
+     * @return Devuelve una Habitacion
+     */
     public Habitacion GetHabitacion(long numero){
         Gson gson = new Gson();
         Habitacion h = new Habitacion();
@@ -58,6 +83,11 @@ public class RestClientHabitacion {
         return h;
     }
 
+    /**
+     * Metodo DELETE de Habitacion por su ID
+     *
+     * @param numero ID de la habitacion
+     */
     public void eliminar(long numero){
         try{
             String resultado = this.client.target("http://localhost:8080/habitaciones/"+numero)
@@ -74,6 +104,14 @@ public class RestClientHabitacion {
         }
     }
 
+    /**
+     * Metodo PUT de Habitacion
+     *
+     * @param numero ID de la habitacion
+     * @param tipo Tipo de la habitacion. Opciones: "Individual", "Doble", "Familiar", "Suite" y "Gran Suite"
+     * @param caracteristicas Caracteristicas de la habitacion, incluyendo el tipo de cama. Ejemplo: "Luminosa, Wifi, Matrimonio"
+     * @param importe_noche Importe por noche de la habitacion
+     */
     public void modificar(long numero, String tipo, String caracteristicas, float importe_noche){
         try{
             Habitacion h = new Habitacion(numero, tipo, caracteristicas, importe_noche);
