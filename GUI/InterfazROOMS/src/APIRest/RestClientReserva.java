@@ -1,13 +1,21 @@
 package APIRest;
 
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class RestClientReserva {
@@ -68,27 +76,51 @@ public class RestClientReserva {
         }
         return  habitacionList;
     }
-    public List<Reserva> consultarListaRes(){
+
+
+
+    public String[] consultarListaRes(){
         List<Reserva> reservaList = new ArrayList<>();
 
         String resultado = this.client.target("http://localhost:8080/reservas/")
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(String.class);
-        String[] listaReservas = jsonToArray(resultado);
-        System.out.println("-----");
-        for (String s: listaReservas) {
 
-            System.out.println(s);
-        }
+
+        String[] listaReservas = separarReservas(resultado);
+
         for (int i = 0; i < listaReservas.length; i++) {
-            Reserva reserva = new Gson().fromJson(listaReservas[i], Reserva.class);
-            reservaList.add(reserva);
+            String[] separarReserva = listaReservas[i].split(",");
+            separarReserva[0] = separarReserva[0].replace("\\{","");
+            separarReserva[0] = separarReserva[0].replace("}","");
+
+            String id = separarReserva[0];
+            id = id.substring(13);
+
+            String fechaIn = separarReserva[1];
+            fechaIn = fechaIn.substring(15,25);
+
+            String fechaFin = separarReserva[2];
+            fechaFin = fechaFin.replace("\"", "");
+
+            String importeTotal = separarReserva[3];
+            importeTotal = importeTotal.replace("\"", "");
+
+            String estado = separarReserva[4];
+            estado = estado.replace("\"", "");
+
+            listaReservas[i] = "ID:" + id + " "
+                    + fechaIn + " "
+                    + fechaFin + " "
+                    + importeTotal + " "
+                    + estado;
         }
-        return  reservaList;
+
+        return listaReservas;
     }
 
-    public String[] jsonToArray(String s ){
+    public String[] jsonToArray(String s){
 
         s = s.replace("[", "");
         s = s.replace("]", "");
@@ -103,8 +135,25 @@ public class RestClientReserva {
             lista[i] += "}";
         }
 
-        for (String habitacion: lista){
-            System.out.println(habitacion);
+        return lista;
+    }
+
+    public String[] separarReservas(String resultado){
+        resultado = resultado.replace("[", "");
+        resultado = resultado.replace("]", "");
+
+        System.out.println("RESERVAS SEPARADAS");
+
+        String[] lista = resultado.split("}}");
+
+        for (int i = 0; i < lista.length; i++) {
+            if ( lista[i].substring(0,1).equals(",") ) {
+                lista[i] = lista[i].substring(1, lista[i].length());
+            }
+        }
+
+        for (String reserva: lista) {
+            System.out.println("\n" +reserva);
         }
         return lista;
     }

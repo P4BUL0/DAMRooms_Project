@@ -53,8 +53,11 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
     public void mostrarReservas(){
         RestClientReserva restClientReserva = new RestClientReserva();
         listWidget_reservas.clear();
-        for (Reserva r: restClientReserva.consultarListaRes()) {
-            listWidget_reservas.addItem(r.getHabitacion() + " " + r.getFechaInicio() + " " + r.getFechaFin() + " " + r.getCliente() + " " + r.getImporteTotal());
+
+        String[] listaReservas = restClientReserva.consultarListaRes();
+
+        for (String reserva: listaReservas) {
+            listWidget_reservas.addItem(reserva);
         }
 
     }
@@ -66,8 +69,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         }
 
     }
-
-
+    
 
     public void calcularImporte(){
         String[] getImporteNoche = listWidget_habitaciones.currentItem().text().split(", ");
