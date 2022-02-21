@@ -56,12 +56,16 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         int telefono;
 
         dni = lineEdit_DNI.text();
+
         nombre = lineEdit_Nombre.text();
         apellidos = lineEdit_Apellidos.text();
         direccion = lineEdit_Direccion.text();
         telefono = Integer.parseInt(lineEdit_Telefono.text());
 
-        restClientCliente.crear(dni, nombre, apellidos, direccion, telefono);
+        if(comprobarDNI(dni)){
+            restClientCliente.crear(dni, nombre, apellidos, direccion, telefono);
+            mensajeOPCorrecta();
+        }
     }
 
     public void consultarCliente(){
@@ -75,21 +79,28 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         Type collectionType = new TypeToken<Collection<Cliente>>(){}.getType();
         Collection<Cliente> clientes = gson.fromJson(resultado, collectionType);
 
+        if (comprobarDNI(dni)){
             lineEdit_Nombre.setText(clientes.stream().findFirst().get().getNombre());
             lineEdit_Apellidos.setText(clientes.stream().findFirst().get().getApellidos());
             lineEdit_Direccion.setText(clientes.stream().findFirst().get().getDireccion());
             lineEdit_Telefono.setText(String.valueOf(clientes.stream().findFirst().get().getTelefono()));
-
+            mensajeOPCorrecta();
+        }
     }
 
     public void eliminarCliente(){
         String dni;
         RestClientCliente restClientCliente = new RestClientCliente();
         dni = lineEdit_DNI.text();
-        int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar el cliente?", "Eliminar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if (confirmar == 0) {
-            restClientCliente.eliminar(dni);
+
+        if (comprobarDNI(dni)){
+            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar el cliente?", "Eliminar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmar == 0) {
+                restClientCliente.eliminar(dni);
+                mensajeOPCorrecta();
+            }
         }
+
 
 
 
@@ -104,7 +115,12 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         apellidos = lineEdit_Apellidos.text();
         direccion = lineEdit_Direccion.text();
         telefono = Integer.parseInt(lineEdit_Telefono.text());
-        restClientCliente.modificar(dni, nombre, apellidos, direccion, telefono);
+
+        if (comprobarDNI(dni)){
+            restClientCliente.modificar(dni, nombre, apellidos, direccion, telefono);
+            mensajeOPCorrecta();
+        }
+
     }
 
     //Métodos mensajes
@@ -117,8 +133,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     }
 
     //Métodos DNI
-    public boolean comprobarDNI(){
-        String dni = lineEdit_DNI.text();
+    public boolean comprobarDNI(String dni){
         String letraMayuscula = "";
 
         if(dni.length() !=9 || !Character.isLetter(dni.charAt(8))){
@@ -129,15 +144,6 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         letraMayuscula = dni.substring(8).toUpperCase();
 
         if(soloNumeros() && letraDNI().equals(letraMayuscula)){
-            mensajeOPCorrecta();
-            pushButton_ingresar.clicked.connect(label_Direccion, "setDisabled(boolean)");
-            pushButton_ingresar.clicked.connect(label_Telefono, "setDisabled(boolean)");
-            pushButton_ingresar.clicked.connect(lineEdit_Nombre, "setDisabled(boolean)");
-            pushButton_ingresar.clicked.connect(label_Nombre, "setDisabled(boolean)");
-            pushButton_ingresar.clicked.connect(lineEdit_Direccion, "setDisabled(boolean)");
-            pushButton_ingresar.clicked.connect(lineEdit_Apellidos, "setDisabled(boolean)");
-            pushButton_ingresar.clicked.connect(lineEdit_Telefono, "setDisabled(boolean)");
-            pushButton_ingresar.clicked.connect(label_Apellidos, "setDisabled(boolean)");
             return true;
         }else if(!lineEdit_DNI.text().isEmpty()){
             mensajeERRORformatoDNI();
@@ -610,6 +616,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         QWidget.setTabOrder(lineEdit_Telefono, pushButton_informe);
         QWidget.setTabOrder(pushButton_informe, pushButton_cancelar);
         retranslateUi(Cliente);
+
 
         pushButton_consultar.clicked.connect(this, "consultarCliente()");
         pushButton_ingresar.clicked.connect(this,"insertarCliente()");

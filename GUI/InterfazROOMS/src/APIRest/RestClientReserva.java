@@ -1,18 +1,11 @@
 package APIRest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.util.*;
@@ -59,8 +52,7 @@ public class RestClientReserva {
         System.out.println("Resultado: \n" + clientes);
         return resultado;
     }
-    public List<Habitacion> consultarLista(){
-        Gson gson = new Gson();
+    public List<Habitacion> consultarListaHab(){
         List<Habitacion> habitacionList = new ArrayList<>();
 
         String resultado = this.client.target("http://localhost:8080/habitaciones/")
@@ -76,6 +68,25 @@ public class RestClientReserva {
         }
         return  habitacionList;
     }
+    public List<Reserva> consultarListaRes(){
+        List<Reserva> reservaList = new ArrayList<>();
+
+        String resultado = this.client.target("http://localhost:8080/reservas/")
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class);
+        String[] listaReservas = jsonToArray(resultado);
+        System.out.println("-----");
+        for (String s: listaReservas) {
+
+            System.out.println(s);
+        }
+        for (int i = 0; i < listaReservas.length; i++) {
+            Reserva reserva = new Gson().fromJson(listaReservas[i], Reserva.class);
+            reservaList.add(reserva);
+        }
+        return  reservaList;
+    }
 
     public String[] jsonToArray(String s ){
 
@@ -85,12 +96,9 @@ public class RestClientReserva {
         String[] lista = s.split("}");
 
         for (int i = 0; i < lista.length; i++) {
-            System.out.println("------");
-
             if (i>=1){
                 System.out.println(lista[i].indexOf(","));
                 lista[i] = lista[i].substring( lista[i].indexOf(",")+1, lista[i].length() );
-
             }
             lista[i] += "}";
         }

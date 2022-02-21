@@ -48,7 +48,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog> {
     public void setupUi(QDialog MainWindow){
         MainWindow.setObjectName("MainWindow");
         MainWindow.resize(new QSize(378, 362).expandedTo(MainWindow.minimumSizeHint()));
-        MainWindow.setWindowIcon(new QIcon(new QPixmap("Resources/Logos/logo_Icon.png")));
+        MainWindow.setWindowIcon(new QIcon(new QPixmap("Resources/Logos/logo_Iconsinfondo.png")));
         layoutWidget = new QWidget(MainWindow);
         layoutWidget.setObjectName("layoutWidget");
         layoutWidget.setGeometry(new QRect(10, 120, 351, 220));

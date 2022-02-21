@@ -203,6 +203,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         long numero;
         RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         numero = Long.parseLong(String.valueOf(spinBox_NumeroHabitacion.value()));
+
         int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar la habitación?", "Eliminar habitación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirmar == 0) {
             restClientHabitacion.eliminar(numero);
@@ -213,6 +214,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         long numero;
         String tipo = "", caracteristica = "";
         float importe_noche;
+        consultarHab();
         RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         numero = spinBox_NumeroHabitacion.value();
         importe_noche = Float.parseFloat(lineEdit_ImporteNoche.text());
@@ -253,6 +255,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         }if (checkBox_Aire.isChecked()){
             caracteristica += ", AC";
         }
+
         restClientHabitacion.modificar(numero, tipo, caracteristica, importe_noche);
     }
 
