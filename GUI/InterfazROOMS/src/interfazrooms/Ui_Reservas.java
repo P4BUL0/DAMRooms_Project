@@ -1,9 +1,15 @@
 package interfazrooms;
 
+import APIRest.Cliente;
+import APIRest.Habitacion;
 import APIRest.RestClientHabitacion;
 import APIRest.RestClientReserva;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 {
@@ -40,9 +46,11 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 
     public void mostrarhabitaciones(){
         RestClientReserva restClientReserva = new RestClientReserva();
-        String listaHab = restClientReserva.consultarLista();
 
-        listWidget_habitaciones.addItem(listaHab);
+        for (Habitacion h: restClientReserva.consultarLista()) {
+            listWidget_habitaciones.addItem(h.getNumero() + ", " + h.getTipo() + ", " + h.getCaracteristicas() + ", " + h.getImporte_noche());
+        }
+
     }
 
     public void setupUi(QDialog Reservas)
@@ -243,8 +251,8 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         listWidget_habitaciones.setGeometry(new QRect(10, 20, 551, 192));
         pushButton_ActualizarHab = new QPushButton(groupBox_habitaciones);
         pushButton_ActualizarHab.setObjectName("pushButton_ActualizarHab");
-        pushButton_ActualizarHab.setGeometry(new QRect(480, 220, 76, 24));
-        pushButton_ActualizarHab.setMinimumSize(new QSize(0, 23));
+        pushButton_ActualizarHab.setGeometry(new QRect(460, 220, 76, 24));
+        pushButton_ActualizarHab.setMinimumSize(new QSize(100, 23));
         QPalette palette2= new QPalette();
         palette2.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(19, 151, 213));
         palette2.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.ButtonText, new QColor(255, 255, 255));
@@ -264,7 +272,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         font6.setWeight(75);
         pushButton_ActualizarHab.setFont(font6);
         pushButton_ActualizarHab.setStyleSheet("background-color:rgb(19, 151, 213)");
-        pushButton_ActualizarHab.setIcon(new QIcon(new QPixmap("Resources/Iconos/Eliminar.png")));
+        pushButton_ActualizarHab.setIcon(new QIcon(new QPixmap("Resources/Iconos/Actualizar.png")));
         groupBox_reservas = new QGroupBox(groupBox_Reservas);
         groupBox_reservas.setObjectName("groupBox_reservas");
         groupBox_reservas.setGeometry(new QRect(10, 500, 571, 141));

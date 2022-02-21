@@ -15,9 +15,9 @@ public class RestClientHabitacion {
         this.client = ClientBuilder.newClient();
     }
 
-    public void crear(String tipo, String caracteristicas, float importe_noche){
+    public void crear(long numero, String tipo, String caracteristicas, float importe_noche){
         try{
-            Habitacion habitacion = new Habitacion(tipo, caracteristicas, importe_noche);
+            Habitacion habitacion = new Habitacion(numero, tipo, caracteristicas, importe_noche);
             WebTarget wt = this.client.target("http://localhost:8080/habitaciones");
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
             Response response = invocationBuilder.post(Entity.entity(habitacion.toString(),MediaType.APPLICATION_JSON));
@@ -28,6 +28,7 @@ public class RestClientHabitacion {
             e.printStackTrace();
         }
     }
+
 
     public String consultar(long numero){
         Gson gson = new Gson();
@@ -62,7 +63,7 @@ public class RestClientHabitacion {
 
     public void modificar(long numero, String tipo, String caracteristicas, float importe_noche){
         try{
-            Habitacion h = new Habitacion(tipo, caracteristicas, importe_noche);
+            Habitacion h = new Habitacion(numero, tipo, caracteristicas, importe_noche);
             WebTarget wt = this.client.target("http://localhost:8080/habitaciones/" + numero);
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
             Response response = invocationBuilder.put(Entity.entity(h.toString(),MediaType.APPLICATION_JSON));
@@ -73,6 +74,4 @@ public class RestClientHabitacion {
             e.printStackTrace();
         }
     }
-
-
 }

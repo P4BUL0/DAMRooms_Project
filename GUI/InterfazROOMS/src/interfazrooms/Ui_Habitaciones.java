@@ -100,7 +100,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
             caracteristica += ", AC";
         }
 
-        restClientHabitacion.crear(tipo, caracteristica, importeNoche);
+        restClientHabitacion.crear(0, tipo, caracteristica, importeNoche);
         lineEdit_ImporteNoche.clear();
         radioButton_Individual.setChecked(false);
         radioButton_Doble.setChecked(false);

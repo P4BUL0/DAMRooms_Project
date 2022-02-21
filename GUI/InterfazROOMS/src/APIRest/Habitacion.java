@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Habitacion {
 
+    private long numero;
     private String tipo;
     private String caracteristicas;
     private float importe_noche;

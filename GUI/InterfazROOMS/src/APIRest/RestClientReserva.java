@@ -1,14 +1,21 @@
 package APIRest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.util.Collection;
+import java.util.*;
 
 public class RestClientReserva {
     Client client;
@@ -50,21 +57,46 @@ public class RestClientReserva {
         System.out.println("Resultado: \n" + clientes);
         return resultado;
     }
-    public String consultarLista(){
+    public List<Habitacion> consultarLista(){
         Gson gson = new Gson();
-        Reserva r = new Reserva();
+        List<Habitacion> habitacionList = new ArrayList<>();
 
         String resultado = this.client.target("http://localhost:8080/habitaciones/")
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .get(String.class);
+        String[] listaHabitaciones = jsonToArray(resultado);
 
-        //r = gson.fromJson(resultado, Reserva.class);
-        Type collectionType = new TypeToken<Collection<Cliente>>(){}.getType();
-        Collection<Cliente> clientes = gson.fromJson(resultado, collectionType);
 
-        System.out.println("Resultado: \n" + clientes);
-        return resultado;
+        for (int i = 0; i < listaHabitaciones.length; i++) {
+            Habitacion habitacion = new Gson().fromJson(listaHabitaciones[i], Habitacion.class);
+            habitacionList.add(habitacion);
+        }
+        return  habitacionList;
+    }
+
+    public String[] jsonToArray(String s ){
+
+        s = s.replace("[", "");
+        s = s.replace("]", "");
+        System.out.println(s);
+        String[] listaHab = s.split("}");
+
+        for (int i = 0; i < listaHab.length; i++) {
+            System.out.println("------");
+
+            if (i>=1){
+                System.out.println(listaHab[i].indexOf(","));
+                listaHab[i] = listaHab[i].substring( listaHab[i].indexOf(",")+1, listaHab[i].length() );
+
+            }
+            listaHab[i] += "}";
+        }
+
+        for (String habitacion: listaHab){
+            System.out.println(habitacion);
+        }
+        return listaHab;
     }
 
     public void eliminar(long numero){
