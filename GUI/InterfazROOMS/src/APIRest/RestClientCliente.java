@@ -124,9 +124,9 @@ public class RestClientCliente {
         }
     }
 
-    public void modificar(String dni, String nombre, String apellidos, String dirección, int telefono){
+    public void modificar(String dni, String nombre, String apellidos, String direccion, int telefono){
         try{
-            Cliente c = new Cliente(dni, nombre, apellidos, dirección, telefono);
+            Cliente c = new Cliente(dni, nombre, apellidos, direccion, telefono);
 
             WebTarget wt = this.client.target("http://localhost:8080/clientes/" + dni);
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
