@@ -27,11 +27,9 @@ public class RestClientReserva {
 
 
     public void crear(LocalDate fechaInicio, LocalDate fechaFin, float importeTotal, Cliente c, Habitacion h){
-        //En el constructor hay que añadir cliente y habitación? Seteandole el primary key correspondiente?
-
         try{
 
-            Reserva res = new Reserva(fechaInicio, fechaFin, importeTotal, c ,h);
+            Reserva res = new Reserva(0,fechaInicio, fechaFin, importeTotal, c ,h);
             System.out.println(res);
             WebTarget wt = this.client.target("http://localhost:8080/reservas");
             Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
@@ -128,11 +126,15 @@ public class RestClientReserva {
 
         String[] lista = resultado.split("}}");
 
-        for (int i = 0; i < lista.length; i++) {
-            if ( lista[i].substring(0,1).equals(",") ) {
-                lista[i] = lista[i].substring(1, lista[i].length());
+        try{
+            for (int i = 0; i < lista.length; i++) {
+                if ( lista[i].substring(0,1).equals(",") ) {
+                    lista[i] = lista[i].substring(1, lista[i].length());
+                }
             }
+        }catch (StringIndexOutOfBoundsException e){
         }
+
 
         for (String reserva: lista) {
             System.out.println("\n" +reserva);
@@ -149,4 +151,20 @@ public class RestClientReserva {
         System.out.println("Resultado: \n" + resultado);
     }
 
+    public void modificar(long idReserva, LocalDate fechaInicio, LocalDate fechaFin, float importeTotal, Cliente c, Habitacion h){
+
+        try{
+
+            Reserva res = new Reserva(idReserva, fechaInicio, fechaFin, importeTotal, c ,h);
+            System.out.println(res);
+            WebTarget wt = this.client.target("http://localhost:8080/reservas/"+ idReserva);
+            Invocation.Builder invocationBuilder = wt.request(MediaType.APPLICATION_JSON);
+            Response response = invocationBuilder.put(Entity.entity(res.toString(),MediaType.APPLICATION_JSON));
+            System.out.println(response.getStatus());
+            System.out.println(response.readEntity(String.class));
+            System.out.println();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

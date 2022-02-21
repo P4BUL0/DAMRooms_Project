@@ -11,6 +11,7 @@ import com.trolltech.qt.gui.*;
 import javax.swing.*;
 import java.lang.reflect.Type;
 import java.util.Collection;
+import java.util.NoSuchElementException;
 
 public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
     public QWidget layoutWidget_4;
@@ -44,6 +45,13 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
 
     public Ui_Cliente() { super(); }
 
+    public void limpiar(){
+        lineEdit_Nombre.clear();
+        lineEdit_Apellidos.clear();
+        lineEdit_Direccion.clear();
+        lineEdit_Telefono.clear();
+        lineEdit_DNI.clear();
+    }
     //Métodos API
     public void insertarCliente(){
 
@@ -63,8 +71,13 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         telefono = Integer.parseInt(lineEdit_Telefono.text());
 
         if(comprobarDNI(dni)){
-            restClientCliente.crear(dni, nombre, apellidos, direccion, telefono);
-            mensajeOPCorrecta();
+            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres insertar el cliente?", "Insertar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmar == 0) {
+                restClientCliente.crear(dni, nombre, apellidos, direccion, telefono);
+                mensajeOPCorrecta();
+                limpiar();
+            }
+
         }
     }
 
@@ -79,13 +92,20 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         Type collectionType = new TypeToken<Collection<Cliente>>(){}.getType();
         Collection<Cliente> clientes = gson.fromJson(resultado, collectionType);
 
-        if (comprobarDNI(dni)){
-            lineEdit_Nombre.setText(clientes.stream().findFirst().get().getNombre());
-            lineEdit_Apellidos.setText(clientes.stream().findFirst().get().getApellidos());
-            lineEdit_Direccion.setText(clientes.stream().findFirst().get().getDireccion());
-            lineEdit_Telefono.setText(String.valueOf(clientes.stream().findFirst().get().getTelefono()));
-            mensajeOPCorrecta();
+        try{
+            if (comprobarDNI(dni)){
+                lineEdit_Nombre.setText(clientes.stream().findFirst().get().getNombre());
+                lineEdit_Apellidos.setText(clientes.stream().findFirst().get().getApellidos());
+                lineEdit_Direccion.setText(clientes.stream().findFirst().get().getDireccion());
+                lineEdit_Telefono.setText(String.valueOf(clientes.stream().findFirst().get().getTelefono()));
+                mensajeOPCorrecta();
+            }
+        }catch (NoSuchElementException nsee){
+            nsee.printStackTrace();
+            System.out.println("El dni  introducido no se encuentra en la base de datos");
+            JOptionPane.showMessageDialog(null, "El dni  introducido no se encuentra en la base de datos", "DNI no encontrado", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     public void eliminarCliente(){
@@ -98,12 +118,9 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
             if (confirmar == 0) {
                 restClientCliente.eliminar(dni);
                 mensajeOPCorrecta();
+                limpiar();
             }
         }
-
-
-
-
     }
 
     public void modificarCliente(){
@@ -117,8 +134,12 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         telefono = Integer.parseInt(lineEdit_Telefono.text());
 
         if (comprobarDNI(dni)){
-            restClientCliente.modificar(dni, nombre, apellidos, direccion, telefono);
-            mensajeOPCorrecta();
+            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres modificar el cliente?", "Modificar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmar == 0) {
+                restClientCliente.modificar(dni, nombre, apellidos, direccion, telefono);
+                mensajeOPCorrecta();
+                limpiar();
+            }
         }
 
     }

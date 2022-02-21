@@ -11,6 +11,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @NoArgsConstructor
 public class Reserva {
 
+    private long idReserva;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private float importeTotal;

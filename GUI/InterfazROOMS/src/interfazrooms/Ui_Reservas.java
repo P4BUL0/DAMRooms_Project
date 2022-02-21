@@ -42,6 +42,11 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 
     public Ui_Reservas() { super(); }
 
+    //Métodos mensajes
+    public void mensajeOPCorrecta(){
+        JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","OK", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public void mostrarhabitaciones(){
         RestClientReserva restClientReserva = new RestClientReserva();
         listWidget_habitaciones.clear();
@@ -69,7 +74,6 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         }
 
     }
-    
 
     public void calcularImporte(){
         String[] getImporteNoche = listWidget_habitaciones.currentItem().text().split(", ");
@@ -85,6 +89,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         }
 
     }
+
     public void insertar(){
 
         RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
@@ -98,22 +103,95 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         float importeTotal;
         Cliente cliente;
         Habitacion habitacion;
-        //numero = String.valueOf(listWidget_habitaciones.selectedItems().stream().findFirst().get());
-        numero = listWidget_habitaciones.currentItem().text().substring(0,listWidget_habitaciones.currentItem().text().indexOf(","));
-        dni = comboBox.currentText();
-        cliente = restClientCliente.obtenerClienteByDni(dni);
-        fechaInicio = LocalDate.parse(dateEditInicio.date().toString("yyyy-MM-dd"));
-        fechaFin = LocalDate.parse(dateEditFin.date().toString("yyyy-MM-dd"));
-        importeTotal = Float.parseFloat(label_importeTotalRes.text().replace(" €", ""));
-        habitacion = restClientHabitacion.GetHabitacion(Long.parseLong(numero));
-        restClientReserva.crear(fechaInicio,fechaFin,importeTotal, cliente, habitacion);
+        try{
+            numero = listWidget_habitaciones.currentItem().text().substring(0,listWidget_habitaciones.currentItem().text().indexOf(","));
+            habitacion = restClientHabitacion.GetHabitacion(Long.parseLong(numero));
+            dni = comboBox.currentText();
+            cliente = restClientCliente.obtenerClienteByDni(dni);
+            fechaInicio = LocalDate.parse(dateEditInicio.date().toString("yyyy-MM-dd"));
+            fechaFin = LocalDate.parse(dateEditFin.date().toString("yyyy-MM-dd"));
+            importeTotal = Float.parseFloat(label_importeTotalRes.text().replace(" €", ""));
+
+            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres insertar la reserva?", "Insertar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmar == 0) {
+                restClientReserva.crear(fechaInicio,fechaFin,importeTotal, cliente, habitacion);
+                mensajeOPCorrecta();
+                mostrarReservas();
+            }
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+            System.out.println("No se ha seleccionado la habitación");
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado habitación", "Habitación no seleccionada", JOptionPane.ERROR_MESSAGE);
+        }catch (NumberFormatException nfe){
+            nfe.printStackTrace();
+            System.out.println("No se ha calculado el importe");
+            JOptionPane.showMessageDialog(null, "No se ha calculado el importe", "Importe no calculado", JOptionPane.ERROR_MESSAGE);
+        }
+
+
 
     }
 
     public void eliminar(){
         RestClientReserva restClientReserva = new RestClientReserva();
-        String numero = listWidget_reservas.currentItem().text().substring(3, listWidget_reservas.currentItem().text().indexOf(" "));
-        restClientReserva.eliminar(Long.parseLong(numero));
+        try{
+            String numero = listWidget_reservas.currentItem().text().substring(3, listWidget_reservas.currentItem().text().indexOf(" "));
+            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar la reserva?", "Eliminar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (confirmar == 0) {
+                restClientReserva.eliminar(Long.parseLong(numero));
+                mensajeOPCorrecta();
+                mostrarReservas();
+            }
+        }catch (NullPointerException npe) {
+            npe.printStackTrace();
+            System.out.println("No se ha seleccionado la reserva");
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado reserva", "Reserva no seleccionada", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void modificar(){
+        RestClientCliente restClientCliente = new RestClientCliente();
+        RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
+        RestClientReserva restClientReserva = new RestClientReserva();
+        String dni;
+        String numero;
+        LocalDate fechaInicio;
+        LocalDate fechaFin;
+        float importeTotal;
+        Cliente cliente;
+        Habitacion habitacion;
+
+        try{
+            String idReserva = listWidget_reservas.currentItem().text().substring(3, listWidget_reservas.currentItem().text().indexOf(" "));
+            try{
+                numero = listWidget_habitaciones.currentItem().text().substring(0,listWidget_habitaciones.currentItem().text().indexOf(","));
+                dni = comboBox.currentText();
+                cliente = restClientCliente.obtenerClienteByDni(dni);
+                fechaInicio = LocalDate.parse(dateEditInicio.date().toString("yyyy-MM-dd"));
+                fechaFin = LocalDate.parse(dateEditFin.date().toString("yyyy-MM-dd"));
+                importeTotal = Float.parseFloat(label_importeTotalRes.text().replace(" €", ""));
+                habitacion = restClientHabitacion.GetHabitacion(Long.parseLong(numero));
+                int confirmar = JOptionPane.showConfirmDialog(null,"Quieres modificar la reserva?", "Modificar reserva", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (confirmar == 0) {
+                    restClientReserva.modificar(Long.parseLong(idReserva),fechaInicio,fechaFin,importeTotal, cliente, habitacion);
+                    mensajeOPCorrecta();
+                    mostrarReservas();
+                }
+            }catch (NullPointerException npe) {
+                npe.printStackTrace();
+                System.out.println("No se ha seleccionado la habitación");
+                JOptionPane.showMessageDialog(null, "No se ha seleccionado habitación", "Habitación no seleccionada", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch (NullPointerException npe){
+            npe.printStackTrace();
+            System.out.println("No se ha seleccionado la reserva");
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado reserva", "Reserva no seleccionada", JOptionPane.ERROR_MESSAGE);
+        }catch (NumberFormatException nfe){
+            nfe.printStackTrace();
+            System.out.println("No se ha calculado el importe");
+            JOptionPane.showMessageDialog(null, "No se ha calculado el importe", "Importe no calculado", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     public void setupUi(QDialog Reservas)
@@ -623,6 +701,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_CalcularImporte.clicked.connect(this, "calcularImporte()");
         pushButton_reservar.clicked.connect(this, "insertar()");
 
+
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setFocus()");
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Inicio.clicked.connect(dateEditInicio, "setDate(com.trolltech.qt.core.QDate)");
@@ -631,7 +710,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         calendarWidget_Fin.clicked.connect(dateEditFin, "setDate(com.trolltech.qt.core.QDate)");
 
 
-        //pushButton_modificar.clicked.connect(this, "modificar()");
+        pushButton_modificar.clicked.connect(this, "modificar()");
         pushButton_eliminar.clicked.connect(this, "eliminar()");
 
 

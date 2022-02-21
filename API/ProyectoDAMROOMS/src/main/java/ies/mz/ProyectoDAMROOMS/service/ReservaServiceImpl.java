@@ -59,8 +59,19 @@ public class ReservaServiceImpl implements ReservaService {
         Reserva reserva = reservaRepository.findById(id)
                 .orElseThrow(() -> new ReservaNotFoundException(id));
         newReserva.setIdReserva(reserva.getIdReserva());
+
+        long numHab = reserva.getHabitacion().getNumero();
+        String dniCli = reserva.getCliente().getDni();
+        Set<Cliente> cliente = clienteRepository.findByDni(dniCli);
+        Optional<Habitacion> habitacion =  habitacionRepository.findById(numHab);
         newReserva.calcImporteTotal();
-        return reservaRepository.save(newReserva);
+        reserva.setHabitacion(habitacion.get());
+        reserva.calcImporteTotal();
+        reserva.setFechaInicio(newReserva.getFechaInicio());
+        reserva.setFechaFin(newReserva.getFechaFin());
+        //reserva.setEstado("Pendiente");
+        reserva.setCliente(cliente.stream().findFirst().get());
+        return reservaRepository.save(reserva);
     }
 
     @Override

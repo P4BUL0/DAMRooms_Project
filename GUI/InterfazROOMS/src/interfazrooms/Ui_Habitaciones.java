@@ -58,6 +58,12 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
 
     public Ui_Habitaciones() { super(); }
 
+
+    //Métodos mensajes
+    public void mensajeOPCorrecta(){
+        JOptionPane.showMessageDialog(null, "La acción se ha realizado correctamente.","OK", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     //Métodos API
     public void insertarHab(){
         String tipo = "", caracteristica = "";
@@ -101,29 +107,21 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         }if (checkBox_Aire.isChecked()){
             caracteristica += ", AC";
         }
-
-        restClientHabitacion.crear(0, tipo, caracteristica, importeNoche);
-        lineEdit_ImporteNoche.clear();
-        radioButton_Individual.setChecked(false);
-        radioButton_Doble.setChecked(false);
-        radioButton_Familiar.setChecked(false);
-        radioButton_Suite.setChecked(false);
-        radioButton_GranSuite.setChecked(false);
-
-
-        radioButton_CamaIndividual.setEnabled(false);
-        radioButton_CamaMatrimonio.setChecked(false);
-        radioButton_CamaKing.setChecked(false);
-
-        checkBox_Luminosa.setChecked(false);
-        checkBox_WiFi.setChecked(false);
-        checkBox_Terraza.setChecked(false);
-        checkBox_Cafe.setChecked(false);
-        checkBox_Bar.setChecked(false);
-        checkBox_Banera.setChecked(false);
-        checkBox_Jacuzzi.setChecked(false);
-        checkBox_Tele.setChecked(false);
-        checkBox_Aire.setChecked(false);
+        int confirmar = JOptionPane.showConfirmDialog(null,"Quieres insertar la habitación?", "Insertar habitación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirmar == 0) {
+            restClientHabitacion.crear(0, tipo, caracteristica, importeNoche);
+            mensajeOPCorrecta();
+            lineEdit_ImporteNoche.clear();
+            checkBox_Luminosa.setChecked(false);
+            checkBox_Aire.setChecked(false);
+            checkBox_Tele.setChecked(false);
+            checkBox_Terraza.setChecked(false);
+            checkBox_Jacuzzi.setChecked(false);
+            checkBox_Banera.setChecked(false);
+            checkBox_Bar.setChecked(false);
+            checkBox_Cafe.setChecked(false);
+            checkBox_WiFi.setChecked(false);
+        }
     }
 
     public void consultarHab(){
@@ -207,6 +205,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar la habitación?", "Eliminar habitación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirmar == 0) {
             restClientHabitacion.eliminar(numero);
+            mensajeOPCorrecta();
         }
     }
 
@@ -214,7 +213,6 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         long numero;
         String tipo = "", caracteristica = "";
         float importe_noche;
-        consultarHab();
         RestClientHabitacion restClientHabitacion = new RestClientHabitacion();
         numero = spinBox_NumeroHabitacion.value();
         importe_noche = Float.parseFloat(lineEdit_ImporteNoche.text());
@@ -255,8 +253,21 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         }if (checkBox_Aire.isChecked()){
             caracteristica += ", AC";
         }
-
-        restClientHabitacion.modificar(numero, tipo, caracteristica, importe_noche);
+        int confirmar = JOptionPane.showConfirmDialog(null,"Quieres modificar la habitación?", "Modificar habitación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (confirmar == 0) {
+            restClientHabitacion.modificar(numero, tipo, caracteristica, importe_noche);
+            mensajeOPCorrecta();
+            lineEdit_ImporteNoche.clear();
+            checkBox_Luminosa.setChecked(false);
+            checkBox_Aire.setChecked(false);
+            checkBox_Tele.setChecked(false);
+            checkBox_Terraza.setChecked(false);
+            checkBox_Jacuzzi.setChecked(false);
+            checkBox_Banera.setChecked(false);
+            checkBox_Bar.setChecked(false);
+            checkBox_Cafe.setChecked(false);
+            checkBox_WiFi.setChecked(false);
+        }
     }
 
     //Métodos GUI

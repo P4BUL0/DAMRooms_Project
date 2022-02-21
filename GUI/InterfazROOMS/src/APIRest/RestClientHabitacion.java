@@ -29,7 +29,6 @@ public class RestClientHabitacion {
         }
     }
 
-
     public String consultar(long numero){
         Gson gson = new Gson();
         Habitacion h = new Habitacion();
