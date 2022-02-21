@@ -9,7 +9,9 @@ import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class RestClientCliente {
     Client client;
@@ -45,6 +47,61 @@ public class RestClientCliente {
         System.out.println("Resultado: \n" + clientes);
         return resultado;
     }
+
+    public Cliente obtenerClienteByDni(String dni){
+        Gson gson = new Gson();
+        String resultado = this.client.target("http://localhost:8080/clientes/"+dni)
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class);
+
+        Cliente cliente = new Gson().fromJson(resultado, Cliente.class);
+
+        return cliente;
+    }
+
+
+    public List<Cliente> consultarLista(){
+        Gson gson = new Gson();
+        List<Cliente> clienteList = new ArrayList<>();
+        String resultado = this.client.target("http://localhost:8080/clientes")
+                .request(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .get(String.class);
+        String[] listaClientes = jsonToArray(resultado);
+
+        for (int i = 0; i < listaClientes.length; i++) {
+            Cliente cliente = new Gson().fromJson(listaClientes[i], Cliente.class);
+            clienteList.add(cliente);
+        }
+
+        return clienteList;
+    }
+
+    public String[] jsonToArray(String s ){
+
+        s = s.replace("[", "");
+        s = s.replace("]", "");
+        System.out.println(s);
+        String[] lista = s.split("}");
+
+        for (int i = 0; i < lista.length; i++) {
+            System.out.println("------");
+
+            if (i>=1){
+                System.out.println(lista[i].indexOf(","));
+                lista[i] = lista[i].substring( lista[i].indexOf(",")+1, lista[i].length() );
+
+            }
+            lista[i] += "}";
+        }
+
+        for (String habitacion: lista){
+            System.out.println(habitacion);
+        }
+        return lista;
+    }
+
 
     public void eliminar(String dni){
 

@@ -80,23 +80,23 @@ public class RestClientReserva {
         s = s.replace("[", "");
         s = s.replace("]", "");
         System.out.println(s);
-        String[] listaHab = s.split("}");
+        String[] lista = s.split("}");
 
-        for (int i = 0; i < listaHab.length; i++) {
+        for (int i = 0; i < lista.length; i++) {
             System.out.println("------");
 
             if (i>=1){
-                System.out.println(listaHab[i].indexOf(","));
-                listaHab[i] = listaHab[i].substring( listaHab[i].indexOf(",")+1, listaHab[i].length() );
+                System.out.println(lista[i].indexOf(","));
+                lista[i] = lista[i].substring( lista[i].indexOf(",")+1, lista[i].length() );
 
             }
-            listaHab[i] += "}";
+            lista[i] += "}";
         }
 
-        for (String habitacion: listaHab){
+        for (String habitacion: lista){
             System.out.println(habitacion);
         }
-        return listaHab;
+        return lista;
     }
 
     public void eliminar(long numero){

@@ -1,15 +1,16 @@
 package interfazrooms;
 
-import APIRest.Cliente;
-import APIRest.Habitacion;
-import APIRest.RestClientHabitacion;
-import APIRest.RestClientReserva;
+import APIRest.*;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 {
@@ -27,6 +28,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
     public QLabel label_importeTotalRes;
     public QListWidget listWidget_habitaciones;
     public QPushButton pushButton_ActualizarHab;
+    public QPushButton pushButton_CalcularImporte;
     public QGroupBox groupBox_reservas;
     public QListWidget listWidget_reservas;
     public QWidget layoutWidget_4;
@@ -46,10 +48,45 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
 
     public void mostrarhabitaciones(){
         RestClientReserva restClientReserva = new RestClientReserva();
-
+        listWidget_habitaciones.clear();
         for (Habitacion h: restClientReserva.consultarLista()) {
             listWidget_habitaciones.addItem(h.getNumero() + ", " + h.getTipo() + ", " + h.getCaracteristicas() + ", " + h.getImporte_noche());
         }
+    }
+    public void mostrarClientesDni(){
+        RestClientCliente restClientCliente = new RestClientCliente();
+        for (Cliente c: restClientCliente.consultarLista()) {
+            comboBox.addItem(c.getDni());
+        }
+
+    }
+
+    public void calcularImporte(){
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        System.out.println(dateTimeFormatter);
+        LocalDate fechaInicio;
+        LocalDate fechaFin;
+        float importeNoche = 50;
+        long total_dias = DAYS.between(LocalDate.parse(dateEditInicio.date().toString()), LocalDate.parse(dateEditFin.date().toString()));
+        float importeTotal = importeNoche * total_dias;
+        label_importeTotal.setText(String.valueOf(importeTotal));
+    }
+    public void insertar(){
+
+        RestClientReserva restClientReserva = new RestClientReserva();
+        RestClientCliente restClientCliente = new RestClientCliente();
+
+        String dni;
+        LocalDate fechaInicio;
+        LocalDate fechaFin;
+        float importeTotal;
+        Cliente cliente;
+        Habitacion habitacion;
+        dni = comboBox.currentText();
+        cliente = restClientCliente.obtenerClienteByDni(dni);
+        fechaInicio = LocalDate.parse(dateEditInicio.date().toString());
+        fechaFin = LocalDate.parse(dateEditFin.date().toString());
 
     }
 
@@ -253,6 +290,10 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         pushButton_ActualizarHab.setObjectName("pushButton_ActualizarHab");
         pushButton_ActualizarHab.setGeometry(new QRect(460, 220, 76, 24));
         pushButton_ActualizarHab.setMinimumSize(new QSize(100, 23));
+        pushButton_CalcularImporte = new QPushButton(groupBox_habitaciones);
+        pushButton_CalcularImporte.setObjectName("pushButton_CalcularImporte");
+        pushButton_CalcularImporte.setGeometry(new QRect(310, 220, 76, 24));
+        pushButton_CalcularImporte.setMinimumSize(new QSize(140, 23));
         QPalette palette2= new QPalette();
         palette2.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(19, 151, 213));
         palette2.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.ButtonText, new QColor(255, 255, 255));
@@ -267,12 +308,16 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         palette2.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Base, new QColor(19, 151, 213));
         palette2.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Window, new QColor(19, 151, 213));
         pushButton_ActualizarHab.setPalette(palette2);
+        pushButton_CalcularImporte.setPalette(palette2);
         QFont font6 = new QFont();
         font6.setBold(true);
         font6.setWeight(75);
         pushButton_ActualizarHab.setFont(font6);
         pushButton_ActualizarHab.setStyleSheet("background-color:rgb(19, 151, 213)");
         pushButton_ActualizarHab.setIcon(new QIcon(new QPixmap("Resources/Iconos/Actualizar.png")));
+        pushButton_CalcularImporte.setFont(font6);
+        pushButton_CalcularImporte.setStyleSheet("background-color:rgb(19, 151, 213)");
+        pushButton_CalcularImporte.setIcon(new QIcon(new QPixmap("Resources/Iconos/Calc.png")));
         groupBox_reservas = new QGroupBox(groupBox_Reservas);
         groupBox_reservas.setObjectName("groupBox_reservas");
         groupBox_reservas.setGeometry(new QRect(10, 500, 571, 141));
@@ -527,7 +572,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         groupBox_cliente.setStyleSheet("background-color:rgb(152,210,232)");
         comboBox = new QComboBox(groupBox_cliente);
         comboBox.setObjectName("comboBox");
-        comboBox.setGeometry(new QRect(70, 20, 231, 22));
+        comboBox.setGeometry(new QRect(90, 20, 231, 22));
         QPalette palette9= new QPalette();
         palette9.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(152, 210, 232));
         palette9.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Base, new QColor(152, 210, 232));
@@ -556,8 +601,10 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         QWidget.setTabOrder(pushButton_modificar, pushButton_reservar);
         QWidget.setTabOrder(pushButton_reservar, pushButton_cancelar);
         retranslateUi(Reservas);
+        pushButton_CalcularImporte.clicked.connect(this, "calcularImporte()");
         pushButton_ActualizarHab.clicked.connect(this, "mostrarhabitaciones()");
-
+        pushButton_ActualizarHab.clicked.connect(this, "mostrarClientesDni()");
+        comboBox.activated.connect(this, "mostrarClientesDni()");
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setFocus()");
         dateEditInicio.dateChanged.connect(calendarWidget_Inicio, "setSelectedDate(com.trolltech.qt.core.QDate)");
         calendarWidget_Inicio.clicked.connect(dateEditInicio, "setDate(com.trolltech.qt.core.QDate)");
@@ -581,6 +628,8 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         label_importeTotalRes.setText("");
         pushButton_ActualizarHab.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Eliminar reserva", null));
         pushButton_ActualizarHab.setText(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Actualizar", null));
+        pushButton_CalcularImporte.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Eliminar reserva", null));
+        pushButton_CalcularImporte.setText(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Calcular importe", null));
         groupBox_reservas.setTitle(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Lista reservas", null));
         pushButton_eliminar.setToolTip(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Eliminar reserva", null));
         pushButton_eliminar.setText(com.trolltech.qt.core.QCoreApplication.translate("Reservas", "Elliminar", null));
