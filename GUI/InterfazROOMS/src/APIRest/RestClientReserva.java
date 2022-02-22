@@ -1,7 +1,10 @@
 package APIRest;
 
 import com.google.gson.*;
+import com.trolltech.qt.gui.QDialog;
+import interfazrooms.Ui_Reservas;
 
+import javax.swing.*;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -60,10 +63,17 @@ public class RestClientReserva {
 
         String[] listaHabitaciones = jsonToArray(resultado);
 
-        for (int i = 0; i < listaHabitaciones.length; i++) {
-            Habitacion habitacion = new Gson().fromJson(listaHabitaciones[i], Habitacion.class);
-            habitacionList.add(habitacion);
+        try{
+            for (int i = 0; i < listaHabitaciones.length; i++) {
+                Habitacion habitacion = new Gson().fromJson(listaHabitaciones[i], Habitacion.class);
+                habitacionList.add(habitacion);
+            }
+        }catch (JsonSyntaxException jse){
+            jse.printStackTrace();
+            System.out.println("Debe introducir una habitación primero");
+            JOptionPane.showMessageDialog(null, "Debe existir al menos una habitación", "Error al abrir reserva", JOptionPane.ERROR_MESSAGE);
         }
+
         return  habitacionList;
     }
 
@@ -72,7 +82,8 @@ public class RestClientReserva {
      *
      * @return Devuelve un array con las reservas
      */
-    public String[] consultarListaRes(){
+    public String[] consultarListaRes()/*throws Exception*/{
+
         String resultado = this.client.target("http://localhost:8080/reservas/")
                 .request(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -85,26 +96,30 @@ public class RestClientReserva {
             separarReserva[0] = separarReserva[0].replace("\\{","");
             separarReserva[0] = separarReserva[0].replace("}","");
 
+            System.out.println(separarReserva[0]);
             String id = separarReserva[0];
-            id = id.substring(13);
 
-            String fechaIn = separarReserva[1];
-            fechaIn = fechaIn.substring(15,25);
+            try {
+                id = id.substring(13);
+                String fechaIn = separarReserva[1];
+                fechaIn = fechaIn.substring(15, 25);
 
-            String fechaFin = separarReserva[2];
-            fechaFin = fechaFin.replace("\"", "");
+                String fechaFin = separarReserva[2];
+                fechaFin = fechaFin.replace("\"", "");
 
-            String importeTotal = separarReserva[3];
-            importeTotal = importeTotal.replace("\"", "");
+                String importeTotal = separarReserva[3];
+                importeTotal = importeTotal.replace("\"", "");
 
-            String estado = separarReserva[4];
-            estado = estado.replace("\"", "");
+                String estado = separarReserva[4];
+                estado = estado.replace("\"", "");
+                listaReservas[i] = "ID:" + id + " "
+                        + fechaIn + " "
+                        + fechaFin + " "
+                        + importeTotal + " "
+                        + estado;
+            }catch (Exception e){
 
-            listaReservas[i] = "ID:" + id + " "
-                    + fechaIn + " "
-                    + fechaFin + " "
-                    + importeTotal + " "
-                    + estado;
+            }
         }
 
         return listaReservas;

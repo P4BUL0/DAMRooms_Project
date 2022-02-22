@@ -5,12 +5,12 @@ import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.time.LocalDate;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
-{
+public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog> {
     public QGroupBox groupBox_Reservas;
     public QWidget layoutWidget_3;
     public QGridLayout gridLayout_3;
@@ -39,6 +39,7 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
     public QGroupBox groupBox_cliente;
     public QComboBox comboBox;
     public QLabel label_clienteDNI;
+    public boolean canOpen = true;
 
     public Ui_Reservas() { super(); }
 
@@ -59,11 +60,17 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
         RestClientReserva restClientReserva = new RestClientReserva();
         listWidget_reservas.clear();
 
-        String[] listaReservas = restClientReserva.consultarListaRes();
+        //try{
+            String[] listaReservas = restClientReserva.consultarListaRes();
+            for (String reserva: listaReservas) {
+                listWidget_reservas.addItem(reserva);
+            }
+        //    canOpen = true;
+        //}catch (Exception e){
+        //    canOpen = false;
+        //}
 
-        for (String reserva: listaReservas) {
-            listWidget_reservas.addItem(reserva);
-        }
+
 
     }
 
@@ -127,6 +134,8 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
             nfe.printStackTrace();
             System.out.println("No se ha calculado el importe");
             JOptionPane.showMessageDialog(null, "No se ha calculado el importe", "Importe no calculado", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -145,6 +154,8 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
             npe.printStackTrace();
             System.out.println("No se ha seleccionado la reserva");
             JOptionPane.showMessageDialog(null, "No se ha seleccionado reserva", "Reserva no seleccionada", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -183,6 +194,8 @@ public class Ui_Reservas implements com.trolltech.qt.QUiForm<QDialog>
                 npe.printStackTrace();
                 System.out.println("No se ha seleccionado la habitación");
                 JOptionPane.showMessageDialog(null, "No se ha seleccionado habitación", "Habitación no seleccionada", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
         }catch (NullPointerException npe){

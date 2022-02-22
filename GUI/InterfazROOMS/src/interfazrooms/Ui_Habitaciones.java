@@ -7,6 +7,7 @@ import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
 import javax.swing.*;
+import javax.ws.rs.NotFoundException;
 
 public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
     public QLabel label_Titulo;
@@ -213,6 +214,13 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
 
         int confirmar = JOptionPane.showConfirmDialog(null,"Quieres eliminar la habitación?", "Eliminar habitación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (confirmar == 0) {
+            try {
+
+            }catch (NotFoundException nfe){
+                nfe.printStackTrace();
+                System.out.println("No existe una habitación con ese número");
+                JOptionPane.showMessageDialog(null, "No existe una habitación con ese número", "Error en la selección de haitación", JOptionPane.ERROR_MESSAGE);
+            }
             restClientHabitacion.eliminar(numero);
             mensajeOPCorrecta();
         }
@@ -879,6 +887,7 @@ public class Ui_Habitaciones implements com.trolltech.qt.QUiForm<QDialog> {
         spinBox_NumeroHabitacion = new QSpinBox(layoutWidget2);
         spinBox_NumeroHabitacion.setObjectName("spinBox_NumeroHabitacion");
         spinBox_NumeroHabitacion.setMinimumSize(new QSize(100, 25));
+        spinBox_NumeroHabitacion.setMinimum(1);
 
         gridLayout_2.addWidget(spinBox_NumeroHabitacion, 0, 1, 1, 1);
 

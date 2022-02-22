@@ -1,6 +1,7 @@
 package APIRest;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 import javax.swing.*;
@@ -106,9 +107,16 @@ public class RestClientCliente {
 
         String[] listaClientes = jsonToArray(resultado);
 
-        for (int i = 0; i < listaClientes.length; i++) {
-            Cliente cliente = new Gson().fromJson(listaClientes[i], Cliente.class);
-            clienteList.add(cliente);
+        try{
+            for (int i = 0; i < listaClientes.length; i++) {
+                Cliente cliente = new Gson().fromJson(listaClientes[i], Cliente.class);
+                clienteList.add(cliente);
+            }
+
+        }catch (JsonSyntaxException jse){
+            jse.printStackTrace();
+            System.out.println("Debe introducir un cliente primero");
+            JOptionPane.showMessageDialog(null, "Debe existir al menos un cliente", "Error al abrir reserva", JOptionPane.ERROR_MESSAGE);
         }
 
         return clienteList;

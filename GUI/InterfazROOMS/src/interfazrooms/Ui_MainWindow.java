@@ -7,8 +7,12 @@
  ********************************************************************************/
 package interfazrooms;
 
+import APIRest.Cliente;
+import APIRest.Habitacion;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
+
+import javax.swing.*;
 
 public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog> {
     public QWidget layoutWidget;
@@ -25,8 +29,15 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QDialog> {
         Ui_Reservas reservas = new Ui_Reservas();
         QDialog dialog = new QDialog();
         reservas.setupUi(dialog);
-        dialog.setModal(true);
-        dialog.show();
+        if (reservas.canOpen){
+            dialog.setModal(true);
+            dialog.show();
+        }else{
+
+            JOptionPane.showMessageDialog(null, "DEBE INTRODUCIR UN CLIENTE Y UNA HABITACIÓN PRIMERO", "ERROR AL ABRIR RESERVAS", JOptionPane.ERROR_MESSAGE);
+
+        }
+
     }
     
     void abrirCliente(){

@@ -135,16 +135,19 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         nombre = lineEdit_Nombre.text();
         apellidos = lineEdit_Apellidos.text();
         direccion = lineEdit_Direccion.text();
-        telefono = Integer.parseInt(lineEdit_Telefono.text());
-
-        if (comprobarDNI(dni)){
-            int confirmar = JOptionPane.showConfirmDialog(null,"Quieres modificar el cliente?", "Modificar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (confirmar == 0) {
-                restClientCliente.modificar(dni, nombre, apellidos, direccion, telefono);
-                mensajeOPCorrecta();
-                limpiar();
+        if (comprobarTelefono(lineEdit_Telefono.text())){
+            telefono = Integer.parseInt(lineEdit_Telefono.text());
+            if (comprobarDNI(dni)){
+                int confirmar = JOptionPane.showConfirmDialog(null,"Quieres modificar el cliente?", "Modificar cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                if (confirmar == 0) {
+                    restClientCliente.modificar(dni, nombre, apellidos, direccion, telefono);
+                    mensajeOPCorrecta();
+                    limpiar();
+                }
             }
         }
+
+
 
     }
 
@@ -177,6 +180,21 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         return false;
     }
 
+    public boolean comprobarTelefono(String telefono){
+
+        if (telefono.matches("^6[0-9]{8}$")){
+            try{
+                Integer.parseInt(telefono);
+            }catch (NumberFormatException nfe){
+
+                nfe.printStackTrace();
+                JOptionPane.showMessageDialog(null, "El número introducido no es un un teléfono", "Error en el teléfono", JOptionPane.ERROR_MESSAGE);
+            }
+            }else{
+            return false;
+        }
+        return true;
+    }
     private boolean soloNumeros(){
         String dni = lineEdit_DNI.text();
         int i, j = 0;
@@ -421,7 +439,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         lineEdit_Direccion = new QLineEdit(layoutWidget1);
         lineEdit_Direccion.setObjectName("lineEdit_Direccion");
 
-        gridLayout_2.addWidget(lineEdit_Direccion, 0, 3, 1, 1);
+        gridLayout_2.addWidget(lineEdit_Direccion,1, 1, 1, 1);
 
         lineEdit_Telefono = new QLineEdit(layoutWidget1);
         lineEdit_Telefono.setObjectName("lineEdit_Telefono");
@@ -452,7 +470,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         font8.setWeight(75);
         label_Direccion.setFont(font8);
 
-        gridLayout_2.addWidget(label_Direccion, 0, 2, 1, 1);
+        gridLayout_2.addWidget(label_Direccion,1, 0, 1, 1);
 
         label_Nombre = new QLabel(layoutWidget1);
         label_Nombre.setObjectName("label_Nombre");
@@ -474,7 +492,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         font10.setWeight(75);
         label_Apellidos.setFont(font10);
 
-        gridLayout_2.addWidget(label_Apellidos, 1, 0, 1, 1);
+        gridLayout_2.addWidget(label_Apellidos, 0, 2, 1, 1);
 
         lineEdit_Nombre = new QLineEdit(layoutWidget1);
         lineEdit_Nombre.setObjectName("lineEdit_Nombre");
@@ -484,7 +502,7 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         lineEdit_Apellidos = new QLineEdit(layoutWidget1);
         lineEdit_Apellidos.setObjectName("lineEdit_Apellidos");
 
-        gridLayout_2.addWidget(lineEdit_Apellidos, 1, 1, 1, 1);
+        gridLayout_2.addWidget(lineEdit_Apellidos, 0, 3, 1, 1);
 
         gridLayout.addWidget(groupBox_DatosCliente, 2, 0, 1, 2);
 
@@ -629,9 +647,9 @@ public class Ui_Cliente implements com.trolltech.qt.QUiForm<QDialog> {
         QWidget.setTabOrder(pushButton_consultar, pushButton_eliminar);
         QWidget.setTabOrder(pushButton_eliminar, pushButton_modificar);
         QWidget.setTabOrder(pushButton_modificar, lineEdit_Nombre);
-        QWidget.setTabOrder(lineEdit_Nombre, lineEdit_Direccion);
-        QWidget.setTabOrder(lineEdit_Direccion, lineEdit_Apellidos);
-        QWidget.setTabOrder(lineEdit_Apellidos, lineEdit_Telefono);
+        QWidget.setTabOrder(lineEdit_Nombre, lineEdit_Apellidos);
+        QWidget.setTabOrder(lineEdit_Apellidos,lineEdit_Direccion);
+        QWidget.setTabOrder(lineEdit_Direccion, lineEdit_Telefono);
         QWidget.setTabOrder(lineEdit_Telefono, pushButton_informe);
         QWidget.setTabOrder(pushButton_informe, pushButton_cancelar);
         retranslateUi(Cliente);
